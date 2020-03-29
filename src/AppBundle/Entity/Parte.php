@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Parte
 {
-
+///ATRIBUTOS
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -33,6 +33,16 @@ class Parte
      * @var bool
      */
     private $estado;
+
+    //RELACIONES
+
+    /**
+     * @ORM\OneToMany(targetEntity="Cliente", mappedBy="partes")
+     * @var Cliente;
+     */
+    private $cliente;
+
+//GETTERS Y SETTERS
 
     /**
      * @return \DateTime
@@ -96,6 +106,23 @@ class Parte
         return $this->id;
     }
 
+    /**
+     * @return Cliente
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+
+    /**
+     * @param Cliente $cliente
+     * @return Parte
+     */
+    public function setCliente($cliente)
+    {
+        $this->cliente = $cliente;
+        return $this;
+    }
 
 
 

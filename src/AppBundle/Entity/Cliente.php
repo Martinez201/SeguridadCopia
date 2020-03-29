@@ -76,6 +76,11 @@ class Cliente
      */
     private $email;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Parte",inversedBy="cliente")
+     * @var Parte[]
+     */
+    private $partes;
 
     /**
      * @return string
@@ -281,6 +286,24 @@ class Cliente
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Parte[]
+     */
+    public function getPartes()
+    {
+        return $this->partes;
+    }
+
+    /**
+     * @param Parte[] $partes
+     * @return Cliente
+     */
+    public function setPartes($partes)
+    {
+        $this->partes = $partes;
+        return $this;
     }
 
 
