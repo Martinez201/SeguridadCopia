@@ -42,6 +42,12 @@ class Albaran
      */
     private $empleado;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Producto")
+     * @var Producto[]
+     */
+    private $productos;
+
     //////////////////////
     ///
     /**
@@ -121,6 +127,24 @@ class Albaran
     public function setEmpleado($empleado)
     {
         $this->empleado = $empleado;
+        return $this;
+    }
+
+    /**
+     * @return Producto[]
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param Producto[] $productos
+     * @return Albaran
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
         return $this;
     }
 

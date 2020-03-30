@@ -54,6 +54,12 @@ class Presupuesto
      */
     private $empleado;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Producto")
+     * @var Producto[]
+     */
+    private $productos;
+
     //////////////////////////
 
     /**
@@ -169,6 +175,24 @@ class Presupuesto
     public function setEmpleado($empleado)
     {
         $this->empleado = $empleado;
+        return $this;
+    }
+
+    /**
+     * @return Producto[]
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param Producto[] $productos
+     * @return Presupuesto
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
         return $this;
     }
 
