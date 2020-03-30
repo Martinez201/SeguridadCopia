@@ -34,8 +34,7 @@ class Parte
      */
     private $estado;
 
-
-    //RELACIONES
+    /////////////////RELACIONES//////////////////////////////////
 
     /**
      * @ORM\OneToMany(targetEntity="Cliente", mappedBy="partes")
@@ -49,7 +48,13 @@ class Parte
      */
     private $delegacion;
 
-//GETTERS Y SETTERS
+    /**
+     * @ORM\ManyToOne(targetEntity="Empleado" , inversedBy="partes")
+     * @var Empleado
+     */
+    private $empleado;
+
+//GETTERS Y SETTERS////////////////////////////////////////////////
 
     /**
      * @return \DateTime
@@ -146,6 +151,24 @@ class Parte
     public function setDelegacion($delegacion)
     {
         $this->delegacion = $delegacion;
+        return $this;
+    }
+
+    /**
+     * @return Empleado
+     */
+    public function getEmpleado()
+    {
+        return $this->empleado;
+    }
+
+    /**
+     * @param Empleado $empleado
+     * @return Parte
+     */
+    public function setEmpleado($empleado)
+    {
+        $this->empleado = $empleado;
         return $this;
     }
 

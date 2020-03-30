@@ -98,6 +98,13 @@ class Empleado
      */
 private $delegacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Parte", mappedBy="empleado")
+     * @var Parte[]
+     */
+
+private $partes;
+
 
 ///////////////////////////////////
     /**
@@ -375,6 +382,24 @@ private $delegacion;
     public function setDelegacion($delegacion)
     {
         $this->delegacion = $delegacion;
+        return $this;
+    }
+
+    /**
+     * @return Parte[]
+     */
+    public function getPartes()
+    {
+        return $this->partes;
+    }
+
+    /**
+     * @param Parte[] $partes
+     * @return Empleado
+     */
+    public function setPartes($partes)
+    {
+        $this->partes = $partes;
         return $this;
     }
 
