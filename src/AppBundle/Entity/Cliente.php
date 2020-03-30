@@ -77,7 +77,7 @@ class Cliente
     private $email;
 //////////////////////////////////////////////////////////////////
     /**
-     * @ORM\ManyToOne(targetEntity="Parte",inversedBy="cliente")
+     * @ORM\OneToMany(targetEntity="Parte",mappedBy="cliente")
      * @var Parte[]
      */
     private $partes;
