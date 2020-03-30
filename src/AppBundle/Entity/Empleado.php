@@ -111,7 +111,11 @@ private $partes;
      */
 private $facturasEmitidas;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Presupuesto",mappedBy="empleado")
+     * @var Presupuesto[]
+     */
+private $presupuestos;
 
 ///////////////////////////////////
     /**

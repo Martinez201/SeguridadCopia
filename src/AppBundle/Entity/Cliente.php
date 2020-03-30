@@ -87,6 +87,12 @@ class Cliente
      * @var Factura[]
      */
     private $facturas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Presupuesto",mappedBy="cliente")
+     * @var Presupuesto[]
+     */
+    private $presupuestos;
 ////////////////////////////////////////////////////////////////
     /**
      * @return string
@@ -327,6 +333,24 @@ class Cliente
     public function setFacturas($facturas)
     {
         $this->facturas = $facturas;
+        return $this;
+    }
+
+    /**
+     * @return Presupuesto[]
+     */
+    public function getPresupuestos()
+    {
+        return $this->presupuestos;
+    }
+
+    /**
+     * @param Presupuesto[] $presupuestos
+     * @return Cliente
+     */
+    public function setPresupuestos($presupuestos)
+    {
+        $this->presupuestos = $presupuestos;
         return $this;
     }
 
