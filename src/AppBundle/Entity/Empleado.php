@@ -91,13 +91,15 @@ class Empleado
      */
     private $comercial;
 
+////////////////////////////////////
+    /**
+     * @ORM\ManyToOne(targetEntity="Delegacion",inversedBy="empleados")
+     * @var Delegacion
+     */
+private $delegacion;
 
 
-
-
-
-
-
+///////////////////////////////////
     /**
      * @return string
      */
@@ -356,6 +358,24 @@ class Empleado
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Delegacion
+     */
+    public function getDelegacion()
+    {
+        return $this->delegacion;
+    }
+
+    /**
+     * @param Delegacion $delegacion
+     * @return Empleado
+     */
+    public function setDelegacion($delegacion)
+    {
+        $this->delegacion = $delegacion;
+        return $this;
     }
 
 
