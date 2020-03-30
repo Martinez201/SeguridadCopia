@@ -117,6 +117,12 @@ private $facturasEmitidas;
      */
 private $presupuestos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Albaran", mappedBy="empleado")
+     * @var Albaran[]
+     */
+private $albaranes;
+
 ///////////////////////////////////
     /**
      * @return string
@@ -411,6 +417,60 @@ private $presupuestos;
     public function setPartes($partes)
     {
         $this->partes = $partes;
+        return $this;
+    }
+
+    /**
+     * @return Factura[]
+     */
+    public function getFacturasEmitidas()
+    {
+        return $this->facturasEmitidas;
+    }
+
+    /**
+     * @param Factura[] $facturasEmitidas
+     * @return Empleado
+     */
+    public function setFacturasEmitidas($facturasEmitidas)
+    {
+        $this->facturasEmitidas = $facturasEmitidas;
+        return $this;
+    }
+
+    /**
+     * @return Presupuesto[]
+     */
+    public function getPresupuestos()
+    {
+        return $this->presupuestos;
+    }
+
+    /**
+     * @param Presupuesto[] $presupuestos
+     * @return Empleado
+     */
+    public function setPresupuestos($presupuestos)
+    {
+        $this->presupuestos = $presupuestos;
+        return $this;
+    }
+
+    /**
+     * @return Albaran[]
+     */
+    public function getAlbaranes()
+    {
+        return $this->albaranes;
+    }
+
+    /**
+     * @param Albaran[] $albaranes
+     * @return Empleado
+     */
+    public function setAlbaranes($albaranes)
+    {
+        $this->albaranes = $albaranes;
         return $this;
     }
 

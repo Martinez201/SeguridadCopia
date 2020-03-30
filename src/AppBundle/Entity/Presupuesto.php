@@ -154,6 +154,24 @@ class Presupuesto
         return $this;
     }
 
+    /**
+     * @return Empleado
+     */
+    public function getEmpleado()
+    {
+        return $this->empleado;
+    }
+
+    /**
+     * @param Empleado $empleado
+     * @return Presupuesto
+     */
+    public function setEmpleado($empleado)
+    {
+        $this->empleado = $empleado;
+        return $this;
+    }
+
 
 
 
