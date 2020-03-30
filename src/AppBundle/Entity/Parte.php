@@ -37,7 +37,7 @@ class Parte
     /////////////////RELACIONES//////////////////////////////////
 
     /**
-     * @ORM\OneToMany(targetEntity="Cliente", mappedBy="partes")
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="partes")
      * @var Cliente;
      */
     private $cliente;
@@ -135,6 +135,8 @@ class Parte
         $this->cliente = $cliente;
         return $this;
     }
+
+
 
     /**
      * @return Delegacion
