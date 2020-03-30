@@ -19,3 +19,4 @@ class LoadFixtures implements FixtureInterface
 }
 
 // composer require --dev nelmio/alice ^2.1
+// composer remove nelmio/alice
