@@ -105,6 +105,13 @@ private $delegacion;
 
 private $partes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Factura",mappedBy="empleado")
+     * @var Factura[]
+     */
+private $facturasEmitidas;
+
+
 
 ///////////////////////////////////
     /**

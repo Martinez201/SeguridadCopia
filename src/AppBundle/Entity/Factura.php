@@ -43,7 +43,11 @@ class Factura
 
     ///////////////////////
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Empleado",inversedBy="facturasEmitidas")
+     * @var Empleado
+     */
+    private $empleado;
 
     ///////////////////////
 
