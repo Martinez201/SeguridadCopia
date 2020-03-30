@@ -49,6 +49,12 @@ class Factura
      */
     private $empleado;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="facturas")
+     * @var Cliente
+     */
+    private $cliente;
+
     ///////////////////////
 
     /**
@@ -129,6 +135,42 @@ class Factura
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Cliente
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+
+    /**
+     * @param Cliente $cliente
+     * @return Factura
+     */
+    public function setCliente($cliente)
+    {
+        $this->cliente = $cliente;
+        return $this;
+    }
+
+    /**
+     * @return Empleado
+     */
+    public function getEmpleado()
+    {
+        return $this->empleado;
+    }
+
+    /**
+     * @param Empleado $empleado
+     * @return Factura
+     */
+    public function setEmpleado($empleado)
+    {
+        $this->empleado = $empleado;
+        return $this;
     }
 
 

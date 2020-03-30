@@ -75,13 +75,19 @@ class Cliente
      * @var string
      */
     private $email;
-
+//////////////////////////////////////////////////////////////////
     /**
      * @ORM\ManyToOne(targetEntity="Parte",inversedBy="cliente")
      * @var Parte[]
      */
     private $partes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Factura",mappedBy="cliente")
+     * @var Factura[]
+     */
+    private $facturas;
+////////////////////////////////////////////////////////////////
     /**
      * @return string
      */
@@ -303,6 +309,24 @@ class Cliente
     public function setPartes($partes)
     {
         $this->partes = $partes;
+        return $this;
+    }
+
+    /**
+     * @return Factura[]
+     */
+    public function getFacturas()
+    {
+        return $this->facturas;
+    }
+
+    /**
+     * @param Factura[] $facturas
+     * @return Cliente
+     */
+    public function setFacturas($facturas)
+    {
+        $this->facturas = $facturas;
         return $this;
     }
 
