@@ -2,15 +2,48 @@
 
 {% block body %}
 
-    <nav class="navbar">
-        <ul class="navbar-nav mr-auto">
-            <li>
-                <a href="{{ path('empleados_listar') }}">Empleados</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="container">
-        {%  block content %}{% endblock %}
+    <div id="wrapper" class="animate">
+        <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">RobCo Security</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav animate side-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Pagina Principal"><i class="fas fa-home"></i>Inicio<i class="fas fa-home shortmenu animate"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Clientes"><i class="fas fa-briefcase"></i> Clientes <i class="fas fa-briefcase shortmenu animate"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Partes"><i class="fas fa-clipboard-check"></i> Partes <i class="fas fa-clipboard-check shortmenu animate"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Empleados"><i class="fas fa-user-friends"></i> Empleados <i class="fas fa-user-friends shortmenu animate"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Facturas"><i class="fas fa-money-bill"></i> Facturas <i class="fas fa-money-bill shortmenu animate"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Albaranes"><i class="fas fa-file-signature"></i> Albaranes <i class="fas fa-file-signature shortmenu animate"></i></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-md-auto d-md-flex">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i> Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-power-off"></i> Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            {%  block content %}{% endblock %}
+        </div>
     </div>
-    
+    <script defer src="{{ asset('fontawesome-free-5.13.0-web/js/all.js') }}"></script>
+
 {% endblock %}
