@@ -1,0 +1,43 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Empleados
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Empleados</h1>
+    <table>
+        <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Apellidos</td>
+            <td>D.N.I</td>
+            <td>Edad</td>
+            <td>Dirección</td>
+            <td>Ciudad</td>
+            <td>provincia</td>
+            <td>Código Postal</td>
+            <td>Teléfono</td>
+            <td>Email</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.apellidos }}</td>
+            <td>{{ empleado.dni }}</td>
+            <td>{{ empleado.edad|date("d/m/Y") }}</td>
+            <td>{{ empleado.direccion }}</td>
+            <td>{{ empleado.ciudad }}</td>
+            <td>{{ empleado.provincia }}</td>
+            <td>{{ empleado.cPostal }}</td>
+            <td>{{ empleado.telefono }}</td>
+            <td>{{ empleado.email }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
