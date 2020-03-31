@@ -93,6 +93,12 @@ class Cliente
      * @var Presupuesto[]
      */
     private $presupuestos;
+
+    /**
+     * @ORM\OneToOne(targetEntity="DatosBancarios")
+     * @var DatosBancarios
+     */
+    private $datosBancarios;
 ////////////////////////////////////////////////////////////////
     /**
      * @return string
@@ -351,6 +357,24 @@ class Cliente
     public function setPresupuestos($presupuestos)
     {
         $this->presupuestos = $presupuestos;
+        return $this;
+    }
+
+    /**
+     * @return DatosBancarios
+     */
+    public function getDatosBancarios()
+    {
+        return $this->datosBancarios;
+    }
+
+    /**
+     * @param DatosBancarios $datosBancarios
+     * @return Cliente
+     */
+    public function setDatosBancarios($datosBancarios)
+    {
+        $this->datosBancarios = $datosBancarios;
         return $this;
     }
 
