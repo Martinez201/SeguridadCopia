@@ -35,7 +35,7 @@ AppBundle\Entity\Empleado:
     ciudad: 'Linares'
     cPostal: '23700'
     provincia: 'Jaén'
-    email: 'prueba@unsegur.es'
+    email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 0
     instalador: 0
@@ -51,7 +51,7 @@ AppBundle\Entity\Empleado:
     ciudad: 'Linares'
     cPostal: '23700'
     provincia: 'Jaén'
-    email: 'prueba@unsegur.es'
+    email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 0
     instalador: 1
@@ -67,9 +67,77 @@ AppBundle\Entity\Empleado:
     ciudad: 'Linares'
     cPostal: '23700'
     provincia: 'Jaén'
-    email: 'prueba@unsegur.es'
+    email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 1
     instalador: 0
     gestor: 0
     comercial: 0
+
+AppBundle\Entity\Cliente:
+  cliente_Jaen_Alta{1..5}:
+    nombre: '<es_ES:firstName()>'
+    apellidos: '<es_ES:lastName()>  <es_ES:lastName()>'
+    dni (unique): '<randomNumber(8)> - <randomLetter()>'
+    fechaNacimiento: '<dateTime()>'
+    telefono: '<tollFreePhoneNumber()>'
+    ciudad: 'Linares'
+    cPostal: '23700'
+    provincia: 'Jaén'
+    email: '<email()>'
+    direccion: '<es_ES:streetAddress()>'
+    estado: 1
+  cliente_Jaen_Baja{1..5}:
+    nombre: '<es_ES:firstName()>'
+    apellidos: '<es_ES:lastName()>  <es_ES:lastName()>'
+    dni (unique): '<randomNumber(8)> - <randomLetter()>'
+    fechaNacimiento: '<dateTime()>'
+    telefono: '<tollFreePhoneNumber()>'
+    ciudad: 'Linares'
+    cPostal: '23700'
+    provincia: 'Jaén'
+    email: '<email()>'
+    direccion: '<es_ES:streetAddress()>'
+    estado: 0
+
+AppBundle\Entity\Producto:
+  productos_A{1..5}:
+    nombre: 'Central de Alarma'
+    tipo: 'Producto'
+    precio: 200,98
+    cantidad: 20
+  productos_B{1..5}:
+    nombre: 'Detector presencia'
+    tipo: 'Producto'
+    precio: 10,98
+    cantidad: 20
+  productos_C{1..5}:
+    nombre: 'Extensor de zona'
+    tipo: 'Producto'
+    precio: 4,98
+    cantidad: 20
+  productos_D{1..5}:
+    nombre: 'Cámara HD'
+    tipo: 'Producto'
+    precio: 20,98
+    cantidad: 20
+  productos_E{1..5}:
+    nombre: 'Video grabador 16 canales'
+    tipo: 'Producto'
+    precio: 220,98
+    cantidad: 20
+  productos_F{1..5}:
+    nombre: 'Video grabador 32 canales'
+    tipo: 'Producto'
+    precio: 520,98
+    cantidad: 20
+  productos_G{1..5}:
+    nombre: 'Vigilante privado'
+    tipo: 'Servicio'
+    precio: 40,98
+    cantidad: 20
+  productos_H{1..5}:
+    nombre: 'Escolta privado'
+    tipo: 'Servicio'
+    precio: 40,98
+    cantidad: 20
