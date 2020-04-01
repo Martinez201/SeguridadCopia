@@ -1,0 +1,31 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Productos
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Productos</h1>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>Nombre</td>
+            <td>Tipo</td>
+            <td>Precio</td>
+            <td>Stock</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.tipo }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.cantidad}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
