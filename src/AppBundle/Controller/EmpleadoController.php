@@ -30,6 +30,19 @@ class EmpleadoController extends Controller
 
     }
 
+    /**
+     * @Route("empleados/alta", name="alta_empleados", methods={"GET","POST"})
+     */
+
+    public function nuevoAction(Request $request){
+
+        $nuevoEmpleado = new Empleado();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($nuevoEmpleado);
+
+        return $this->formAction($request,$nuevoEmpleado);
+    }
+
 
     /**
      * @Route("/empleados/{id}", name= "empleados_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
@@ -78,4 +91,37 @@ class EmpleadoController extends Controller
         ]);
     }
 
+
+    /**
+     * @Route("/empleados/eliminar/{id}", name="empleados_eliminar",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     */
+
+    public function  eliminarAction(Request $request, Empleado $empleado){
+
+        if($request->getMethod() == "POST"){
+
+
+            try {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($empleado);
+                $em->flush();
+                $this->addFlash('success','Empleado dado de baja con éxito');
+                return $this->redirectToRoute('empleados_listar');
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error','Error: No se a podido dar de baja al empleado.');
+                return $this->redirectToRoute('empleados_form',['id'=> $empleado->getId()]);
+            }
+
+        }
+
+        return $this->render('empleados/eliminar.html.twig',[
+
+            'empleado' => $empleado
+
+        ]);
+
+    }
 }

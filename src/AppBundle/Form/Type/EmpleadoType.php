@@ -4,7 +4,9 @@
 namespace AppBundle\Form\Type;
 
 
+use AppBundle\Entity\Delegacion;
 use AppBundle\Entity\Empleado;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -66,28 +68,30 @@ class EmpleadoType extends AbstractType
             ->add('administrador',CheckboxType::class,[
 
                 'label'=> 'Administrador:',
-                'required' => false
             ])
             ->add('gestor',CheckboxType::class,[
 
-                'label'=> 'Gestor:',
-                'required' => false
+                'label'=> 'Gestor:'
             ])
             ->add('instalador',CheckboxType::class,[
 
-                'label'=> 'Instalador:',
-                'required' => false
+                'label'=> 'Instalador:'
             ])
             ->add('comercial',CheckboxType::class,[
 
-                'label'=> 'Comercial:',
-                'required' => false
+                'label'=> 'Comercial:'
+            ])
+            ->add('delegacion', EntityType::class,[
+
+                'label'=> 'Delegación:',
+                'class' => Delegacion::class,
+                'placeholder'=> '<-Selecione una delegación->'
+
             ])
             ->add('avatar', FileType::class,[
 
                 'label' => 'Avatar:',
                 'mapped' => false,
-                'required'=> false,
                 'constraints'=>[
                    new File([
                        'maxSize'=> '5000k',

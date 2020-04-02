@@ -2,23 +2,37 @@
 
 
 {% block title %}
-    Alta Empleados
+   Empleados
 {% endblock %}
 
+
 {% block content %}
+
+    <h1>
+        {% if empleado.id %}
+            Empleado{{ empleado.id }}
+        {% else %}
+            Alta Empleado
+        {% endif %}
+    </h1>
 
     {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
     {{ form_widget(form) }}
     {{ form_row(form.avatar) }}
-    <button type="submit" class="btn btn-success">Guardar</button>
 
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+
+    <a href="{{ path('empleados_listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado</a>
     {% if not empleado.id %}
-    <button type="reset" class="btn btn-warning"> Limpiar</button>
+    <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
+        {% else %}
+            <a href="{{ path('empleados_eliminar',{'id': empleado.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
     {%  endif %}
 
-    <a href="{{ path('empleados_listar') }}" class="btn btn-info"> Volver al listado</a>
+   
 
     {{ form_end(form) }}
+
 {% endblock %}
 
 
