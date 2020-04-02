@@ -1,0 +1,25 @@
+{% extends 'navegacion.html.twig' %}
+
+
+{% block title %}
+    Alta Empleados
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.avatar) }}
+    <button type="submit" class="btn btn-success">Guardar</button>
+
+    {% if not empleado.id %}
+    <button type="reset" class="btn btn-warning"> Limpiar</button>
+    {%  endif %}
+
+    <a href="{{ path('empleados_listar') }}" class="btn btn-info"> Volver al listado</a>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+
+

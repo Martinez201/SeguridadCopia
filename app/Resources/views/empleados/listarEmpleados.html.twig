@@ -26,7 +26,7 @@
         <tbody>
         {% for empleado in empleados %}
         <tr>
-            <td>{{ empleado.nombre }}</td>
+            <td><a href="{{ path('empleados_form',{'id': empleado.id}) }}">{{ empleado.nombre }}</a></td>
             <td>{{ empleado.apellidos }}</td>
             <td>{{ empleado.dni }}</td>
             <td>{{ empleado.edad|date("d/m/Y") }}</td>

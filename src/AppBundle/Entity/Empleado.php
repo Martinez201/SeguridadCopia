@@ -91,6 +91,12 @@ class Empleado
      */
     private $comercial;
 
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     * @var string
+     */
+    private $avatar;
+
 ////////////////////////////////////
     /**
      * @ORM\ManyToOne(targetEntity="Delegacion",inversedBy="empleados")
@@ -474,8 +480,23 @@ private $albaranes;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
 
-
+    /**
+     * @param string $avatar
+     * @return Empleado
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
 
 
 }
