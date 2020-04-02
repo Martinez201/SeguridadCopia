@@ -1,0 +1,23 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+
+    Baja empleado
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Baja empleado</h1>
+
+    <div class="alert alert-warning">
+        ¿Esta seguro de que quiere dar al empleado {{ empleado.id }} de baja?  Esta operación no se puede deshacer.
+    </div>
+
+    <form method="post">
+        <a href="{{ path('empleados_form',{'id': empleado.id}) }}" class="btn btn-info">Volver atrás</a>
+        <button type="submit" class="btn btn-danger">Dar de baja</button>
+    </form>
+{% endblock %}
+
+
