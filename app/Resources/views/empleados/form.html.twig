@@ -2,7 +2,7 @@
 
 
 {% block title %}
-   Empleados
+    Alta Empleados
 {% endblock %}
 
 
@@ -19,6 +19,7 @@
     {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
     {{ form_widget(form) }}
     {{ form_row(form.avatar) }}
+    <button type="submit" class="btn btn-success">Guardar</button>
 
     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
 
@@ -29,7 +30,7 @@
             <a href="{{ path('empleados_eliminar',{'id': empleado.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
     {%  endif %}
 
-   
+    <a href="{{ path('empleados_listar') }}" class="btn btn-info"> Volver al listado</a>
 
     {{ form_end(form) }}
 
