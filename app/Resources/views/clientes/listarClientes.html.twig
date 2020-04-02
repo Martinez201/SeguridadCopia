@@ -27,7 +27,7 @@
         <tbody>
         {% for cliente in clientes %}
             <tr>
-                <td>{{ cliente.nombre }}</td>
+                <td><a href="{{ path('clientes_form',{'id': cliente.id}) }}">{{ cliente.nombre }}</a></td>
                 <td>{{ cliente.apellidos }}</td>
                 <td>{{ cliente.dni }}</td>
                 <td>{{ cliente.fechaNacimiento|date("d/m/Y") }}</td>
