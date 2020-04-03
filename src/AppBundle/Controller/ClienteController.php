@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Cliente;
+use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\ClienteType;
 use AppBundle\Repository\ClienteRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,17 @@ class ClienteController extends Controller
             'clientes' => $clientes
         ]);
 
+    }
+
+    /**
+     * @Route("/clientes/alta", name="altas_clientes", methods={"GET","POST"})
+     */
+
+    public function nuevaAction(Request $request){
+
+        $cliente = new Cliente();
+        $this->getDoctrine()->getManager()->persist($cliente);
+        return $this->formAction($request,$cliente);
     }
 
     /**
@@ -62,4 +74,35 @@ class ClienteController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/clientes/eliminar/{id}"), name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     */
+
+    public function eliminarAction(Request $request, Cliente $cliente){
+
+        if ($request->getMethod() == 'POST'){
+
+
+            try {
+
+                $cli = $this->getDoctrine()->getManager();
+                $cli->remove($cliente);
+                $cli->flush();
+                $this->addFlash('success','Cliente dado de baja con éxito');
+                return $this->redirectToRoute('clientes_Listar');
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error','Error: no se ha podido dar de baja al cliente');
+            }
+
+        }
+
+        return $this->render('clientes/eliminar.html.twig',[
+
+            'cliente' => $cliente
+
+        ]);
+
+    }
 }

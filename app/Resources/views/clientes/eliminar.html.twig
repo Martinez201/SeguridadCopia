@@ -1,0 +1,24 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+
+    Baja Cliente
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Baja Cliente</h1>
+
+    <div class="alert alert-warning">
+        ¿Esta seguro de que quiere dar al cliente {{ cliente.id }} de baja?  Esta operación no se puede deshacer.
+    </div>
+
+    <form method="post">
+        <a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn btn-info">Volver atrás</a>
+        <button type="submit" class="btn btn-danger">Dar de baja</button>
+    </form>
+{% endblock %}
+
+
+

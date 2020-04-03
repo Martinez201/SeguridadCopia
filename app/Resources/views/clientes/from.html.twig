@@ -14,6 +14,8 @@
         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
     {% if not cliente.id %}
         <button type="reset" class="btn btn-warning"><i class="fas fa-eraser"></i> Limpiar</button>
+    {% else %}
+        <a href="{{ path('app_cliente_eliminar',{'id': cliente.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
     {% endif %}
     <a href="{{ path('clientes_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
     {{ form_end(form) }}
