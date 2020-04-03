@@ -95,7 +95,7 @@ class Cliente
     private $presupuestos;
 
     /**
-     * @ORM\OneToOne(targetEntity="DatosBancarios")
+     * @ORM\OneToOne(targetEntity="DatosBancarios", mappedBy="cliente")
      * @var DatosBancarios
      */
     private $datosBancarios;
@@ -378,6 +378,10 @@ class Cliente
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getNombre()." ".$this->getApellidos();
+    }
 
 
 }

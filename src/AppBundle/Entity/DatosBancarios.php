@@ -135,5 +135,42 @@ class DatosBancarios
         return $this;
     }
 
+///////
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cliente", inversedBy="datosBancarios")
+     * @var Cliente
+     */
+        private $cliente;
+
+    /**
+     * @return Cliente
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+
+    /**
+     * @param Cliente $cliente
+     * @return DatosBancarios
+     */
+    public function setCliente($cliente)
+    {
+        $this->cliente = $cliente;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+
+
 
 }
