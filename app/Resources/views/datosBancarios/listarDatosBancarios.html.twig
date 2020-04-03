@@ -1,0 +1,37 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Datos bancarios cliente {{ cliente.id }}
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Datos bancarios cliente</h1>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>Cliente</td>
+            <td>IBAN</td>
+            <td>Moneda</td>
+            <td>Entidad</td>
+            <td>Sucursal</td>
+            <td>BIC</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dato in datos %}
+            <tr>
+                <td>{{ dato.cliente }}</td>
+                <td>{{ dato.iban }}</td>
+                <td>{{ dato.moneda }}</td>
+                <td>{{ dato.entidad }}</td>
+                <td>{{ dato.sucursal }}</td>
+                <td>{{ dato.bic }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn btn-info">Volver atrás</a>
+{% endblock %}
