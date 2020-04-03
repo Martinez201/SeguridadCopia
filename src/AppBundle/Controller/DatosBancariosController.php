@@ -6,7 +6,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Cliente;
 use AppBundle\Entity\DatosBancarios;
 use AppBundle\Form\Type\DatosBancariosType;
-use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\DatosBancariosRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,15 +32,30 @@ class DatosBancariosController extends Controller
 
     }
 
+    /**
+     * @Route("/domiciliacion/alta/{id}", name="altas_domiciliacion",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     *
+     */
+
+    public function nuevoAction(Request $request,Cliente $cliente){
+
+        $datosBancarios = new DatosBancarios();
+        $this->getDoctrine()->getManager()->persist($datosBancarios);
+        return $this->formAction($request,$datosBancarios,$cliente);
+
+    }
+
 
     /**
      * @Route("/domiciliacion/{id}"), name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
-    public  function formAction(Request $request, DatosBancarios $datosBancarios){
+    public  function formAction(Request $request, DatosBancarios $datosBancarios,Cliente $cliente){
 
         $form = $this->createForm(DatosBancariosType::class,$datosBancarios);
         $form->handleRequest($request);
+
+        $datosBancarios->setCliente($cliente);
 
         if($form->isSubmitted() && $form->isValid()){
 
@@ -61,9 +75,41 @@ class DatosBancariosController extends Controller
         return $this->render('datosBancarios/form.html.twig',[
 
             'form'=> $form->createView(),
-            'datos'=> $datosBancarios
+            'datos'=> $datosBancarios,
+
 
         ]);
     }
 
+    /**
+     *@Route("/domiciliacion/eliminar/{id}"), name="domiciliacion_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     */
+
+    public function eliminarAction(Request $request, DatosBancarios $datosBancarios){
+
+        if ($request->getMethod() == 'POST'){
+
+
+            try {
+
+                $cli = $this->getDoctrine()->getManager();
+                $cli->remove($datosBancarios);
+                $cli->flush();
+                $this->addFlash('success','Domiciliación  eliminada éxito');
+                return $this->redirectToRoute('clientes_Listar');
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error','Error: no se ha eliminar la domiciliación');
+            }
+
+        }
+
+        return $this->render('datosBancarios/eliminar.html.twig',[
+
+            'datos' => $datosBancarios
+
+        ]);
+
+    }
 }

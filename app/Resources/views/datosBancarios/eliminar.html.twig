@@ -1,0 +1,23 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+
+    Eliminar datos bancarios
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Eliminar domicializacióne</h1>
+
+    <div class="alert alert-warning">
+        ¿Esta seguro de que quiere eliminar los datos bancarios del cliente {{ datos.cliente }}?  Esta operación no se puede deshacer.
+    </div>
+
+    <form method="post">
+        <a href="{{ path('app_datosbancarios_form',{'id': datos.id}) }}" class="btn btn-info">Volver atrás</a>
+        <button type="submit" class="btn btn-danger">Borrar</button>
+    </form>
+{% endblock %}
+
+

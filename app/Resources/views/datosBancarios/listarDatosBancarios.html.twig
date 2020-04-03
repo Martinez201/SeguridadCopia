@@ -7,8 +7,10 @@
 
 {% block content %}
 
+
     <h1>Datos bancarios cliente</h1>
 
+    <a href="{{ path('altas_domiciliacion',{'id': cliente.id}) }}" class="btn btn-success">Añadir Domiciliación</a>
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
@@ -23,7 +25,7 @@
         <tbody>
         {% for dato in datos %}
             <tr>
-                <td>{{ dato.cliente }}</td>
+                <td><a href="{{path('app_datosbancarios_form',{'id': dato.id})  }}">{{ dato.cliente }}</a></td>
                 <td>{{ dato.iban }}</td>
                 <td>{{ dato.moneda }}</td>
                 <td>{{ dato.entidad }}</td>
