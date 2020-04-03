@@ -16,7 +16,7 @@ class DatosBancariosController extends Controller
 {
 
     /**
-     * @Route("/clientes/domiciliacion/{id}", name = "listar_datos")
+     * @Route("/domiciliacion/{id}", name = "listar_datos")
      */
 
     public function clientesAction(DatosBancariosRepository $datosBancariosRepository, Cliente $cliente){
@@ -33,31 +33,27 @@ class DatosBancariosController extends Controller
     }
 
     /**
-     * @Route("/domiciliacion/alta/{id}", name="altas_domiciliacion",requirements={"id" = "\d+"}, methods={"GET","POST"})
-     *
+     * @Route("/datosbanco/alta/{id}", name="domiciliacion_alta",methods={"GET","POST"})
      */
 
-    public function nuevoAction(Request $request,Cliente $cliente){
+    public function nuevaAction(Request $request,Cliente $cliente){
 
         $datosBancarios = new DatosBancarios();
         $this->getDoctrine()->getManager()->persist($datosBancarios);
-        return $this->formAction($request,$datosBancarios,$cliente);
-
+        $datosBancarios->setCliente($cliente);
+        return $this->formAction($request,$datosBancarios);
     }
 
-
     /**
-     * @Route("/domiciliacion/{id}"), name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/datosbanco/{id}", name= "domiciliacion_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
-    public  function formAction(Request $request, DatosBancarios $datosBancarios,Cliente $cliente){
+    public function formAction(Request $request, DatosBancarios $datosBancarios){
 
-        $form = $this->createForm(DatosBancariosType::class,$datosBancarios);
+        $form = $this->createForm(DatosBancariosType::class, $datosBancarios);
         $form->handleRequest($request);
 
-        $datosBancarios->setCliente($cliente);
-
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()){
 
             try {
 
@@ -74,17 +70,15 @@ class DatosBancariosController extends Controller
 
         return $this->render('datosBancarios/form.html.twig',[
 
-            'form'=> $form->createView(),
-            'datos'=> $datosBancarios,
-
+            'form' => $form->createView(),
+            'datos' => $datosBancarios
 
         ]);
     }
 
     /**
-     *@Route("/domiciliacion/eliminar/{id}"), name="domiciliacion_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/datosbanco/eliminar/{id}", name="domiciliacion_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
-
     public function eliminarAction(Request $request, DatosBancarios $datosBancarios){
 
         if ($request->getMethod() == 'POST'){
@@ -95,12 +89,12 @@ class DatosBancariosController extends Controller
                 $cli = $this->getDoctrine()->getManager();
                 $cli->remove($datosBancarios);
                 $cli->flush();
-                $this->addFlash('success','Domiciliación  eliminada éxito');
+                $this->addFlash('success','Domiciliación borrada con éxito');
                 return $this->redirectToRoute('clientes_Listar');
 
             }catch (\Exception $ex){
 
-                $this->addFlash('error','Error: no se ha eliminar la domiciliación');
+                $this->addFlash('error','Error: no se ha podido borrar la domiciliación');
             }
 
         }

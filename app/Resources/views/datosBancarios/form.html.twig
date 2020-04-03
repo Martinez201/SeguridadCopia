@@ -4,9 +4,9 @@
 
     <h1>
         {% if datos.id %}
-            Datos del cliente {{ datos.cliente }}
+            Domiciliación {{ datos.cliente }}
         {% else %}
-            Añadir  datos bancarios
+            Añadir Domiciliación
         {% endif %}
     </h1>
     {{ form_start(form) }}
@@ -15,14 +15,13 @@
     {% if not datos.id %}
         <button type="reset" class="btn btn-warning"><i class="fas fa-eraser"></i> Limpiar</button>
     {% else %}
-        <a href="{{ path('app_datosbancarios_eliminar',{'id': datos.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar datos bancarios</a>
+        <a href="{{ path('domiciliacion_eliminar',{'id':datos.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar domiciliación</a>
     {% endif %}
-    <a href="{{ path('clientes_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado de clientes</a>
-
+    <a href="{{ path('clientes_form',{'id': datos.cliente.id}) }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     {{ form_end(form) }}
 {% endblock %}
 
 {% block title %}
-    Clientes
+    Domiciliación
 {% endblock %}
 

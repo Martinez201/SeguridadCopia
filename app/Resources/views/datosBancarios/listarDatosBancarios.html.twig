@@ -9,8 +9,7 @@
 
 
     <h1>Datos bancarios cliente</h1>
-
-    <a href="{{ path('altas_domiciliacion',{'id': cliente.id}) }}" class="btn btn-success">Añadir Domiciliación</a>
+    <a href="{{ path('domiciliacion_alta',{"id": cliente.id}) }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir Domiciliación</a>
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
@@ -25,7 +24,7 @@
         <tbody>
         {% for dato in datos %}
             <tr>
-                <td><a href="{{path('app_datosbancarios_form',{'id': dato.id})  }}">{{ dato.cliente }}</a></td>
+                <td><a href="{{ path('domiciliacion_form',{'id': dato.id}) }}">{{ dato.cliente }}</a></td>
                 <td>{{ dato.iban }}</td>
                 <td>{{ dato.moneda }}</td>
                 <td>{{ dato.entidad }}</td>
@@ -35,5 +34,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn btn-info">Volver atrás</a>
+    <a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
 {% endblock %}
