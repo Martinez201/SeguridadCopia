@@ -75,7 +75,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * @Route("/clientes/eliminar/{id}"), name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/clientes/eliminar/{id}", name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function eliminarAction(Request $request, Cliente $cliente){
