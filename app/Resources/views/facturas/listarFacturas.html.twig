@@ -1,0 +1,38 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Partes
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Facturas</h1>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>id</td>
+            <td>Empleado</td>
+            <td>Cliente</td>
+            <td>Fecha</td>
+            <td>Concepto</td>
+            <td>Precio sin iva</td>
+            <td>Precio con iva</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.id }}</a></td>
+                <td>{{ factura.cliente }}</td>
+                <td>{{ factura.empleado }}</td>
+                <td>{{ factura.fecha|date("d/m/Y") }}</td>
+                <td>{{ factura.concepto}}</td>
+                <td>{{ factura.precioSinIva }}</td>
+                <td>{{ factura.precioConIva }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
