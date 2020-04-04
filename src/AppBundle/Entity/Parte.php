@@ -34,6 +34,12 @@ class Parte
      */
     private $estado;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $tipo;
+
     /////////////////RELACIONES//////////////////////////////////
 
     /**
@@ -171,6 +177,24 @@ class Parte
     public function setEmpleado($empleado)
     {
         $this->empleado = $empleado;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * @param int $tipo
+     * @return Parte
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
         return $this;
     }
 
