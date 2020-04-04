@@ -1,0 +1,38 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Partes
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Partes</h1>
+    <a href="{{ path('partes_alta') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir parte</a>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>id</td>
+            <td>Cliente</td>
+            <td>Delegación</td>
+            <td>Empleado</td>
+            <td>Fecha</td>
+            <td>Observaciones</td>
+            <td>Estado</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for parte in partes %}
+            <tr>
+                <td><a href="{{ path('partes_form',{'id': parte.id}) }}">{{ parte.id }}</a></td>
+                <td>{{ parte.cliente }}</td>
+                <td>{{ parte.delegacion }}</td>
+                <td>{{ parte.empleado }}</td>
+                <td>{{ parte.fecha|date("d/m/Y") }}</td>
+                <td>{{ parte.observaciones }}</td>
+                <td>{{ parte.estado }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
