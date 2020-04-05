@@ -86,12 +86,12 @@ class AlbaranController extends Controller
                 $cli = $this->getDoctrine()->getManager();
                 $cli->remove($albaran);
                 $cli->flush();
-                $this->addFlash('success','albarán dado de baja con éxito');
+                $this->addFlash('success','albarán borrado con éxito');
                 return $this->redirectToRoute('albaranes_Listar');
 
             }catch (\Exception $ex){
 
-                $this->addFlash('error','Error: no se ha podido dar de baja al albarán');
+                $this->addFlash('error','Error: no se ha podido borrar albarán');
             }
 
         }

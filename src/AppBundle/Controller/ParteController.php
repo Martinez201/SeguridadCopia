@@ -87,7 +87,7 @@ class ParteController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($parte);
                 $em->flush();
-                $this->addFlash('success','Partes borrado con éxito');
+                $this->addFlash('success','Parte borrado con éxito');
                 return $this->redirectToRoute('partes_Listar');
 
             }catch (\Exception $ex){
