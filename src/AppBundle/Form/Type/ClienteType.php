@@ -31,7 +31,8 @@ class ClienteType extends AbstractType
             ])
             ->add('fechaNacimiento',DateType::class,[
 
-                'label'=> 'Fecha nacimiento:'
+                'label'=> 'Fecha nacimiento:',
+                'years'=> range(date('1910'),date('Y')-18)
             ])
             ->add('direccion',TextType::class,[
 

@@ -35,7 +35,8 @@ class EmpleadoType extends AbstractType
             ])
             ->add('edad',DateType::class,[
 
-                'label'=> 'Fecha nacimiento:'
+                'label'=> 'Fecha nacimiento:',
+                'years'=> range(date('1910'),date('Y')-18)
             ])
             ->add('telefono',TextType::class,[
 
