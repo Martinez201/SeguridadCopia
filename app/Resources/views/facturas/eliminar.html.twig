@@ -1,0 +1,23 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+
+    Eliminar  factura
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Eliminar factura</h1>
+
+    <div class="alert alert-warning">
+        ¿Esta seguro de que quiere eliminar la factura {{ factura.id }}?  Esta operación no se puede deshacer.
+    </div>
+
+    <form method="post">
+        <a href="{{ path('facturas_form',{'id': factura.id}) }}" class="btn btn-info">Volver atrás</a>
+        <button type="submit" class="btn btn-danger">Borrar</button>
+    </form>
+{% endblock %}
+
+

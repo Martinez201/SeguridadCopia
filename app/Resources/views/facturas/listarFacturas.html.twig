@@ -8,7 +8,7 @@
 {% block content %}
 
     <h1>Facturas</h1>
-
+    <a href="{{ path('altas_facturas') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir factura</a>
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
@@ -24,7 +24,7 @@
         <tbody>
         {% for factura in facturas %}
             <tr>
-                <td>{{ factura.id }}</a></td>
+                <td><a href="{{ path('facturas_form',{'id': factura.id}) }}">{{ factura.id }}</a></td>
                 <td>{{ factura.cliente }}</td>
                 <td>{{ factura.empleado }}</td>
                 <td>{{ factura.fecha|date("d/m/Y") }}</td>
