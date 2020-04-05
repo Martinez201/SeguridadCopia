@@ -1,0 +1,27 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block content %}
+
+    <h1>
+        {% if albaran.id %}
+            Albarán {{ albaran.id }}
+        {% else %}
+            Alta albarán
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+    {% if not albaran.id %}
+        <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
+    {% else %}
+        <a href="{{ path('albaranes_eliminar',{'id': albaran.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a>
+    {% endif %}
+    <a href="{{ path('albaranes_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block title %}
+    Albaranes
+{% endblock %}
+

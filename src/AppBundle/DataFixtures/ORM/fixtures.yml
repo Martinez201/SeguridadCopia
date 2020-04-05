@@ -101,43 +101,43 @@ AppBundle\Entity\Cliente:
     estado: 0
 
 AppBundle\Entity\Producto:
-  productos_A{1..5}:
+  productos_A:
     nombre: 'Central de Alarma'
     tipo: 'Producto'
-    precio: 200,98
+    precio: 200.98
     cantidad: 20
-  productos_B{1..5}:
+  productos_B:
     nombre: 'Detector presencia'
     tipo: 'Producto'
-    precio: 10,98
+    precio: 10.98
     cantidad: 20
-  productos_C{1..5}:
+  productos_C:
     nombre: 'Extensor de zona'
     tipo: 'Producto'
-    precio: 4,98
+    precio: 4.98
     cantidad: 20
-  productos_D{1..5}:
+  productos_D:
     nombre: 'Cámara HD'
     tipo: 'Producto'
-    precio: 20,98
+    precio: 20.98
     cantidad: 20
-  productos_E{1..5}:
+  productos_E:
     nombre: 'Video grabador 16 canales'
     tipo: 'Producto'
-    precio: 220,98
+    precio: 220.98
     cantidad: 20
-  productos_F{1..5}:
+  productos_F:
     nombre: 'Video grabador 32 canales'
     tipo: 'Producto'
-    precio: 520,98
+    precio: 520.98
     cantidad: 20
-  productos_G{1..5}:
+  productos_G:
     nombre: 'Vigilante privado'
     tipo: 'Servicio'
-    precio: 40,98
+    precio: 40.98
     cantidad: 20
-  productos_H{1..5}:
+  productos_H:
     nombre: 'Escolta privado'
     tipo: 'Servicio'
-    precio: 40,98
+    precio: 40.98
     cantidad: 20

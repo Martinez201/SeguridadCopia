@@ -1,0 +1,36 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Albaranes
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Albaranes</h1>
+    <a href="{{ path('altas_albaranes') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir albarán</a>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>ID</td>
+            <td>Empleado</td>
+            <td>Fecha</td>
+            <td>Unidades</td>
+            <td>Proveedor</td>
+            <td>Contenido</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for albaran in albaranes %}
+            <tr>
+                <td><a href="{{ path('albaranes_form',{'id': albaran.id}) }}">{{ albaran.id }}</a></td>
+                <td>{{ albaran.empleado }}</td>
+                <td>{{ albaran.fecha|date("d/m/Y") }}</td>
+                <td>{{ albaran.cantidad }}</td>
+                <td>{{ albaran.proveedor }}</td>
+                <td>{{ albaran.productos|join(',') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
