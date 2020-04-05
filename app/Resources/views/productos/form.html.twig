@@ -1,0 +1,27 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block content %}
+
+    <h1>
+        {% if producto.id %}
+            Producto {{ producto.nombre }}
+        {% else %}
+            Alta producto
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+    {% if not producto.id %}
+        <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
+    {% else %}
+        <a href="{{ path('productos_eliminar',{'id': producto.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a>
+    {% endif %}
+    <a href="{{ path('productos_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block title %}
+    Productos
+{% endblock %}
+

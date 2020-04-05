@@ -8,6 +8,7 @@
 {% block content %}
 
     <h1>Productos</h1>
+    <a href="{{ path('altas_productos') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir producto</a>
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
@@ -20,7 +21,7 @@
         <tbody>
         {% for producto in productos %}
             <tr>
-                <td>{{ producto.nombre }}</td>
+                <td><a href="{{ path('productos_form',{'id': producto.id}) }}">{{ producto.nombre }}</a></td>
                 <td>{{ producto.tipo }}</td>
                 <td>{{ producto.precio }}</td>
                 <td>{{ producto.cantidad}}</td>
