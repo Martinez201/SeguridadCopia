@@ -1,0 +1,38 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Presupuestos
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Presupuestos</h1>
+    <a href="{{ path('altas_presupuestos') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir presupuesto</a>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>id</td>
+            <td>Cliente</td>
+            <td>Empleado</td>
+            <td>Fecha</td>
+            <td>Dirección(Instalación)</td>
+            <td>Precio sin Iva</td>
+            <td>Precio con Iva</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for presupuesto in presupuestos %}
+            <tr>
+                <td><a href="{{ path('presupuestos_form',{'id': presupuesto.id}) }}">{{ presupuesto.id }}</a></td>
+                <td>{{ presupuesto.cliente }}</td>
+                <td>{{ presupuesto.empleado }}</td>
+                <td>{{ presupuesto.fecha|date("d/m/Y") }}</td>
+                <td>{{ presupuesto.instalacion }}</td>
+                <td>{{ presupuesto.precioSinIva }}</td>
+                <td>{{ presupuesto.precioConIva }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
