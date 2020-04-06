@@ -29,22 +29,10 @@ class AlbaranType extends AbstractType
             ->add('fecha',DateType::class,[
 
                 'label' => 'Fecha:'
-
-
-            ])
-            ->add('cantidad', NumberType::class,[
-
-                'label'=> 'Unidades:'
             ])
             ->add('proveedor', TextType::class,[
 
                 'label'=> 'Proveedor:'
-            ])
-            ->add('productos',EntityType::class,[
-
-                'label'=>'Productos:',
-                'class'=> Producto::class,
-                'multiple'=> true,
             ]);
     }
 

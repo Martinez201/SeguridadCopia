@@ -1,0 +1,23 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+
+    Eliminar  contenido
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Eliminar contenido del albarán</h1>
+
+    <div class="alert alert-warning">
+        ¿Esta seguro de que quiere eliminar este producto del albrarán {{ contenido.id }}?  Esta operación no se puede deshacer.
+    </div>
+
+    <form method="post">
+        <a href="{{ path('contenido_form',{'albaran': albaran.id,'id': contenido.id}) }}" class="btn btn-info">Volver atrás</a>
+        <button type="submit" class="btn btn-danger">Borrar</button>
+    </form>
+{% endblock %}
+
+

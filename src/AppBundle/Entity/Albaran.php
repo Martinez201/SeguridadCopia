@@ -24,11 +24,7 @@ class Albaran
      * @var \DateTime
      */
     private $fecha;
-    /**
-     * @ORM\Column(type="integer")
-     * @var int
-     */
-    private $cantidad;
+
     /**
      * @ORM\Column(type="string")
      * @var string
@@ -43,10 +39,10 @@ class Albaran
     private $empleado;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Producto")
-     * @var Producto[]
+     * @ORM\OneToMany(targetEntity="ContenidoAlbaran",mappedBy="albaran")
+     * @var ContenidoAlbaran[]
      */
-    private $productos;
+    private $contenido;
 
     //////////////////////
     ///
@@ -65,24 +61,6 @@ class Albaran
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCantidad()
-    {
-        return $this->cantidad;
-    }
-
-    /**
-     * @param int $cantidad
-     * @return Albaran
-     */
-    public function setCantidad($cantidad)
-    {
-        $this->cantidad = $cantidad;
         return $this;
     }
 
@@ -131,22 +109,24 @@ class Albaran
     }
 
     /**
-     * @return Producto[]
+     * @return ContenidoAlbaran[]
      */
-    public function getProductos()
+    public function getContenido()
     {
-        return $this->productos;
+        return $this->contenido;
     }
 
     /**
-     * @param Producto[] $productos
+     * @param ContenidoAlbaran[] $contenido
      * @return Albaran
      */
-    public function setProductos($productos)
+    public function setContenido($contenido)
     {
-        $this->productos = $productos;
+        $this->contenido = $contenido;
         return $this;
     }
+
+
 
 
 }
