@@ -11,6 +11,7 @@
     </h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
+    {{ form_row(form.imagen) }}
     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
     {% if not producto.id %}
         <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>

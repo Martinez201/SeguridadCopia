@@ -39,7 +39,11 @@ class Producto
      * @var int
      */
     private $cantidad;
-
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     * @var string
+     */
+    private $imagen;
 
     /**
      * @return string
@@ -124,6 +128,24 @@ class Producto
     public function __toString()
     {
         return $this->nombre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    /**
+     * @param string $imagen
+     * @return Producto
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+        return $this;
     }
 
 

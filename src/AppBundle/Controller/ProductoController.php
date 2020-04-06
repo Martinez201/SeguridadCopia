@@ -51,7 +51,17 @@ class ProductoController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
 
+            $imagen = $form->get('imagen')->getData();
+
+            if($imagen){
+
+                $nombreOriginal = pathinfo($imagen->getClientOriginalName(),PATHINFO_FILENAME);
+                $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$imagen->guessExtension();
+
+            }
             try {
+                $imagen->move($this->getParameter('directorioImagenes'),$guardarNuevo);
+                $producto->setImagen($guardarNuevo);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();

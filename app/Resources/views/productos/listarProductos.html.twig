@@ -12,6 +12,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
+            <td>Imagen</td>
             <td>Nombre</td>
             <td>Tipo</td>
             <td>Precio</td>
@@ -21,6 +22,7 @@
         <tbody>
         {% for producto in productos %}
             <tr>
+                <td><img src="{% if producto.imagen %} {{ asset('imagenesProductos/') }}{{ producto.imagen }} {% else %} {{ asset('imagenesProductos/sin-imagen12.jpg') }}{% endif %}" width="100px"></td>
                 <td><a href="{{ path('productos_form',{'id': producto.id}) }}">{{ producto.nombre }}</a></td>
                 <td>{{ producto.tipo }}</td>
                 <td>{{ producto.precio }}</td>

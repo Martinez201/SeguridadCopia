@@ -69,18 +69,22 @@ class EmpleadoType extends AbstractType
             ->add('administrador',CheckboxType::class,[
 
                 'label'=> 'Administrador:',
+                'required'=> false
             ])
             ->add('gestor',CheckboxType::class,[
 
-                'label'=> 'Gestor:'
+                'label'=> 'Gestor:',
+                'required'=> false
             ])
             ->add('instalador',CheckboxType::class,[
 
-                'label'=> 'Instalador:'
+                'label'=> 'Instalador:',
+                'required'=> false
             ])
             ->add('comercial',CheckboxType::class,[
 
-                'label'=> 'Comercial:'
+                'label'=> 'Comercial:',
+                'required'=> false
             ])
             ->add('delegacion', EntityType::class,[
 
@@ -93,6 +97,7 @@ class EmpleadoType extends AbstractType
 
                 'label' => 'Avatar:',
                 'mapped' => false,
+                'required'=> false,
                 'constraints'=>[
                    new File([
                        'maxSize'=> '5000k',

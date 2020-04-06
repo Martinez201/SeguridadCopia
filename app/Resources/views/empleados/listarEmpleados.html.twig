@@ -12,6 +12,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
+            <td>Avatar</td>
             <td>Nombre</td>
             <td>Apellidos</td>
             <td>D.N.I</td>
@@ -27,6 +28,7 @@
         <tbody>
         {% for empleado in empleados %}
         <tr>
+            <td><img src="{% if empleado.avatar %} {{ asset('avatares/') }}{{ empleado.avatar}} {% else %} {{ asset('avatares/person_8x10.png') }}{% endif %}" width="100px"></td>
             <td><a href="{{ path('empleados_form',{'id': empleado.id}) }}">{{ empleado.nombre }}</a></td>
             <td>{{ empleado.apellidos }}</td>
             <td>{{ empleado.dni }}</td>

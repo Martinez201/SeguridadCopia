@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     directorioAvatares: '%kernel.project_dir%/web/avatares'
+    directorioImagenes: '%kernel.project_dir%/web/imagenesProductos'
 
 framework:
     #esi: ~
