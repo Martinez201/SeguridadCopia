@@ -18,7 +18,8 @@ class ClienteRepository extends ServiceEntityRepository
     public function obtenerClientesOrdenados(){
 
         return $this->createQueryBuilder('c')
-            ->addSelect('c')
+            ->addSelect('d')
+            ->leftJoin('c.datosBancarios','d')
             ->orderBy('c.nombre')
             ->addOrderBy('c.apellidos')
             ->getQuery()
