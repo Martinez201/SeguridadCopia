@@ -16,15 +16,20 @@ class EmpleadoRepository extends ServiceEntityRepository
     }
 
 
-    function obtenerEmpleados(){
+    function obtenerEmpleadosQueryBuilder(){
 
         return $this->createQueryBuilder('ep')
             ->addSelect('ep')
             ->orderBy('ep.nombre')
-            ->addOrderBy('ep.apellidos')
+            ->addOrderBy('ep.apellidos');
+
+    }
+
+    function obtenerEmpleadosOrdenados(){
+
+        return $this->obtenerEmpleadosQueryBuilder()
             ->getQuery()
             ->getResult();
-
     }
 
 }
