@@ -27,4 +27,15 @@ class ClienteRepository extends ServiceEntityRepository
 
     }
 
+    public function obtenerCliente(Cliente $cliente){
+
+        return $this->createQueryBuilder('c')
+            ->addSelect('d')
+            ->leftJoin('c.datosBancarios','d')
+            ->where('c.id = :cliente')
+            ->setParameter('cliente',$cliente)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

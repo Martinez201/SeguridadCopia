@@ -5,10 +5,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Factura;
 use AppBundle\Form\Type\FacturaType;
+use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\FacturaRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use TFox\MpdfPortBundle\Service\MpdfService;
+use Twig\Environment;
 
 class FacturaController extends Controller
 {
@@ -101,5 +104,29 @@ class FacturaController extends Controller
 
         ]);
 
+    }
+
+    /**
+     * @Route("facturas/informe/{id}", name="facturas_informe", methods={"GET"})
+     */
+
+    public function informeAction(Request $request, FacturaRepository $facturaRepository, Environment $twig, ClienteRepository $clienteRepository,Factura $factura){
+
+        $facturas = $facturaRepository->obtenerFactura($factura);
+        $mpdfService = new MpdfService();
+        $nombre = $factura->getCliente()->getNombre()." ".$factura->getCliente()->getApellidos();
+        $direccion = $factura->getCliente()->getDireccion()." ".$factura->getCliente()->getCiudad()." ".$factura->getCliente()->getProvincia().",".$factura->getCliente()->getCPostal();
+        $email = $factura->getCliente()->getEmail();
+        $telefono = $factura->getCliente()->getTelefono();
+        $html = $twig->render('facturas/informe.html.twig',[
+
+            'factura'=> $factura,
+            'nombre' => $nombre,
+            'telefono'=> $telefono,
+            'email'=> $email,
+            'direccion'=> $direccion
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
     }
 }

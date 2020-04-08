@@ -26,4 +26,17 @@ class FacturaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function obtenerFactura(Factura $factura){
+
+        return $this->createQueryBuilder('f')
+            ->addSelect('e')
+            ->addSelect('c')
+            ->leftJoin('f.empleado','e')
+            ->leftJoin('f.cliente','c')
+            ->where('f.id = :factura')
+            ->setParameter('factura',$factura)
+            ->getQuery()
+            ->getResult();
+    }
 }

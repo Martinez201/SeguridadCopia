@@ -19,6 +19,7 @@
             <td>Concepto</td>
             <td>Precio sin iva</td>
             <td>Precio con iva</td>
+            <td>PDF</td>
         </tr>
         </thead>
         <tbody>
@@ -31,8 +32,10 @@
                 <td>{{ factura.concepto}}</td>
                 <td>{{ factura.precioSinIva }}</td>
                 <td>{{ factura.precioConIva }}</td>
+                <td><a href="{{ path('facturas_informe',{'id': factura.id}) }}">Generar factura</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
 {% endblock %}
