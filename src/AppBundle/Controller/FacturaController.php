@@ -54,6 +54,9 @@ class FacturaController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
 
+            $precioConIva = $form->get('precioSinIva')->getData() * 0.21;
+            $factura->setPrecioConIva($form->get('precioSinIva')->getData()+$precioConIva);
+
             try {
 
                 $em = $this->getDoctrine()->getManager();

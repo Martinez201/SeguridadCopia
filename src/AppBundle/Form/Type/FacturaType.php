@@ -37,10 +37,6 @@ class FacturaType extends AbstractType
 
                 'label'=> 'Fecha:'
             ])
-            ->add('precioConIva',NumberType::class,[
-
-                'label'=> 'Precio con Iva:'
-            ])
             ->add('precioSinIva',NumberType::class,[
 
                 'label'=> 'Precio sin Iva:'
