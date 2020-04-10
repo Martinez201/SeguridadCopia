@@ -13,6 +13,8 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use TFox\MpdfPortBundle\Service\MpdfService;
+use Twig\Environment;
 
 class EmpleadoController extends Controller
 {
@@ -139,5 +141,21 @@ class EmpleadoController extends Controller
 
         ]);
 
+    }
+
+    /**
+     * @Route("/empleado/informe", name="empleado_informe", methods={"GET"})
+     */
+
+    public function  informeAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){
+
+        $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
+        $mpdfService = new MpdfService();
+        $html = $twig->render('empleados_informe.html.twig',[
+
+            'empleados'=> $empleados
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
     }
 }
