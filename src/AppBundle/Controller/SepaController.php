@@ -109,28 +109,27 @@ class SepaController extends Controller
 
      $DbtrAgt->setBIC($datosBancariosCliente->getBic()); // BIC DE LA CUENTA DEL CLIENTE
 
-     //OPCIONAL SI SE QUIERE MAS DE 1 CLIENTE POR DOCUMENTO SEPA
-     $UltmtDbtr->setNm('X'); // NOMBRE CLIENTE 2
-     $UltmtDbtr->setId('X'); //ID CLIENTE2
+     $UltmtDbtr->setNm('X'); // NOMBRE  ultimo Acreedor
+     $UltmtDbtr->setId('X'); //ID ultimo acreedor
 
-     $PmtId->setInstrId('X'); // CAMBIAR LA FECHA DEJAR EL RESTO
+     $PmtId->setInstrId('265052/007/'.$aux2); // CAMBIAR LA FECHA DEJAR EL RESTO
 
-     $Amt->setInstdAmt(0); //LO QUE TIENE QUE PAGAR CLIENTE2
+     $Amt->setInstdAmt($factura->getPrecioConIva());
 
-     $CdtrAgt->setBic('X'); // BIC DE LA CUENTA DEL CLIENTE 2
+     $CdtrAgt->setBic('AIBKIE2D'); // BIC DE LA CUENTA DEL ACREEDOR
 
      $PstlAdr = new PstlAdr();
-     $Cdtr->setNm('X'); // CLIENTE2
-     $Cdtr->setId('X'); //ID CLIENTE2
+     $Cdtr->setNm('RobCo Security'); // ACREEDOR
+     $Cdtr->setId('0468651441'); //ID ACREEDOR
 
-     $PstlAdr->setPstCd('X'); //CODIGO POSTAL CLIENTE2
-     $PstlAdr->setTwnNm('X'); // CIUDAD CLIENTE2
-     $PstlAdr->setCtry('X'); //PAIS CLIENTE 2
-     $PstlAdr->setAdrLine('X'); //DIRECCION CLIENTE 2
+     $PstlAdr->setPstCd('28080'); //CODIGO POSTAL ACREEDOR
+     $PstlAdr->setTwnNm('Madrid'); // CIUDAD ACREEDOR
+     $PstlAdr->setCtry('España'); //PAIS ACREEDOR
+     $PstlAdr->setAdrLine('Avenida de Andalucía 128 (Edificio Tesla)'); //DIRECCION ACREEDOR
 
      $Cdtr->setPstlAdr($PstlAdr);
 
-     $CdtrAcct->setIban('X'); // IBAN CLIENTE2
+     $CdtrAcct->setIban('ES660020961234567890'); // IBAN ACREEDOR
 
      $UltmtCdtr->setId('X');
      $UltmtCdtr->setNum('XXX');
