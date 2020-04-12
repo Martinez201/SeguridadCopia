@@ -69,7 +69,7 @@ class SepaController extends Controller
      $InitgPty->setNm('ROBCO SECURITY S.A.U'); // NOMBRE DE LA EMPRESA QUE FACTURA
 
     //cuerpo
-     $PmtInf->setPmtInfId('ABC/4560/'); //CAMBIAR LA FECHA POR LA ACTUAL DEJAR EL RESTO DE LA CADENA
+     $PmtInf->setPmtInfId('ABC/4560/'.$aux2); //CAMBIAR LA FECHA POR LA ACTUAL DEJAR EL RESTO DE LA CADENA
      $PmtInf->setPmtMtd('TRF'); // DEJARLO
      $PmtInf->setBtchBookg(false); // DEJARLO
      $PmtInf->setNbOfTxs(1); // NUMERO DE TRANSACCIONES (DEJARLO)
