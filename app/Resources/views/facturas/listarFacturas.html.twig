@@ -34,7 +34,13 @@
                 <td>{{ factura.precioSinIva }}</td>
                 <td>{{ factura.precioConIva }}</td>
                 <td><a href="{{ path('facturas_informe',{'id': factura.id}) }}">Generar factura</a></td>
-                <td><a href="{{ path('sepa_generar',{'id': factura.id}) }}" class="btn btn-info"><i class="fas fa-download"></i> Generar SEPA</a></td>
+                <td>
+                    {% if factura.cliente.datosBancarios %}
+                    <a href="{{ path('sepa_generar',{'id': factura.id}) }}" class="btn btn-info"><i class="fas fa-download"></i> Generar SEPA</a>
+                        {% else %}
+                        No tiene domiciliación
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
