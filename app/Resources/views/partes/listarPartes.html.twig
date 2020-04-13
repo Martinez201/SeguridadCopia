@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for parte in partes %}
+        {% for parte in paginador.currentPageResults %}
             <tr>
                 <td><a href="{{ path('partes_form',{'id': parte.id}) }}">{{ parte.id }}</a></td>
                 <td>{{ parte.cliente }}</td>
@@ -35,4 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if paginador and paginador.haveToPaginate %}
+        {{ pagerfanta(paginador,'twitter_bootstrap4') }}
+    {% endif %}
 {% endblock %}

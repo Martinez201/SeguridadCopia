@@ -15,7 +15,7 @@ class ParteRepository extends ServiceEntityRepository
         parent::__construct($registry, Parte::class);
     }
 
-    public function obtenerPartesOrdenados(){
+    public function obtenerPartesOrdenadosQueryBuilder(){
 
         return $this->createQueryBuilder('p')
             ->addSelect('d')
@@ -24,7 +24,13 @@ class ParteRepository extends ServiceEntityRepository
             ->leftJoin('p.delegacion','d')
             ->leftJoin('p.empleado','e')
             ->leftJoin('p.cliente','c')
-            ->orderBy('p.fecha')
+            ->orderBy('p.fecha');
+
+    }
+
+    public function obtenerPartesOrdenados(){
+
+        return $this->obtenerPartesOrdenadosQueryBuilder()
             ->getQuery()
             ->getResult();
     }

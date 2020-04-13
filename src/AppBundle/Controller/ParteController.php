@@ -6,6 +6,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Parte;
 use AppBundle\Form\Type\ParteType;
 use AppBundle\Repository\ParteRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,21 +16,37 @@ use Symfony\Component\Routing\Annotation\Route;
 class ParteController extends Controller
 {
     /**
-     * @Route("/partes",name="partes_Listar")
+     * @Route("/partes/{page}",name="partes_Listar")
      */
 
-    public function partesAction(ParteRepository $parteRepository){
+    public function partesAction(ParteRepository $parteRepository,$page=1){
 
-        $partes = $parteRepository->obtenerPartesOrdenados();
+        $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($partes, false);
+        $pager = new Pagerfanta($adaptador);
+
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
+
 
         return $this->render('partes/listarPartes.html.twig',[
 
-            'partes'=> $partes
+            'partes'=> $partes,
+            'paginador'=> $pager
         ]);
     }
 
     /**
-     * @Route("/partes/altas",name="partes_alta", methods={"GET","POST"})
+     * @Route("/parte/altas",name="partes_alta", methods={"GET","POST"})
      */
 
     public function nuevoAction(Request $request){
@@ -40,7 +59,7 @@ class ParteController extends Controller
     }
 
     /**
-     * @Route("/partes/{id}", name="partes_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/parte/{id}", name="partes_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
      *
      */
 
@@ -74,7 +93,7 @@ class ParteController extends Controller
     }
 
     /**
-     * @Route("/partes/eliminar/{id}", name="partes_eliminar",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/parte/eliminar/{id}", name="partes_eliminar",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function eliminarAction(Request $request, Parte $parte){
