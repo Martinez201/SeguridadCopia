@@ -80,12 +80,10 @@ class EmpleadoController extends Controller
 
                 $nombreOriginal = pathinfo($imagen->getClientOriginalName(),PATHINFO_FILENAME);
                 $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$imagen->guessExtension();
-
+                $imagen->move($this->getParameter('directorioAvatares'), $guardarNuevo);
+                $empleado->setAvatar($guardarNuevo);
             }
             try {
-
-                $imagen->move($this->getParameter('directorioAvatares'),$guardarNuevo);
-                $empleado->setAvatar($guardarNuevo);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();

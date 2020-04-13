@@ -57,11 +57,10 @@ class ProductoController extends Controller
 
                 $nombreOriginal = pathinfo($imagen->getClientOriginalName(),PATHINFO_FILENAME);
                 $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$imagen->guessExtension();
-
-            }
-            try {
                 $imagen->move($this->getParameter('directorioImagenes'),$guardarNuevo);
                 $producto->setImagen($guardarNuevo);
+            }
+            try {
 
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
