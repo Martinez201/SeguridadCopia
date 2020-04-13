@@ -8,6 +8,9 @@ use AppBundle\Entity\Cliente;
 use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\ClienteType;
 use AppBundle\Repository\ClienteRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,23 +19,37 @@ class ClienteController extends Controller
 {
 
     /**
-     * @Route("/clientes", name = "clientes_Listar")
+     * @Route("/clientes/{page}", name = "clientes_Listar")
      */
 
-    public function clientesAction(ClienteRepository $clienteRepository){
+    public function clientesAction(ClienteRepository $clienteRepository,$page=1){
 
-        $clientes = $clienteRepository->obtenerClientesOrdenados();
+        $clientes = $clienteRepository->obtenerClientesOrdenadosQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($clientes, false);
+        $pager = new Pagerfanta($adaptador);
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
 
 
         return $this->render('clientes/listarClientes.html.twig',[
 
-            'clientes' => $clientes
+            'clientes' => $clientes,
+            'paginador'=> $pager
         ]);
 
     }
 
     /**
-     * @Route("/clientes/alta", name="altas_clientes", methods={"GET","POST"})
+     * @Route("/cliente/alta", name="altas_clientes", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request){
@@ -43,7 +60,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * @Route("/clientes/{id}", name= "clientes_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/cliente/{id}", name= "clientes_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function formAction(Request $request, Cliente $cliente){
@@ -75,7 +92,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * @Route("/clientes/eliminar/{id}", name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/cliente/eliminar/{id}", name="cliente_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function eliminarAction(Request $request, Cliente $cliente){

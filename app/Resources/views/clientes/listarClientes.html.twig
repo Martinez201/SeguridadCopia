@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for cliente in clientes %}
+        {% for cliente in paginador.currentPageResults %}
             <tr>
                 <td><a href="{{ path('clientes_form',{'id': cliente.id}) }}">{{ cliente.nombre }}</a></td>
                 <td>{{ cliente.apellidos }}</td>
@@ -43,4 +43,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if paginador and paginador.haveToPaginate %}
+        {{ pagerfanta(paginador,'twitter_bootstrap4') }}
+    {% endif %}
 {% endblock %}

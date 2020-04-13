@@ -15,16 +15,22 @@ class ClienteRepository extends ServiceEntityRepository
         parent::__construct($registry, Cliente::class);
     }
 
-    public function obtenerClientesOrdenados(){
+    public function obtenerClientesOrdenadosQueryBuilder(){
 
         return $this->createQueryBuilder('c')
             ->addSelect('d')
             ->leftJoin('c.datosBancarios','d')
             ->orderBy('c.nombre')
-            ->addOrderBy('c.apellidos')
+            ->addOrderBy('c.apellidos');
+
+
+    }
+
+    public function obtenerClientesOrdenados(){
+
+        return $this->obtenerClientesOrdenadosQueryBuilder()
             ->getQuery()
             ->getResult();
-
     }
 
     public function obtenerCliente(Cliente $cliente){
