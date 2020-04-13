@@ -7,6 +7,9 @@ use AppBundle\Entity\Factura;
 use AppBundle\Form\Type\FacturaType;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\FacturaRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,23 +19,37 @@ use Twig\Environment;
 class FacturaController extends Controller
 {
     /**
-     * @Route("/facturas", name = "facturas_Listar")
+     * @Route("/facturas/{page}", name = "facturas_Listar")
      */
 
-    public function clientesAction(FacturaRepository $facturaRepository){
+    public function FacturasAction(FacturaRepository $facturaRepository,$page=1){
 
-        $facturas = $facturaRepository->obtenerFacturasOrdenadas();
+        $facturas = $facturaRepository->obtenerFacturasOrdenadasQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($facturas, false);
+        $pager = new Pagerfanta($adaptador);
 
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
 
         return $this->render('facturas/listarFacturas.html.twig',[
 
-            'facturas' => $facturas
+            'facturas' => $facturas,
+            'paginador'=> $pager
         ]);
 
     }
 
     /**
-     * @Route("/facturas/alta", name="altas_facturas", methods={"GET","POST"})
+     * @Route("/factura/alta", name="altas_facturas", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request){
@@ -44,7 +61,7 @@ class FacturaController extends Controller
 
 
     /**
-     * @Route("/facturas/{id}", name="facturas_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/factura/{id}", name="facturas_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function formAction(Request $request, Factura $factura){
@@ -78,7 +95,7 @@ class FacturaController extends Controller
     }
 
     /**
-     * @Route("/facturas/eliminar/{id}", name="facturas_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/factura/eliminar/{id}", name="facturas_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function eliminarAction(Request $request, Factura $factura){
@@ -110,7 +127,7 @@ class FacturaController extends Controller
     }
 
     /**
-     * @Route("facturas/informe/{id}", name="facturas_informe", methods={"GET"})
+     * @Route("factura/informe/{id}", name="facturas_informe", methods={"GET"})
      */
 
     public function informeAction(Request $request, FacturaRepository $facturaRepository, Environment $twig, ClienteRepository $clienteRepository,Factura $factura){
@@ -134,7 +151,7 @@ class FacturaController extends Controller
     }
 
     /**
-     *  @Route("facturas/informes", name="facturas_informes", methods={"GET"})
+     *  @Route("factura/informes", name="facturas_informes", methods={"GET"})
      */
 
     public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig){

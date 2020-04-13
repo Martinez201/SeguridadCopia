@@ -15,14 +15,19 @@ class FacturaRepository extends ServiceEntityRepository
     }
 
 
-    public function obtenerFacturasOrdenadas(){
+    public function obtenerFacturasOrdenadasQueryBuilder(){
 
         return $this->createQueryBuilder('f')
             ->addSelect('e')
             ->addSelect('c')
             ->leftJoin('f.empleado','e')
             ->leftJoin('f.cliente','c')
-            ->orderBy('f.fecha')
+            ->orderBy('f.fecha');
+    }
+
+    public function obtenerFacturasOrdenadas(){
+
+        return $this->obtenerFacturasOrdenadasQueryBuilder()
             ->getQuery()
             ->getResult();
     }

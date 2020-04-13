@@ -24,7 +24,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for factura in facturas %}
+        {% for factura in paginador.currentPageResults %}
             <tr>
                 <td><a href="{{ path('facturas_form',{'id': factura.id}) }}">{{ factura.id }}</a></td>
                 <td>{{ factura.cliente }}</td>
@@ -46,4 +46,7 @@
         </tbody>
     </table>
     <a href="{{ path('facturas_informes') }}" class="btn btn-info"><i class="fas fa-file-pdf"></i> Generar informe</a>
+    {% if paginador and paginador.haveToPaginate %}
+        {{ pagerfanta(paginador,'twitter_bootstrap4') }}
+    {% endif %}
 {% endblock %}
