@@ -49,6 +49,8 @@ class PresupuestoController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $precioConIva = $form->get('precioSinIva')->getData() * 0.21;
+            $presupuesto->setPrecioConIva($form->get('precioSinIva')->getData()+$precioConIva);
 
             try {
 

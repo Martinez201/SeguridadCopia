@@ -42,10 +42,6 @@ class PresupuestoType extends AbstractType
 
                 'label'=> 'Fecha prevista(Instalación):'
             ])
-            ->add('precioConIva',NumberType::class,[
-
-                'label'=> 'Precio con Iva:'
-            ])
             ->add('precioSinIva',NumberType::class,[
 
                 'label'=> 'Precio sin Iva:'
