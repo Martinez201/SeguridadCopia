@@ -30,7 +30,7 @@
                 <td>{{ parte.empleado }}</td>
                 <td>{{ parte.fecha|date("d/m/Y") }}</td>
                 <td>{{ parte.observaciones }}</td>
-                <td>{{ parte.estado }}</td>
+                <td>{% if parte.estado %} <a href="#" class="btn btn-warning">ABIERTO</a>{% else %}<a href="#" class="btn btn-success">CERRADO</a>{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -38,7 +38,7 @@
                 <td>{{ cliente.cPostal }}</td>
                 <td>{{ cliente.telefono }}</td>
                 <td>{{ cliente.email }}</td>
-                <td>{{ cliente.estado }}</td>
+                <td>{% if cliente.estado %} <a href="#" class="btn btn-success">ALTA</a>{% else %}<a href="#" class="btn btn-danger">BAJA</a>{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
