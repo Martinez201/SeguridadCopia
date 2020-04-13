@@ -7,6 +7,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Albaran;
 use AppBundle\Form\Type\AlbaranType;
 use AppBundle\Repository\AlbaranRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,22 +18,36 @@ class AlbaranController extends Controller
 {
 
     /**
-     * @Route("/albaranes",name="albaranes_Listar")
+     * @Route("/albaranes/{page}",name="albaranes_Listar")
      */
 
-    public function albaranesAction(AlbaranRepository $albaranRepository){
+    public function albaranesAction(AlbaranRepository $albaranRepository,$page = 1){
 
-        $albaranes = $albaranRepository->obtenerAlbaranesOrdenados();
+        $albaranes = $albaranRepository->obtenerAlbaranesOrdenadosQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($albaranes, false);
+        $pager = new Pagerfanta($adaptador);
 
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
         return $this->render('albaranes/albaranesListar.html.twig',[
 
-            'albaranes'=> $albaranes
+            'albaranes'=> $albaranes,
+            'paginador'=> $pager
 
         ]);
     }
 
     /**
-     * @Route("/albaranes/alta", name="altas_albaranes", methods={"GET","POST"})
+     * @Route("/albaran/alta", name="altas_albaranes", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request){
@@ -42,7 +59,7 @@ class AlbaranController extends Controller
 
 
     /**
-     * @Route("/albaranes/{id}", name="albaranes_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/albaran/{id}", name="albaranes_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function formAction(Request $request, Albaran $albaran){
@@ -73,7 +90,7 @@ class AlbaranController extends Controller
     }
 
     /**
-     * @Route("/albaranes/eliminar/{id}", name="albaranes_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/albaran/eliminar/{id}", name="albaranes_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function eliminarAction(Request $request, Albaran $albaran){

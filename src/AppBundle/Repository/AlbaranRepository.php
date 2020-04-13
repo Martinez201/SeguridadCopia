@@ -14,12 +14,18 @@ class AlbaranRepository extends ServiceEntityRepository
         parent::__construct($registry, Albaran::class);
     }
 
-    public function obtenerAlbaranesOrdenados(){
+    public function obtenerAlbaranesOrdenadosQueryBuilder(){
 
         return $this->createQueryBuilder('a')
-            ->orderBy('a.fecha')
+            ->orderBy('a.fecha');
+
+
+    }
+
+    public function obtenerAlbaranesOrdenados(){
+
+        return $this->obtenerAlbaranesOrdenadosQueryBuilder()
             ->getQuery()
             ->getResult();
-
     }
 }
