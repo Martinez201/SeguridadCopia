@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for producto in productos %}
+        {% for producto in paginador.currentPageResults %}
             <tr>
                 <td><img src="{% if producto.imagen %} {{ asset('imagenesProductos/') }}{{ producto.imagen }} {% else %} {{ asset('imagenesProductos/sin-imagen12.jpg') }}{% endif %}" width="100px"></td>
                 <td><a href="{{ path('productos_form',{'id': producto.id}) }}">{{ producto.nombre }}</a></td>
@@ -31,4 +31,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if paginador and paginador.haveToPaginate %}
+        {{ pagerfanta(paginador,'twitter_bootstrap4') }}
+    {% endif %}
 {% endblock %}

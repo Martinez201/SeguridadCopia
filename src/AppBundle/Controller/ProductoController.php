@@ -7,6 +7,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Producto;
 use AppBundle\Form\Type\ProductoType;
 use AppBundle\Repository\ProductoRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,22 +18,36 @@ class ProductoController extends Controller
 {
 
     /**
-     * @Route("/productos", name = "productos_Listar")
+     * @Route("/productos/{page}", name = "productos_Listar")
      */
 
-    public function productosAction(ProductoRepository $productoRepository){
+    public function productosAction(ProductoRepository $productoRepository, $page = 1){
 
-        $productos= $productoRepository->obtenerProductos();
+        $productos= $productoRepository->obtenerProductosQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($productos, false);
+        $pager = new Pagerfanta($adaptador);
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
 
 
         return $this->render('productos/listarProductos.html.twig',[
 
-            'productos' => $productos
+            'productos' => $productos,
+            'paginador'=> $pager
         ]);
 
     }
     /**
-     * @Route("/productos/alta", name="altas_productos", methods={"GET","POST"})
+     * @Route("/producto/alta", name="altas_productos", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request){
@@ -42,7 +59,7 @@ class ProductoController extends Controller
 
 
     /**
-     * @Route("/productos/{id}", name="productos_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/producto/{id}", name="productos_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
     public function formAction(Request $request, Producto $producto){
 
@@ -82,7 +99,7 @@ class ProductoController extends Controller
 
 
     /**
-     * @Route("/productos/eliminar/{id}", name="productos_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/producto/eliminar/{id}", name="productos_eliminar", requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function eliminarAction(Request $request, Producto $producto){

@@ -15,14 +15,20 @@ class ProductoRepository extends ServiceEntityRepository
         parent::__construct($registry, Producto::class);
     }
 
-    function obtenerProductos(){
+    function obtenerProductosQueryBuilder(){
 
         return $this->createQueryBuilder('p')
             ->addSelect('p')
-            ->orderBy('p.nombre')
+            ->orderBy('p.nombre');
+
+
+    }
+
+    function obtenerProductos(){
+
+        return $this->obtenerProductosQueryBuilder()
             ->getQuery()
             ->getResult();
-
     }
 
     function obtenerPrecio(Producto $producto){
