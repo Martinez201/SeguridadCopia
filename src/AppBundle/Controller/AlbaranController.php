@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Albaran;
+use AppBundle\Entity\ContenidoAlbaran;
 use AppBundle\Form\Type\AlbaranType;
 use AppBundle\Repository\AlbaranRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -13,6 +14,8 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use TFox\MpdfPortBundle\Service\MpdfService;
+use Twig\Environment;
 
 class AlbaranController extends Controller
 {
@@ -120,4 +123,26 @@ class AlbaranController extends Controller
         ]);
 
     }
+
+    /**
+     * @Route("albaran/informe/{id}", name="albaran_informe", methods={"GET"})
+     */
+
+    public function informeAction(Request $request, Albaran $albaran,Environment $twig){
+
+        $mpdfService = new MpdfService();
+        $productos = $albaran->getContenido();
+
+        $html = $twig->render('albaranes/iformeAlbaran.htm.twig',[
+
+            'albaran'=> $albaran,
+            'contenido'=> $productos
+
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
+    }
+
+
+
 }

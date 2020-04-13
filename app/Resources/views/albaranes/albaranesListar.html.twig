@@ -17,6 +17,7 @@
             <td>Fecha</td>
             <td>Proveedor</td>
             <td>Añadir Contenido</td>
+            <td>Albarán (PDF)</td>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +27,8 @@
                 <td>{{ albaran.empleado }}</td>
                 <td>{{ albaran.fecha|date("d/m/Y") }}</td>
                 <td>{{ albaran.proveedor }}</td>
-                <td><i class="fas fa-eye"></i><a href="{{ path('contenido_Listar',{'id': albaran.id}) }}">Ver contenido</a></td>
+                <td><a href="{{ path('contenido_Listar',{'id': albaran.id}) }}" class="btn btn-info"><i class="fas fa-eye"></i> Ver contenido</a></td>
+                <td><a href="{{ path('albaran_informe',{'id': albaran.id}) }}" class="btn btn-warning"><i class="fas fa-download"></i> Generar Albaran</a></td>
             </tr>
         {% endfor %}
         </tbody>
