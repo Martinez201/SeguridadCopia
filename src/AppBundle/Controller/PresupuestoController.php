@@ -45,7 +45,7 @@ class PresupuestoController extends Controller
     }
 
     /**
-     * @Route("/presupuestos/alta", name="altas_presupuestos", methods={"GET","POST"})
+     * @Route("/presupuesto/alta", name="altas_presupuestos", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request){
@@ -57,7 +57,7 @@ class PresupuestoController extends Controller
 
 
     /**
-     * @Route("/presupuestos/{id}", name="presupuestos_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/presupuesto/{id}", name="presupuestos_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
     public function formAction(Request $request, Presupuesto $presupuesto){
