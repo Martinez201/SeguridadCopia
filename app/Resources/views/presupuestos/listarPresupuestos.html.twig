@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for presupuesto in presupuestos %}
+        {% for presupuesto in paginador.currentPageResults %}
             <tr>
                 <td><a href="{{ path('presupuestos_form',{'id': presupuesto.id}) }}">{{ presupuesto.id }}</a></td>
                 <td>{{ presupuesto.cliente }}</td>
@@ -35,4 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if paginador and paginador.haveToPaginate %}
+        {{ pagerfanta(paginador,'twitter_bootstrap4') }}
+    {% endif %}
 {% endblock %}

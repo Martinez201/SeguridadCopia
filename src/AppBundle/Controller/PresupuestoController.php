@@ -7,6 +7,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Presupuesto;
 use AppBundle\Form\Type\PresupuestoType;
 use AppBundle\Repository\PresupuestoRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,16 +17,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class PresupuestoController extends Controller
 {
     /**
-     * @Route("/presupuestos",name="presupuestos_Listar")
+     * @Route("/presupuestos/{page}",name="presupuestos_Listar")
      */
 
-    public function partesAction(PresupuestoRepository $presupuestoRepository){
+    public function partesAction(PresupuestoRepository $presupuestoRepository,$page = 1){
 
-        $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenados();
+        $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenadosQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($presupuestos, false);
+        $pager = new Pagerfanta($adaptador);
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
 
         return $this->render('presupuestos/listarPresupuestos.html.twig',[
 
-            'presupuestos'=> $presupuestos
+            'presupuestos'=> $presupuestos,
+            'paginador'=> $pager
         ]);
     }
 

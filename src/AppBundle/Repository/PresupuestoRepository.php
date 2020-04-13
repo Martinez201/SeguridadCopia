@@ -16,14 +16,20 @@ class PresupuestoRepository extends ServiceEntityRepository
         parent::__construct($registry, Presupuesto::class );
     }
 
-    public function obtenerPresupuestosOrdenados(){
+    public function obtenerPresupuestosOrdenadosQueryBuilder(){
 
         return $this->createQueryBuilder('p')
             ->addSelect('e')
             ->addSelect('c')
             ->leftJoin('p.cliente','c')
             ->leftJoin('p.empleado','e')
-            ->orderBy('p.fecha')
+            ->orderBy('p.fecha');
+
+    }
+
+    public function obtenerPresupuestosOrdenados(){
+
+        return $this->obtenerPresupuestosOrdenadosQueryBuilder()
             ->getQuery()
             ->getResult();
     }
