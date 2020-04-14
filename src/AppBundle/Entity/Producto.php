@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,21 +22,27 @@ class Producto
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $nombre;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=30)
      * @var string
      */
     private $tipo;
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @var float
      */
     private $precio;
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      * @var int
      */
     private $cantidad;
