@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity
@@ -21,22 +23,28 @@ class Factura
     private $id;
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date
      * @var \DateTime
      */
     private $fecha;
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @var float
      */
     private $precioConIva;
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @var float
      */
     private $precioSinIva;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5,max=30)
      * @var string
      */
     private $concepto;
