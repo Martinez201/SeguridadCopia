@@ -118,6 +118,22 @@ class Empleado
      */
     private $avatar;
 
+    /**
+     * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5,max="20")
+     * @var string
+     */
+    private $usuario;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5)
+     * @var string
+     */
+    private $clave;
+
 ////////////////////////////////////
     /**
      * @ORM\ManyToOne(targetEntity="Delegacion",inversedBy="empleados")
@@ -523,4 +539,43 @@ private $albaranes;
     {
         return $this->getNombre()." ".$this->getApellidos();
     }
+
+    /**
+     * @return string
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param string $usuario
+     * @return Empleado
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClave()
+    {
+        return $this->clave;
+    }
+
+    /**
+     * @param string $clave
+     * @return Empleado
+     */
+    public function setClave($clave)
+    {
+        $this->clave = $clave;
+        return $this;
+    }
+
+
+
 }
