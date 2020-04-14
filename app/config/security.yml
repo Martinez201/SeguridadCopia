@@ -7,6 +7,13 @@ security:
         in_memory:
             memory: ~
 
+    role_hierarchy:
+        ROLE_ADMINISTRADOR: 'ROLE_GESTOR'
+        ROLE_GESTOR: ['ROLE_COMERCIAL','ROLE_INSTALADOR']
+        ROLE_COMERCIAL: ['ROLE_COMERCIAL','ROLE_USER']
+        ROLE_INSTALADOR: 'ROLE_USER'
+
+
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
