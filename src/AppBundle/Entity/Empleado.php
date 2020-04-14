@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,51 +23,71 @@ class Empleado
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $nombre;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $apellidos;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=9,max=9)
      * @var string
      */
     private $dni;
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date
      * @var \DateTime
      */
     private $edad;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5,max=9)
      * @var string
      */
     private $telefono;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=30)
      * @var string
      */
     private $ciudad;
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min=5,max=9)
+     * @Assert\NotBlank()
      * @var string
      */
     private $cPostal;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=30)
      * @var string
      */
     private $provincia;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=10,max=40)
      * @var string
      */
     private $email;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=10,max=50)
      * @var string
      */
     private $direccion;
