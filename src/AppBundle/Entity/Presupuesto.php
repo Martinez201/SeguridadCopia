@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,21 +22,27 @@ class Presupuesto
     private $id;
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date
      * @var \DateTime
      */
     private $fecha;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=10,max=50)
      * @var string
      */
     private $instalacion;
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @var float
      */
     private $precioSinIva;
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @var float
      */
     private $precioConIva;
