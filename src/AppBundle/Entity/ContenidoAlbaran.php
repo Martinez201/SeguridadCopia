@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,11 +22,13 @@ class ContenidoAlbaran
     private $id;
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      * @var int
      */
     private $cantidad;
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @var float
      */
     private $total;

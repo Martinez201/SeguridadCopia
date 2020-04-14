@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,26 +22,35 @@ class DatosBancarios
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $iban;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=10)
      * @var string
      */
     private $moneda;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $entidad;
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      * @var int
      */
     private $sucursal;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $bic;
