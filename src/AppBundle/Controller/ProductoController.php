@@ -82,6 +82,7 @@ class ProductoController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash('success','Se han guardado los datos con éxito');
+                return $this->redirectToRoute('productos_Listar');
 
             }catch (\Exception $ex){
 

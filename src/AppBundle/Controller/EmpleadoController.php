@@ -88,6 +88,7 @@ class EmpleadoController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash('succes','Se han guardado los datos con éxito');
+                return $this->redirectToRoute('empleados_listar');
 
 
 

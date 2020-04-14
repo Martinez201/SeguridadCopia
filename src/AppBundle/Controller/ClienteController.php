@@ -75,6 +75,7 @@ class ClienteController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash('success','Se han guardado los datos con éxito');
+                return $this->redirectToRoute('clientes_Listar');
 
             }catch (\Exception $ex){
 
