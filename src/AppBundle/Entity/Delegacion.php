@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,36 +22,50 @@ class Delegacion
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $nombre;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=50)
      * @var string
      */
     private $provincia;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=100)
      * @var string
      */
     private $direccion;
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min=5,max=9)
+     * @Assert\NotBlank()
      * @var string
      */
     private $cPostal;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3,max=30)
      * @var string
      */
     private $ciudad;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5,max=9)
      * @var string
      */
     private $telefono;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=10,max=40)
      * @var string
      */
     private $email;
