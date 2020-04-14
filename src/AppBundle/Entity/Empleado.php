@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Monolog\Handler\IFTTTHandler;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -580,12 +581,35 @@ private $albaranes;
 
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        $roles = ['ROLE_USER'];
+
+       if ($this->isAdministrador()){
+
+           $roles[] = 'ROLE_ADMINISTRADOR';
+
+       }
+
+       if($this->isComercial()){
+
+           $roles[] = 'ROLE_COMERCIAL';
+       }
+
+       if($this->isGestor()){
+
+           $roles[] = 'ROLE_GESTOR';
+
+       }
+
+       if($this->isInstalador()){
+
+           $roles[] = 'ROLE_INSTALADOR';
+       }
+
     }
 
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->getClave();
     }
 
     public function getSalt()
@@ -595,7 +619,7 @@ private $albaranes;
 
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->getUsuario();
     }
 
     public function eraseCredentials()
