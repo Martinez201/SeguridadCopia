@@ -78,3 +78,38 @@
     display: block;
     margin-top: 10px;
 }
+
+
+
+@media screen and (min-width: 500px) {
+    .portada {
+
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 50em;
+        min-height: 50em;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .portada {
+
+        min-width: 20em;
+        min-height: 20em;
+    }
+
+}
+.portada{
+
+    background-image: url("../imagenes/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+
+.titulo{
+
+    text-align: center;
+}
