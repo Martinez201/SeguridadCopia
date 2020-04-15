@@ -37,11 +37,17 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-md-auto d-md-flex">
+                    {% if app.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fas fa-user"></i> Perfil</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-power-off"></i> Salir</a>
+                        {% if app.user %}
+                            <a class="nav-link" href="{{ path('usuario_salir') }}"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                        {% else %}
+                            <a class="nav-link" href="{{ path('usuario_entrar') }}"><i class="fas fa-sign-in-alt"></i> Entrar</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
