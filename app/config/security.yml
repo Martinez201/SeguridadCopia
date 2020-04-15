@@ -4,14 +4,19 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        base_de_datos:
+            entity:
+                class: AppBundle\Entity\Empleado
+                property: usuario
 
     role_hierarchy:
         ROLE_ADMINISTRADOR: 'ROLE_GESTOR'
         ROLE_GESTOR: ['ROLE_COMERCIAL','ROLE_INSTALADOR']
         ROLE_COMERCIAL: ['ROLE_COMERCIAL','ROLE_USER']
         ROLE_INSTALADOR: 'ROLE_USER'
+
+    encoders:
+        AppBundle\Entity\Empleado: plaintext
 
 
     firewalls:
