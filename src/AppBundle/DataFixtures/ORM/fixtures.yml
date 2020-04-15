@@ -25,6 +25,24 @@ AppBundle\Entity\Delegacion:
     email: 'contacto@unsegur.es'
 
 AppBundle\Entity\Empleado:
+  empleado_Jaen_Gestor:
+    delegacion: "@delegacion_Jaen"
+    nombre: '<es_ES:firstName()>'
+    apellidos: '<es_ES:lastName()>  <es_ES:lastName()>'
+    dni (unique): '<randomNumber(8)> - <randomLetter()>'
+    edad: '<dateTime()>'
+    telefono: '<tollFreePhoneNumber()>'
+    ciudad: 'Linares'
+    cPostal: '23700'
+    provincia: 'Jaén'
+    email: '<email()>'
+    direccion: '<es_ES:streetAddress()>'
+    administrador: 0
+    instalador: 0
+    gestor: 1
+    comercial: 0
+    usuario: gestor
+    clave: gestor
   empleado_Jaen_Ventas{1..10}:
     delegacion: "@delegacion_Jaen"
     nombre: '<es_ES:firstName()>'
@@ -41,6 +59,8 @@ AppBundle\Entity\Empleado:
     instalador: 0
     gestor: 0
     comercial: 1
+    usuario: 'comercial<randomNumber(2)>'
+    clave: comercial
   empleado_Jaen_Instalador{1..10}:
     delegacion: "@delegacion_Jaen"
     nombre: '<es_ES:firstName()>'
@@ -57,6 +77,8 @@ AppBundle\Entity\Empleado:
     instalador: 1
     gestor: 0
     comercial: 0
+    usuario: 'instalador<randomNumber(2)>'
+    clave: instalador
   empleado_Jaen_Administrador:
     delegacion: "@delegacion_Jaen"
     nombre: '<es_ES:firstName()>'
@@ -73,6 +95,8 @@ AppBundle\Entity\Empleado:
     instalador: 0
     gestor: 0
     comercial: 0
+    usuario: admin
+    clave: admin
 
 AppBundle\Entity\Cliente:
   cliente_Jaen_Alta{1..5}:
