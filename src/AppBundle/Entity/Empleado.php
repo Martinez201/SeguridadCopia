@@ -605,6 +605,7 @@ private $albaranes;
            $roles[] = 'ROLE_INSTALADOR';
        }
 
+       return $roles;
     }
 
     public function getPassword()
