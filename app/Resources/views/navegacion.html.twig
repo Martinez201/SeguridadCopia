@@ -20,9 +20,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('partes_Listar') }}" title="Partes"><i class="fas fa-clipboard-check"></i> Partes <i class="fas fa-clipboard-check shortmenu animate"></i></a>
                     </li>
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('empleados_listar') }}" title="Empleados"><i class="fas fa-user-friends"></i> Empleados <i class="fas fa-user-friends shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('facturas_Listar') }}" title="Facturas"><i class="fas fa-file-invoice-dollar"></i> Facturas <i class="fas fa-file-invoice-dollar shortmenu animate"></i></a>
                     </li>

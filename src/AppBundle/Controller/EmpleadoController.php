@@ -10,11 +10,17 @@ use AppBundle\Repository\EmpleadoRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use TFox\MpdfPortBundle\Service\MpdfService;
 use Twig\Environment;
+
+/**
+ * @Security("is_granted('ROLE_ADMINISTRADOR')")
+ */
+
 
 class EmpleadoController extends Controller
 {
