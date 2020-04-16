@@ -29,18 +29,26 @@
                         <a class="nav-link" href="{{ path('empleados_listar') }}" title="Empleados"><i class="fas fa-user-friends"></i> Empleados <i class="fas fa-user-friends shortmenu animate"></i></a>
                     </li>
                     {% endif %}
+                    {% if is_granted('ROLE_GESTOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('facturas_Listar') }}" title="Facturas"><i class="fas fa-file-invoice-dollar"></i> Facturas <i class="fas fa-file-invoice-dollar shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_GESTOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('albaranes_Listar') }}" title="Albaranes"><i class="fas fa-file-signature"></i> Albaranes <i class="fas fa-file-signature shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('productos_Listar') }}" title="Almacén"><i class="fas fa-industry"></i> Almacén <i class="fas fa-industry shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_COMERCIAL') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('presupuestos_Listar') }}" title="Presupuestos"><i class="fas fa-file-alt"></i> Presupuestos <i class="fas fa-file-alt shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
                     {% if is_granted('ROLE_ADMINISTRADOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('delegaciones_listar') }}" title="Delegaciones"><i class="fas fa-building"></i> Delegaciones <i class="fas fa-building shortmenu animate"></i></a>
