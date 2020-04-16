@@ -1,0 +1,38 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Delegaciones
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Delegaciones</h1>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>Nombre</td>
+            <td>Dirección</td>
+            <td>Ciudad</td>
+            <td>provincia</td>
+            <td>Código Postal</td>
+            <td>Teléfono</td>
+            <td>Email</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for delegacion in delegaciones %}
+            <tr>
+                <td>{{ delegacion.nombre }}</td>
+                <td>{{ delegacion.direccion}}</td>
+                <td>{{ delegacion.ciudad }}</td>
+                <td>{{ delegacion.provincia }}</td>
+                <td>{{ delegacion.cPostal }}</td>
+                <td>{{ delegacion.telefono }}</td>
+                <td>{{ delegacion.email }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
