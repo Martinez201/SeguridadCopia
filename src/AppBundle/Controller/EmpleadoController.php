@@ -18,9 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use TFox\MpdfPortBundle\Service\MpdfService;
 use Twig\Environment;
 
-/**
- * @Security("is_granted('ROLE_ADMINISTRADOR')")
- */
+
 
 
 class EmpleadoController extends Controller
@@ -28,6 +26,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleados/{page}", name="empleados_listar")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function indexAction(EmpleadoRepository $empleadoRepository,$page=1){
@@ -57,6 +56,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("empleado/alta", name="alta_empleados", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function nuevoAction(Request $request){
@@ -71,6 +71,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleado/{id}", name= "empleados_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMINISTRADOR)")
      */
 
     public function formAction(Request $request, Empleado $empleado){
@@ -118,6 +119,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleado/eliminar/{id}", name="empleados_eliminar",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMINISTRADOR)")
      */
 
     public function  eliminarAction(Request $request, Empleado $empleado){
@@ -151,6 +153,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleado/informe", name="empleado_informe", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMINISTRADOR)")
      */
 
     public function  informeAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){
