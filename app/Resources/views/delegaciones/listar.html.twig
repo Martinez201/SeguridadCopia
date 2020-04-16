@@ -8,7 +8,7 @@
 {% block content %}
 
     <h1>Delegaciones</h1>
-
+    <a href="{{ path('altas_delegaciones') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir delegación</a>
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
@@ -24,7 +24,7 @@
         <tbody>
         {% for delegacion in delegaciones %}
             <tr>
-                <td>{{ delegacion.nombre }}</td>
+                <td><a href="{{ path('delegaciones_form',{'id': delegacion.id}) }}">{{ delegacion.nombre }}</a></td>
                 <td>{{ delegacion.direccion}}</td>
                 <td>{{ delegacion.ciudad }}</td>
                 <td>{{ delegacion.provincia }}</td>
