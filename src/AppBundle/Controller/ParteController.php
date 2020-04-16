@@ -15,13 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Security("is_granted('ROLE_GESTOR')")
+ *
  */
 
 class ParteController extends Controller
 {
     /**
      * @Route("/partes/{page}",name="partes_Listar")
+     * @Security("is_granted('ROLE_INSTALADOR')")
      */
 
     public function partesAction(ParteRepository $parteRepository,$page=1){
@@ -52,6 +53,7 @@ class ParteController extends Controller
 
     /**
      * @Route("/parte/altas",name="partes_alta", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function nuevoAction(Request $request){
@@ -65,7 +67,7 @@ class ParteController extends Controller
 
     /**
      * @Route("/parte/{id}", name="partes_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
-     *
+     *@Security("is_granted('ROLE_INSTALADOR')")
      */
 
     public function formAction(Request $request, Parte $parte){
@@ -99,6 +101,7 @@ class ParteController extends Controller
 
     /**
      * @Route("/parte/eliminar/{id}", name="partes_eliminar",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function eliminarAction(Request $request, Parte $parte){

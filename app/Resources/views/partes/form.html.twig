@@ -25,7 +25,11 @@
     {% if not parte.id %}
         <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
     {% else %}
+
+        {% if is_granted('ROLE_GESTOR') %}
         <a href="{{ path('partes_eliminar',{'id': parte.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
+        {% endif %}
+
     {%  endif %}
 
     {{ form_end(form) }}
