@@ -30,7 +30,6 @@ class Factura
     private $fecha;
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank()
      * @var float
      */
     private $precioConIva;

@@ -28,7 +28,6 @@ class ContenidoAlbaran
     private $cantidad;
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank()
      * @var float
      */
     private $total;

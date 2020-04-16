@@ -42,7 +42,6 @@ class Presupuesto
     private $precioSinIva;
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank()
      * @var float
      */
     private $precioConIva;
