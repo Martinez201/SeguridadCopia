@@ -14,12 +14,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('portada') }}" title="Pagina Principal"><i class="fas fa-home"></i>Inicio<i class="fas fa-home shortmenu animate"></i></a>
                     </li>
+                    {% if is_granted('ROLE_COMERCIAL') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('clientes_Listar') }}" title="Clientes"><i class="fas fa-briefcase"></i> Clientes <i class="fas fa-briefcase shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_GESTOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('partes_Listar') }}" title="Partes"><i class="fas fa-clipboard-check"></i> Partes <i class="fas fa-clipboard-check shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
                     {% if is_granted('ROLE_ADMINISTRADOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('empleados_listar') }}" title="Empleados"><i class="fas fa-user-friends"></i> Empleados <i class="fas fa-user-friends shortmenu animate"></i></a>

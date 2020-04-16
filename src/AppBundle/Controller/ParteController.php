@@ -9,9 +9,14 @@ use AppBundle\Repository\ParteRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Security("is_granted('ROLE_GESTOR')")
+ */
 
 class ParteController extends Controller
 {
