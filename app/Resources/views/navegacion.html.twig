@@ -35,9 +35,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('presupuestos_Listar') }}" title="Presupuestos"><i class="fas fa-file-alt"></i> Presupuestos <i class="fas fa-file-alt shortmenu animate"></i></a>
                     </li>
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('delegaciones_listar') }}" title="Delegaciones"><i class="fas fa-building"></i> Delegaciones <i class="fas fa-building shortmenu animate"></i></a>
                     </li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav ml-md-auto d-md-flex">
                     {% if app.user %}
