@@ -7,6 +7,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Delegacion;
 use AppBundle\Form\Type\DelegacionType;
 use AppBundle\Repository\DelegacionRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,17 +18,31 @@ class DelegacionController extends Controller
 {
 
     /**
-     * @Route("/delegaciones", name="delegaciones_listar")
+     * @Route("/delegaciones/{page}", name="delegaciones_listar")
      */
 
-    public function delegacionesAction(DelegacionRepository $delegacionRepository)
+    public function delegacionesAction(DelegacionRepository $delegacionRepository, $page = 1)
     {
 
-        $delegaciones = $delegacionRepository->obtenerDelegaciones();
+        $delegaciones = $delegacionRepository->obtenerDelegacionesQueryBuilder();
+        $adaptador = new DoctrineORMAdapter($delegaciones, false);
+        $pager = new Pagerfanta($adaptador);
 
+        try {
+
+            $pager
+                ->setMaxPerPage(8)
+                ->setCurrentPage($page);
+
+        }catch (OutOfRangeCurrentPageException $ex){
+
+            $pager->setCurrentPage(1);
+
+        }
         return $this->render('delegaciones/listar.html.twig', [
 
-            'delegaciones' => $delegaciones
+            'delegaciones' => $delegaciones,
+            'paginador'=> $pager
         ]);
     }
 

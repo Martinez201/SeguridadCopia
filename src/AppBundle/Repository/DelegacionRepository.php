@@ -15,10 +15,17 @@ class DelegacionRepository extends ServiceEntityRepository
         parent::__construct($registry, Delegacion::class);
     }
 
-    public function obtenerDelegaciones(){
+    public function obtenerDelegacionesQueryBuilder(){
 
         return $this->createQueryBuilder('d')
-            ->orderBy('d.provincia')
+            ->orderBy('d.provincia');
+
+
+    }
+
+    public function obtenerDelegaciones(){
+
+        return $this->obtenerDelegacionesQueryBuilder()
             ->getQuery()
             ->getResult();
 

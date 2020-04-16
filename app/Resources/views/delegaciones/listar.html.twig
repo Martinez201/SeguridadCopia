@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for delegacion in delegaciones %}
+        {% for delegacion in paginador.currentPageResults %}
             <tr>
                 <td><a href="{{ path('delegaciones_form',{'id': delegacion.id}) }}">{{ delegacion.nombre }}</a></td>
                 <td>{{ delegacion.direccion}}</td>
@@ -35,4 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if paginador and paginador.haveToPaginate %}
+        {{ pagerfanta(paginador,'twitter_bootstrap4') }}
+    {% endif %}
 {% endblock %}
