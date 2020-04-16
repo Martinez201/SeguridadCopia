@@ -1,0 +1,22 @@
+{% extends 'navegacion.html.twig' %}
+
+
+{% block title %}
+    Perfil
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>
+     Mi perfil
+    </h1>
+
+    {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.avatar) }}
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar cambios</button>
+    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al inicio</a>
+    {{ form_end(form) }}
+
+{% endblock %}

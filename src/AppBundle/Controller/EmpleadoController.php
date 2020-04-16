@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\EmpleadoType;
+use AppBundle\Form\Type\MyUsuarioType;
 use AppBundle\Repository\EmpleadoRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
@@ -162,5 +163,39 @@ class EmpleadoController extends Controller
         ]);
 
         return $mpdfService->generatePdfResponse($html);
+    }
+
+    /**
+     * @Route("/perfil", name="usuario_perfil", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_USER')")
+     */
+
+    public  function perfilAction(Request $request){
+
+        $usuario = $this->getUser();
+        $form = $this->createForm(MyUsuarioType::class,$usuario);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            try {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->addFlash('success','Se han guardado los datos con éxito');
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error', 'Error: no se ha podido guardar los cambios');
+            }
+
+        }
+
+        return $this->render('empleados/perfil_form.html.twig',[
+
+            'form' => $form->createView(),
+            'usuario'=> $usuario
+        ]);
+
     }
 }
