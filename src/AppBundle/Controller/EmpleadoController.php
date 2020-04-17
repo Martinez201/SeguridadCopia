@@ -179,6 +179,16 @@ class EmpleadoController extends Controller
         $form = $this->createForm(MyUsuarioType::class,$usuario);
         $form->handleRequest($request);
 
+        $imagen = $form->get('avatar')->getData();
+
+        if($imagen){
+
+            $nombreOriginal = pathinfo($imagen->getClientOriginalName(),PATHINFO_FILENAME);
+            $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$imagen->guessExtension();
+            $imagen->move($this->getParameter('directorioAvatares'), $guardarNuevo);
+            $usuario->setAvatar($guardarNuevo);
+        }
+
         if($form->isSubmitted() && $form->isValid()){
 
             try {
