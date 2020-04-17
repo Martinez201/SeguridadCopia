@@ -84,3 +84,23 @@
 
     text-align: center;
 }
+
+.profile .table-properties th {
+    font-weight: normal;
+    width: 15rem;
+}
+
+.profile .table-properties td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.profile .table-properties tr:first-child td,
+.profile .table-properties tr:first-child th {
+    border-top: none !important;
+}
+
+.profile .img-lg {
+    width: 9rem;
+    height: 9rem;
+}

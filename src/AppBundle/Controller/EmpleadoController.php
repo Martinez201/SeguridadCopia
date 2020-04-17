@@ -169,7 +169,7 @@ class EmpleadoController extends Controller
     }
 
     /**
-     * @Route("/perfil", name="usuario_perfil", methods={"GET", "POST"})
+     * @Route("/perfil", name="usuario_perfil_form", methods={"GET", "POST"})
      * @Security("is_granted('ROLE_USER')")
      */
 
@@ -178,7 +178,7 @@ class EmpleadoController extends Controller
         $usuario = $this->getUser();
         $form = $this->createForm(MyUsuarioType::class,$usuario);
         $form->handleRequest($request);
-
+        dump($usuario);
         $imagen = $form->get('avatar')->getData();
 
         if($imagen){
@@ -187,6 +187,8 @@ class EmpleadoController extends Controller
             $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$imagen->guessExtension();
             $imagen->move($this->getParameter('directorioAvatares'), $guardarNuevo);
             $usuario->setAvatar($guardarNuevo);
+
+
         }
 
         if($form->isSubmitted() && $form->isValid()){
@@ -208,6 +210,24 @@ class EmpleadoController extends Controller
 
             'form' => $form->createView(),
             'usuario'=> $usuario
+        ]);
+
+    }
+
+    /**
+     * @Route("/perfil/usuario", name="usuario_perfil")
+     * @Security("is_granted('ROLE_USER')")
+     */
+
+    public  function perfilUsuarioAction(){
+
+        $usuario = $this->getUser();
+
+
+        return $this->render('empleados/perfil_usuario_form.html.twig',[
+
+            'usuario'=> $usuario
+
         ]);
 
     }
