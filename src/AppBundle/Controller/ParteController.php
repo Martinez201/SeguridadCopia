@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Parte;
 use AppBundle\Form\Type\ParteType;
 use AppBundle\Repository\ParteRepository;
@@ -22,14 +23,28 @@ class ParteController extends Controller
 {
     /**
      * @Route("/partes/{page}",name="partes_Listar")
-     * @Security("is_granted('ROLE_INSTALADOR')")
      */
 
     public function partesAction(ParteRepository $parteRepository,$page=1){
 
-        $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder();
-        $adaptador = new DoctrineORMAdapter($partes, false);
-        $pager = new Pagerfanta($adaptador);
+        if ($this->isGranted('ROLE_COMERCIAL')){
+
+            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder();
+            $adaptador = new DoctrineORMAdapter($partes, false);
+            $pager = new Pagerfanta($adaptador);
+        }
+
+        if ($this->isGranted('ROLE_INSTALADOR')){
+
+            /**@var Empleado */
+            $usuario = $this->getUser();
+
+            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder($usuario->getDelegacion());
+            $adaptador = new DoctrineORMAdapter($partes, false);
+            $pager = new Pagerfanta($adaptador);
+
+        }
+
 
         try {
 
@@ -67,7 +82,7 @@ class ParteController extends Controller
 
     /**
      * @Route("/parte/{id}", name="partes_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
-     *@Security("is_granted('ROLE_INSTALADOR')")
+     *@Security("is_granted('PARTE_MOSTRAR',parte)")
      */
 
     public function formAction(Request $request, Parte $parte){
