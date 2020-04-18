@@ -71,7 +71,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleado/{id}", name= "empleados_form", requirements={"id" = "\d+"}, methods={"GET","POST"})
-     * @Security("is_granted('ROLE_ADMINISTRADOR)")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function formAction(Request $request, Empleado $empleado){
@@ -119,7 +119,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleado/eliminar/{id}", name="empleados_eliminar",requirements={"id" = "\d+"}, methods={"GET","POST"})
-     * @Security("is_granted('ROLE_ADMINISTRADOR)")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function  eliminarAction(Request $request, Empleado $empleado){
@@ -153,7 +153,7 @@ class EmpleadoController extends Controller
 
     /**
      * @Route("/empleado/informe", name="empleado_informe", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMINISTRADOR)")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function  informeAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){

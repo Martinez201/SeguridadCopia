@@ -27,8 +27,8 @@
         {% for factura in paginador.currentPageResults %}
             <tr>
                 <td><a href="{{ path('facturas_form',{'id': factura.id}) }}">{{ factura.id }}</a></td>
-                <td>{{ factura.cliente }}</td>
                 <td>{{ factura.empleado }}</td>
+                <td>{{ factura.cliente }}</td>
                 <td>{{ factura.fecha|date("d/m/Y") }}</td>
                 <td>{{ factura.concepto}}</td>
                 <td>{{ factura.precioSinIva }}</td>
