@@ -45,6 +45,12 @@ class Parte
      */
     private $tipo;
 
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    private $detalle;
+
     /////////////////RELACIONES//////////////////////////////////
 
     /**
@@ -200,6 +206,24 @@ class Parte
     public function setTipo($tipo)
     {
         $this->tipo = $tipo;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDetalle()
+    {
+        return $this->detalle;
+    }
+
+    /**
+     * @param string $detalle
+     * @return Parte
+     */
+    public function setDetalle($detalle)
+    {
+        $this->detalle = $detalle;
         return $this;
     }
 

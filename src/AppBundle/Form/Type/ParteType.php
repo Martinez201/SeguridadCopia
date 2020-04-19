@@ -40,6 +40,10 @@ class ParteType extends AbstractType
                 'class'=> Delegacion::class,
                 'placeholder'=> '<-Seleccione una delegación->'
             ])
+            ->add('detalle', TextareaType::class,[
+
+                'label'=> 'Detalles:'
+            ])
             ->add('tipo', ChoiceType::class,[
 
                 'label'=> 'Tipo:',
