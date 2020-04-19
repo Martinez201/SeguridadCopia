@@ -16,7 +16,7 @@ security:
         ROLE_INSTALADOR: 'ROLE_USER'
 
     encoders:
-        AppBundle\Entity\Empleado: plaintext
+        AppBundle\Entity\Empleado: bcrypt
 
 
     firewalls:

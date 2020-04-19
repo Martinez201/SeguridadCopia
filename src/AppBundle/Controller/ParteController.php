@@ -99,7 +99,7 @@ class ParteController extends Controller
 
             $form = $this->createForm(ParteInstalador::class,$parte);
             $form->handleRequest($request);
-            dump(2);
+
         }
         else{
 
