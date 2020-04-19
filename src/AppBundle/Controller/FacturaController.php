@@ -157,7 +157,7 @@ class FacturaController extends Controller
     }
 
     /**
-     *  @Route("factura/informes", name="facturas_informes", methods={"GET"})
+     *  @Route("/factura/informes", name="facturas_informes", methods={"GET"})
      */
 
     public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig){
