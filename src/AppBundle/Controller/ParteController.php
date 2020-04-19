@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Parte;
+use AppBundle\Form\Type\ParteInstalador;
 use AppBundle\Form\Type\ParteType;
 use AppBundle\Repository\ParteRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -94,8 +95,19 @@ class ParteController extends Controller
 
     public function formAction(Request $request, Parte $parte){
 
-        $form = $this->createForm(ParteType::class,$parte);
-        $form->handleRequest($request);
+        if ($this->getUser()->isInstalador()){
+
+            $form = $this->createForm(ParteInstalador::class,$parte);
+            $form->handleRequest($request);
+            dump(2);
+        }
+        else{
+
+            $form = $this->createForm(ParteType::class,$parte);
+            $form->handleRequest($request);
+
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()){
 
