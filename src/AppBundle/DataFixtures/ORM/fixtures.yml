@@ -42,7 +42,7 @@ AppBundle\Entity\Empleado:
     gestor: 1
     comercial: 0
     usuario: gestor
-    clave: gestor
+    clave: <codificarClave('gestor')>
   empleado_Jaen_Ventas{1..10}:
     delegacion: "@delegacion_Jaen"
     nombre: '<es_ES:firstName()>'
@@ -60,7 +60,7 @@ AppBundle\Entity\Empleado:
     gestor: 0
     comercial: 1
     usuario: 'comercial<randomNumber(2)>'
-    clave: comercial
+    clave: <codificarClave('comercial')>
   empleado_Jaen_Instalador{1..10}:
     delegacion: "@delegacion_Jaen"
     nombre: '<es_ES:firstName()>'
@@ -78,7 +78,7 @@ AppBundle\Entity\Empleado:
     gestor: 0
     comercial: 0
     usuario: 'instalador<randomNumber(2)>'
-    clave: instalador
+    clave: <codificarClave('instalador')>
   empleado_Jaen_Administrador:
     delegacion: "@delegacion_Jaen"
     nombre: '<es_ES:firstName()>'
@@ -96,7 +96,7 @@ AppBundle\Entity\Empleado:
     gestor: 0
     comercial: 0
     usuario: admin
-    clave: admin
+    clave: <codificarClave('admin')>
 
 AppBundle\Entity\Cliente:
   cliente_Jaen_Alta{1..5}:
