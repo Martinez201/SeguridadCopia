@@ -4,14 +4,12 @@
 namespace AppBundle\Form\Model;
 
 
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class CambioClave
 {
 
     /**
-     * @UserPassword()
      * @var string
      */
     private $claveAntigua;

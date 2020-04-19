@@ -10,16 +10,26 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 class CambioClaveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('claveAntigua', PasswordType::class,[
+        if($options['es_admin'] === false){
 
-                'label'=> 'Clave Actual:'
-            ])
+            $builder
+                ->add('claveAntigua', PasswordType::class,[
+
+                    'label'=> 'Clave Actual:',
+                    'constraints'=>[
+
+                        new UserPassword()
+                    ]
+                ]);
+        }
+
+        $builder
             ->add('nuevaClave', RepeatedType::class,[
                 'type'=> PasswordType::class,
                 'first_options'=>[
@@ -38,7 +48,8 @@ class CambioClaveType extends AbstractType
     {
         $resolver->setDefaults([
 
-            'data_class'=> CambioClave::class
+            'data_class'=> CambioClave::class,
+            'es_admin'=> false
 
         ]);
     }

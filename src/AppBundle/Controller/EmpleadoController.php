@@ -279,4 +279,51 @@ class EmpleadoController extends Controller
 
         ]);
     }
+
+    /**
+     * @Route("/perfil/clave/{id}", name="admin_cambiar_clave")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
+     */
+
+    public function establecerAction(Request $request, UserPasswordEncoderInterface $encoder, Empleado $empleado){
+
+        $cambioCLave = new CambioClave();
+
+        $form = $this->createForm(CambioClaveType::class, $cambioCLave,[
+
+            'es_admin'=> true
+        ]);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&& $form->isValid()){
+
+            try {
+
+                $em = $this->getDoctrine()->getManager();
+                $empleado->setClave(
+
+                    $encoder->encodePassword($empleado, $cambioCLave->getNuevaClave())
+
+                );
+                $em->flush();
+                $this->addFlash('success','Se ha cambiado la contraseña con éxito');
+                $this->redirectToRoute('empleados_form',['id'=> $empleado->getId()]);
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error','Error: No se ha podido cambiar la contraseña');
+
+            }
+
+        }
+
+        return $this->render('empleados/establecerClave.html.twig',[
+
+            'formulario'=> $form->createView(),
+            'empleado'=> $empleado
+
+        ]);
+    }
+
 }

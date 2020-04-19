@@ -27,6 +27,7 @@
     <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
         {% else %}
             <a href="{{ path('empleados_eliminar',{'id': empleado.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
+            <a href="{{ path('admin_cambiar_clave',{'id': empleado.id}) }}" class="btn btn-warning"><i class="fas fa-key"></i> Cambiar contraseña</a>
     {%  endif %}
 
     {{ form_end(form) }}
