@@ -1,0 +1,18 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block content %}
+
+    <h1>Cambiar Clave</h1>
+
+    {{ form_start(formulario) }}
+    {{ form_widget(formulario) }}
+    <a href="{{ path('usuario_perfil') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al perfil</a>
+    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Cambiar contraseña</button>
+    {{ form_end(formulario) }}
+
+{% endblock %}
+
+{% block title %}
+    Cambio de Clave
+{% endblock %}
+

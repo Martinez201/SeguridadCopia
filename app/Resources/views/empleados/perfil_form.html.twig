@@ -17,6 +17,7 @@
     {{ form_row(form.avatar) }}
     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar cambios</button>
     <a href="{{ path('usuario_perfil') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al perfil</a>
+    <a href="{{ path('usuario_cambiar_clave') }}" class="btn btn-warning"><i class="fas fa-key"></i> Cambiar contraseña</a>
     {{ form_end(form) }}
 
 {% endblock %}

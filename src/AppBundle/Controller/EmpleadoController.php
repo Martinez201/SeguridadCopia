@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Empleado;
+use AppBundle\Form\Model\CambioClave;
+use AppBundle\Form\Type\CambioClaveType;
 use AppBundle\Form\Type\EmpleadoType;
 use AppBundle\Form\Type\MyUsuarioType;
 use AppBundle\Repository\EmpleadoRepository;
@@ -15,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use TFox\MpdfPortBundle\Service\MpdfService;
 use Twig\Environment;
 
@@ -230,5 +233,50 @@ class EmpleadoController extends Controller
 
         ]);
 
+    }
+
+    /**
+     * @Route("/perfil/clave", name="usuario_cambiar_clave")
+     * @Security("is_granted('ROLE_USER')")
+     */
+
+    public function cambioClaveAction(Request $request, UserPasswordEncoderInterface $encoder){
+
+        $cambioClave = new CambioClave();
+
+        $form = $this->createForm(CambioClaveType::class, $cambioClave);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            try {
+
+                $em = $this->getDoctrine()->getManager();
+
+                /**@var Empleado $user*/
+                $user = $this->getUser();
+                $user->setClave(
+
+                    $encoder->encodePassword($user,$cambioClave->getNuevaClave())
+
+                );
+
+                $em->flush();
+                $this->addFlash('success','Se ha cambiado la contraseña con éxito');
+                return $this->redirectToRoute('usuario_perfil');
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error','Error: no se ha podido cambiar la contraseña');
+
+            }
+
+        }
+
+        return $this->render('empleados/cambioClaveForm.html.twig',[
+
+            'formulario'=> $form->createView()
+
+        ]);
     }
 }
