@@ -29,7 +29,7 @@ class ParteController extends Controller
 
         if ($this->isGranted('ROLE_COMERCIAL')){
 
-            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder();
+            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder(0);
             $adaptador = new DoctrineORMAdapter($partes, false);
             $pager = new Pagerfanta($adaptador);
         }
@@ -39,10 +39,17 @@ class ParteController extends Controller
             /**@var Empleado */
             $usuario = $this->getUser();
 
-            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder($usuario->getDelegacion());
+            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder(0,$usuario->getDelegacion());
             $adaptador = new DoctrineORMAdapter($partes, false);
             $pager = new Pagerfanta($adaptador);
 
+        }
+
+        if ($this->isGranted('ROLE_ADMINISTRADOR')){
+
+            $partes = $parteRepository->obtenerPartesOrdenadosQueryBuilder(1);
+            $adaptador = new DoctrineORMAdapter($partes, false);
+            $pager = new Pagerfanta($adaptador);
         }
 
 

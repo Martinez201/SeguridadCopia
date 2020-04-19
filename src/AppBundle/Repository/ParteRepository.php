@@ -4,6 +4,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Delegacion;
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Parte;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -16,7 +17,7 @@ class ParteRepository extends ServiceEntityRepository
         parent::__construct($registry, Parte::class);
     }
 
-    public function obtenerPartesOrdenadosQueryBuilder(Delegacion $delegacion = null){
+    public function obtenerPartesOrdenadosQueryBuilder($sw,Delegacion $delegacion = null){
 
         $qb= $this->createQueryBuilder('p')
             ->addSelect('d')
@@ -27,7 +28,7 @@ class ParteRepository extends ServiceEntityRepository
             ->leftJoin('p.cliente','c')
             ->orderBy('p.fecha');
 
-        if($delegacion){
+        if($delegacion && !$sw){
 
             $qb->andWhere('p.delegacion = :delegacion')
                 ->setParameter('delegacion',$delegacion);
