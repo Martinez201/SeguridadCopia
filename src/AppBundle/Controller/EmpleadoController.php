@@ -163,7 +163,7 @@ class EmpleadoController extends Controller
 
         $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
         $mpdfService = new MpdfService();
-        $html = $twig->render('empleados_informe.html.twig',[
+        $html = $twig->render('empleados/informe.html.twig',[
 
             'empleados'=> $empleados
         ]);
