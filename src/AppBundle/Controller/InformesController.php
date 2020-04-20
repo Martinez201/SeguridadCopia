@@ -4,7 +4,9 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +26,7 @@ class InformesController extends Controller
 
     /**
      *  @Route("/informes/factura", name="facturas_informes", methods={"GET"})
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig){
@@ -39,4 +42,22 @@ class InformesController extends Controller
         return $mpdfService->generatePdfResponse($html);
 
     }
+
+    /**
+     * @Route("/informes/empleados", name="empleado_informe", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
+     */
+
+    public function  informeAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){
+
+        $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
+        $mpdfService = new MpdfService();
+        $html = $twig->render('empleados/informe.html.twig',[
+
+            'empleados'=> $empleados
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
+    }
+
 }

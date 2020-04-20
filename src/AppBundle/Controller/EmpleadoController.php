@@ -154,22 +154,6 @@ class EmpleadoController extends Controller
 
     }
 
-    /**
-     * @Route("/empleado/informe", name="empleado_informe", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMINISTRADOR')")
-     */
-
-    public function  informeAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){
-
-        $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
-        $mpdfService = new MpdfService();
-        $html = $twig->render('empleados/informe.html.twig',[
-
-            'empleados'=> $empleados
-        ]);
-
-        return $mpdfService->generatePdfResponse($html);
-    }
 
     /**
      * @Route("/perfil", name="usuario_perfil_form", methods={"GET", "POST"})
