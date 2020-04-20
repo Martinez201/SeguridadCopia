@@ -43,7 +43,6 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('empleado_informe') }}" class="btn btn-info"><i class="fas fa-file-pdf"></i> Generar informe</a>
     {% if paginador and paginador.haveToPaginate %}
         {{ pagerfanta(paginador,'twitter_bootstrap4') }}
     {% endif %}

@@ -168,6 +168,26 @@
                 </div>
             </div>
             {% endif %}
+            {% if is_granted('ROLE_USER') %}
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                    <div class="box-part text-center">
+
+                        <i class="fas fa-book fa-3x" aria-hidden="true"></i>
+
+                        <div class="title">
+                            <h4>Informes</h4>
+                        </div>
+
+                        <div class="text">
+                            <span>Gestión de los informes de la empresa</span>
+                        </div>
+
+                        <a href="{{ path('portada_informes') }}" class="btn btn-warning">Ir a informes</a>
+
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
