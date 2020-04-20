@@ -4,9 +4,11 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
+use AppBundle\Repository\PresupuestoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +75,25 @@ class InformesController extends Controller
         $html = $twig->render('informes/informe_clientes.html.twig',[
 
             'clientes'=> $clientes
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
+    }
+
+    /**
+     * @Route("/informes/presupuestos", name="presupuestos_informe", methods={"GET"})
+     * @Security("is_granted('ROLE_COMERCIAL')")
+     */
+
+    public function  informePresupuestosAction(Request $request, PresupuestoRepository $presupuestoRepository, Environment $twig){
+
+
+        $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenados();
+        $mpdfService = new MpdfService();
+        $html = $twig->render('informes/informe_presupuestos.html.twig',[
+
+            'presupuestos'=> $presupuestos
+
         ]);
 
         return $mpdfService->generatePdfResponse($html);
