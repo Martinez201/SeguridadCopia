@@ -156,21 +156,5 @@ class FacturaController extends Controller
         return $mpdfService->generatePdfResponse($html);
     }
 
-    /**
-     *  @Route("/factura/informes", name="facturas_informes", methods={"GET"})
-     */
 
-    public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig){
-
-        $facturas = $facturaRepository->obtenerFacturasOrdenadas();
-        $mpdfService = new MpdfService();
-        $html = $twig->render('facturas/iformeTotal.htm.twig',[
-
-            'facturas'=> $facturas
-
-        ]);
-
-        return $mpdfService->generatePdfResponse($html);
-
-    }
 }
