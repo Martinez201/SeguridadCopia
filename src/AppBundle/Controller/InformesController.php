@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -60,4 +61,20 @@ class InformesController extends Controller
         return $mpdfService->generatePdfResponse($html);
     }
 
+    /**
+     * @Route("/informes/clientes", name="cliente_informe", methods={"GET"})
+     * @Security("is_granted('ROLE_GESTOR')")
+     */
+
+    public function  informeClientesAction(Request $request, ClienteRepository $clienteRepository, Environment $twig){
+
+        $clientes = $clienteRepository->obtenerClientesOrdenados();
+        $mpdfService = new MpdfService();
+        $html = $twig->render('informes/informe_clientes.html.twig',[
+
+            'clientes'=> $clientes
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
+    }
 }
