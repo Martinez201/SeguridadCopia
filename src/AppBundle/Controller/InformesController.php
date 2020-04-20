@@ -33,7 +33,7 @@ class InformesController extends Controller
 
         $facturas = $facturaRepository->obtenerFacturasOrdenadas();
         $mpdfService = new MpdfService();
-        $html = $twig->render('facturas/iformeTotal.htm.twig',[
+        $html = $twig->render('informes/iformeTotal.htm.twig',[
 
             'facturas'=> $facturas
 
@@ -52,7 +52,7 @@ class InformesController extends Controller
 
         $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
         $mpdfService = new MpdfService();
-        $html = $twig->render('empleados/informe.html.twig',[
+        $html = $twig->render('informes/informe.html.twig',[
 
             'empleados'=> $empleados
         ]);
