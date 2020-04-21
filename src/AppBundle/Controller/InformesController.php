@@ -8,6 +8,7 @@ use AppBundle\Entity\Empleado;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
+use AppBundle\Repository\ParteRepository;
 use AppBundle\Repository\PresupuestoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -93,6 +94,33 @@ class InformesController extends Controller
         $html = $twig->render('informes/informe_presupuestos.html.twig',[
 
             'presupuestos'=> $presupuestos
+
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
+    }
+
+    /**
+     * @Route("/informes/partes", name="partes_informe", methods={"GET"})
+     * @Security("is_granted('ROLE_INSTALADOR')")
+     */
+
+    public function  informePartesAction(Request $request, ParteRepository $parteRepository, Environment $twig){
+
+        /**@var Empleado */
+        $usuario = $this->getUser();
+        $partes = $parteRepository->obtenerPartesOrdenados(1);
+
+        $mpdfService = new MpdfService();
+        $html = $twig->render('informes/informe_partes.html.twig',[
+
+            'partes'=> $partes
+
+        ]);
+
+        $html = $twig->render('informes/informe_partes.html.twig',[
+
+            'partes'=> $partes
 
         ]);
 

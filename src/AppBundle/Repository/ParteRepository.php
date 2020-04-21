@@ -38,9 +38,9 @@ class ParteRepository extends ServiceEntityRepository
 
     }
 
-    public function obtenerPartesOrdenados(){
+    public function obtenerPartesOrdenados($sw = 0){
 
-        return $this->obtenerPartesOrdenadosQueryBuilder()
+        return $this->obtenerPartesOrdenadosQueryBuilder($sw)
             ->getQuery()
             ->getResult();
     }
