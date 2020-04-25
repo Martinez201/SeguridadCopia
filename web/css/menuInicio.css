@@ -16,4 +16,16 @@ body{background:#f9f9f9;}
 .animate{-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;-ms-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 .navbar-nav li a svg{font-size: 25px;float: left;margin: 0 10px 0 5px;}
 .side-nav li { border-bottom: 1px solid #50575d;}
+#usuardio2{visibility: hidden;}
+@media(min-width:992px) {
 
+    @media(max-width:1024px) {
+
+        #usuardio{
+            visibility: hidden;
+        }
+        #usuardio2{
+            visibility: visible;
+        }
+    }
+}
