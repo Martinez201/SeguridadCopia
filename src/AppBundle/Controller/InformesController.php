@@ -17,6 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use TFox\MpdfPortBundle\Service\MpdfService;
 use Twig\Environment;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ */
+
 class InformesController extends Controller
 {
     /**
