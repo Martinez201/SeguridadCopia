@@ -7,9 +7,15 @@ use AppBundle\Entity\Cliente;
 use AppBundle\Entity\DatosBancarios;
 use AppBundle\Form\Type\DatosBancariosType;
 use AppBundle\Repository\DatosBancariosRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Security("is_granted('ROLE_COMERCIAL')")
+ */
+
 
 
 class DatosBancariosController extends Controller
