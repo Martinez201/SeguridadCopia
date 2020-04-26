@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Factura;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -12,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+
+/**
+ * @Security("is_granted('ROLE_GESTOR')")
+ */
 
 
 class SepaController extends Controller
