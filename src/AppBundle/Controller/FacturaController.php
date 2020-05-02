@@ -77,7 +77,7 @@ class FacturaController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $precioConIva = $form->get('precioSinIva')->getData() * 0.21;
+            $precioConIva = round($form->get('precioSinIva')->getData() * 0.21,2);
             $factura->setPrecioConIva($form->get('precioSinIva')->getData()+$precioConIva);
 
             try {
@@ -138,12 +138,12 @@ class FacturaController extends Controller
 
     public function informeAction(Request $request, FacturaRepository $facturaRepository, Environment $twig, ClienteRepository $clienteRepository,Factura $factura){
 
-        $facturas = $facturaRepository->obtenerFactura($factura);
         $mpdfService = new MpdfService();
         $nombre = $factura->getCliente()->getNombre()." ".$factura->getCliente()->getApellidos();
         $direccion = $factura->getCliente()->getDireccion()." ".$factura->getCliente()->getCiudad()." ".$factura->getCliente()->getProvincia().",".$factura->getCliente()->getCPostal();
         $email = $factura->getCliente()->getEmail();
         $telefono = $factura->getCliente()->getTelefono();
+
         $html = $twig->render('facturas/informe.html.twig',[
 
             'factura'=> $factura,
