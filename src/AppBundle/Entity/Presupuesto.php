@@ -47,13 +47,7 @@ class Presupuesto
     private $precioConIva;
 
     ////////////////////////////
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="presupuestos")
-     * @var Cliente
-     */
-    private $cliente;
-
+    ///
     /**
      * @ORM\ManyToOne(targetEntity="Empleado", inversedBy="presupuestos")
      * @var Empleado
@@ -146,24 +140,6 @@ class Presupuesto
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return Cliente
-     */
-    public function getCliente()
-    {
-        return $this->cliente;
-    }
-
-    /**
-     * @param Cliente $cliente
-     * @return Presupuesto
-     */
-    public function setCliente($cliente)
-    {
-        $this->cliente = $cliente;
-        return $this;
     }
 
     /**

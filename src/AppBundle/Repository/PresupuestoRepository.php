@@ -20,8 +20,6 @@ class PresupuestoRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
             ->addSelect('e')
-            ->addSelect('c')
-            ->leftJoin('p.cliente','c')
             ->leftJoin('p.empleado','e')
             ->orderBy('p.fecha');
 
