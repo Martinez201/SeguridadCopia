@@ -11,10 +11,12 @@ use AppBundle\Entity\Producto;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class PresupuestoType extends AbstractType
 {
@@ -39,6 +41,29 @@ class PresupuestoType extends AbstractType
             ->add('precioSinIva',NumberType::class,[
 
                 'label'=> 'Precio sin Iva:'
+            ])
+            ->add('contrato', FileType::class,[
+
+                'label' => 'Contrato:',
+                'mapped' => false,
+                'required'=> false,
+                'constraints'=>[
+                    new File([
+                        'maxSize'=> '5000k',
+                        'mimeTypes'=>[
+                            'application/vnd.oasis.opendocument.text',
+                            'application/pdf',
+                            'application/x-7z-compressed',
+                            'application/msword',
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'application/zip',
+                            'application/x-rar-compressed'
+                        ],
+                        'mimeTypesMessage'=>'Error: Archivo  no válido',
+                    ])
+                ],
+
+
             ]);
     }
 

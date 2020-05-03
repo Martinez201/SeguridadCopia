@@ -46,6 +46,12 @@ class Presupuesto
      */
     private $precioConIva;
 
+    /**
+     * @ORM\Column(type="string" , nullable= true)
+     * @var string
+     */
+    private $contrato;
+
     ////////////////////////////
     ///
     /**
@@ -175,6 +181,24 @@ class Presupuesto
     public function setContenido($contenido)
     {
         $this->contenido = $contenido;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContrato()
+    {
+        return $this->contrato;
+    }
+
+    /**
+     * @param string $contrato
+     * @return Presupuesto
+     */
+    public function setContrato($contrato)
+    {
+        $this->contrato = $contrato;
         return $this;
     }
 

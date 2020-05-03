@@ -71,8 +71,19 @@ class PresupuestoController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
             $precioConIva = $form->get('precioSinIva')->getData() * 0.21;
             $presupuesto->setPrecioConIva($form->get('precioSinIva')->getData()+$precioConIva);
+
+            $contrato = $form->get('contrato')->getData();
+
+            if($contrato){
+
+                $nombreOriginal = pathinfo($contrato->getClientOriginalName(),PATHINFO_FILENAME);
+                $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$contrato->guessExtension();
+                $contrato->move($this->getParameter('directoriocontratos'), $guardarNuevo);
+                $presupuesto->setContrato($guardarNuevo);
+            }
 
             try {
 

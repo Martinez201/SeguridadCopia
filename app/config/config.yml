@@ -9,6 +9,7 @@ parameters:
     locale: en
     directorioAvatares: '%kernel.project_dir%/web/avatares'
     directorioImagenes: '%kernel.project_dir%/web/imagenesProductos'
+    directorioContratos: '%kernel.project_dir%/web/Contratos'
 
 framework:
     #esi: ~
