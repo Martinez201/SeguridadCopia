@@ -1,0 +1,32 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block title %}
+    Presupuesto Contenido
+{% endblock %}
+
+{% block content %}
+
+    <h1>Contenido presupuesto</h1>
+    <a href="{{ path('altas_contenido_presupuesto',{'id': presupuesto.id}) }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir contenido</a>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+            <td>ID</td>
+            <td>Producto</td>
+            <td>Cantidad</td>
+            <td>Total(P.V.P * Unidades)</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for content in contenido %}
+            <tr>
+                <td><a href="{{ path('contenido_presupuesto_form',{'presupuesto': presupuesto.id,'id': content.id}) }}">{{ content.id }}</a></td>
+                <td>{{ content.producto }}</td>
+                <td>{{ content.cantidad }}</td>
+                <td>{{ content.total }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('presupuestos_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+{% endblock %}

@@ -8,7 +8,6 @@ use AppBundle\Entity\Albaran;
 use AppBundle\Entity\ContenidoAlbaran;
 use AppBundle\Form\Type\ContenidoType;
 use AppBundle\Repository\ContenidoRepository;
-use AppBundle\Repository\ProductoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
