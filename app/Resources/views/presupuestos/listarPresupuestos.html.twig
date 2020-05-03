@@ -34,4 +34,10 @@
     {% if paginador and paginador.haveToPaginate %}
         {{ pagerfanta(paginador,'twitter_bootstrap4') }}
     {% endif %}
+    <h2>Información del cliente</h2>
+    <p>
+        <a href="{{ asset('Contrato.pdf') }} " target="_blank"  class="btn btn-danger"> <i class="fas fa-file-pdf"></i> Generar Contrato (PDF)</a>
+        <a href="{{ asset('Contrato.odt') }} " target="_blank"  class="btn btn-info"><i class="fas fa-file-word"></i> Generar Contrato (WORD)</a>
+    </p>
+
 {% endblock %}
