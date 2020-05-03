@@ -66,7 +66,7 @@ class ContenidoPresController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash('success','Se han guardado los datos con éxito');
-                return $this->redirectToRoute('presupuestos_Listar');
+                return $this->redirectToRoute('contenido_presupuesto_Listar',['id'=> $presupuesto->getId()]);
 
             }catch (\Exception $ex){
 
