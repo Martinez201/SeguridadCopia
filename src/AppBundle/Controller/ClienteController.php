@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Security("is_granted('ROLE_COMERCIAL')")
+ * @Security("is_granted('ROLE_GESTOR')")
  */
 
 
