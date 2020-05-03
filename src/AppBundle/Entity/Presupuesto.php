@@ -61,10 +61,10 @@ class Presupuesto
     private $empleado;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Producto")
-     * @var Producto[]
+     * @ORM\OneToMany(targetEntity="ContenidoPresupuesto",mappedBy="presupuesto")
+     * @var ContenidoPresupuesto[]
      */
-    private $productos;
+    private $contenido;
 
     //////////////////////////
 
@@ -185,22 +185,24 @@ class Presupuesto
     }
 
     /**
-     * @return Producto[]
+     * @return ContenidoPresupuesto[]
      */
-    public function getProductos()
+    public function getContenido()
     {
-        return $this->productos;
+        return $this->contenido;
     }
 
     /**
-     * @param Producto[] $productos
+     * @param ContenidoPresupuesto[] $contenido
      * @return Presupuesto
      */
-    public function setProductos($productos)
+    public function setContenido($contenido)
     {
-        $this->productos = $productos;
+        $this->contenido = $contenido;
         return $this;
     }
+
+
 
 
 
