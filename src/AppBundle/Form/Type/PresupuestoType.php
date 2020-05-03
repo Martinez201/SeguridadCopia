@@ -28,12 +28,6 @@ class PresupuestoType extends AbstractType
                 'placeholder'=> '<-Seleccione un empleado->'
 
             ])
-            ->add('cliente', EntityType::class,[
-
-                'label'=> 'Cliente:',
-                'class'=> Cliente::class,
-                'placeholder'=>'<-Seleccione un cliente->'
-            ])
             ->add('instalacion',TextType::class,[
 
                 'label'=> 'Instalación(Dirección):'
@@ -45,12 +39,6 @@ class PresupuestoType extends AbstractType
             ->add('precioSinIva',NumberType::class,[
 
                 'label'=> 'Precio sin Iva:'
-            ])
-            ->add('productos',EntityType::class,[
-
-                'label'=>'Productos:',
-                'class'=> Producto::class,
-                'multiple'=> true,
             ]);
     }
 
