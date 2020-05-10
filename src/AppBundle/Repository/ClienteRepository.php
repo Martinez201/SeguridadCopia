@@ -33,15 +33,15 @@ class ClienteRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function obtenerCliente(Cliente $cliente){
 
-        return $this->createQueryBuilder('c')
-            ->addSelect('d')
-            ->leftJoin('c.datosBancarios','d')
-            ->where('c.id = :cliente')
-            ->setParameter('cliente',$cliente)
-            ->getQuery()
-            ->getResult();
+    public function obtenerResultados($palabra){
+
+
+        return $this->createQueryBuilder('cli')
+                ->Where('cli.apellidos LIKE :texto')
+                ->setParameter('texto','%'.$palabra.'%')
+                ->getQuery()
+                ->getArrayResult();
     }
 
 }

@@ -7,9 +7,21 @@
 
 {% block content %}
 
+
     <h1>Clientes</h1>
     <a href="{{ path('altas_clientes') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir cliente</a>
-    <table class="table table-bordered table-striped text-center">
+    <p>
+        <div class="input-group mb-3">
+            <div>
+                <input type="text" name="palabra" id="palabra" placeholder="Buscar ..">
+            </div>
+            <div>
+                <button class="btn btn-warning" id="btnLimpiar">Limpiar</button>
+            </div>
+        </div>
+
+    </p>
+    <table class="table table-bordered table-striped text-center" id="tabla1">
         <thead class="thead-dark">
         <tr>
             <td>Nombre</td>
@@ -43,6 +55,164 @@
         {% endfor %}
         </tbody>
     </table>
+    <table class="table table-bordered table-striped text-center" id="tabla2">
+        <thead class="thead-dark">
+        <tr>
+            <td>Nombre</td>
+            <td>Apellidos</td>
+            <td>D.N.I</td>
+            <td>Edad</td>
+            <td>Dirección</td>
+            <td>Ciudad</td>
+            <td>provincia</td>
+            <td>Código Postal</td>
+            <td>Teléfono</td>
+            <td>Email</td>
+            <td>Estado</td>
+        </tr>
+        </thead>
+        <tbody id="hola">
+
+        </tbody>
+    </table>
+    <script src="{{ asset('jquery/jquery-3.4.1.js') }}"></script>
+    <script>
+        $(function () {
+
+            $("#tabla2").hide();
+
+        })
+        $("#palabra").on("keyup",function () {
+
+
+            var texto = document.getElementById("palabra").value;
+            var datos = {};
+            var fila;
+            var celda,textoCelda;
+            var celda1,textoCelda1;
+            var celda2,textoCelda2,celda3,textoCelda3,celda4,textoCelda4,celda5,textoCelda5;
+            var celda6,textoCelda6,celda7,textoCelda7,celda8,textoCelda8,celda9,textoCelda9;
+            var celda10,textoCelda10;
+
+            datos.palabra = texto;
+
+            if(!texto){
+
+                $("table").show();
+                $(".pagination").show();
+                $("#tabla2").hide();
+            }
+            else{
+
+                $("table").hide();
+                $(".pagination").hide();
+                $("#tabla2").show();
+                $("#tabla2 tbody").html("");
+            }
+
+
+            $.ajax({
+
+                method: 'GET',
+                url: '/cliente/buscar',
+                data: datos,
+                dataType:'json',
+                async:true,
+                success:function (respuesta) {
+
+                    var tabla = document.getElementById("hola");
+
+                    if(respuesta.length > 0){
+
+                        for(let i = 0; i < respuesta.length; i++){
+
+                            fila = document.createElement("tr");
+                            celda = document.createElement("td");
+                            textoCelda = document.createTextNode(respuesta[i].nombre);
+                            celda1 = document.createElement("td");
+                            textoCelda1 = document.createTextNode(respuesta[i].apellidos);
+                            celda2 = document.createElement("td");
+                            textoCelda2 = document.createTextNode(respuesta[i].dni);
+                            celda3 = document.createElement("td");
+                            var textoDefinitivo = (respuesta[i].fechaNacimiento.date).split(" ");
+                            textoCelda3 = document.createTextNode(textoDefinitivo[0]);
+                            celda4 = document.createElement("td");
+                            textoCelda4 = document.createTextNode(respuesta[i].direccion);
+                            celda5 = document.createElement("td");
+                            textoCelda5 = document.createTextNode(respuesta[i].ciudad);
+                            celda6 = document.createElement("td");
+                            textoCelda6 = document.createTextNode(respuesta[i].provincia);
+                            celda7 = document.createElement("td");
+                            textoCelda7 = document.createTextNode(respuesta[i].CPostal);
+                            celda8 = document.createElement("td");
+                            textoCelda8 = document.createTextNode(respuesta[i].telefono);
+                            celda9 = document.createElement("td");
+                            textoCelda9 = document.createTextNode(respuesta[i].email);
+                            celda10 = document.createElement("td");
+                            if(respuesta[i].estado){
+                                textoCelda10 = document.createTextNode("ALTA");
+                                celda10.classList.add("btn","btn-success");
+
+                            }
+                            else{
+                                textoCelda10 = document.createTextNode("BAJA");
+                                celda10.classList.add("btn","btn-danger");
+                            }
+
+
+                            celda1.appendChild(textoCelda1);
+                            celda2.appendChild(textoCelda2);
+                            celda3.appendChild(textoCelda3);
+                            celda4.appendChild(textoCelda4);
+                            celda5.appendChild(textoCelda5);
+                            celda6.appendChild(textoCelda6);
+                            celda7.appendChild(textoCelda7);
+                            celda8.appendChild(textoCelda8);
+                            celda9.appendChild(textoCelda9);
+                            celda10.appendChild(textoCelda10);
+                            celda.appendChild(textoCelda);
+                            fila.appendChild(celda);
+                            fila.appendChild(celda1);
+                            fila.appendChild(celda2);
+                            fila.appendChild(celda3);
+                            fila.appendChild(celda4);
+                            fila.appendChild(celda5);
+                            fila.appendChild(celda6);
+                            fila.appendChild(celda7);
+                            fila.appendChild(celda8);
+                            fila.appendChild(celda9);
+
+                            fila.appendChild(celda10);
+                            tabla.appendChild(fila);
+
+                        }
+                    }
+                    else{
+
+                        textoCelda1 = document.createTextNode("NO HAY RESULTADOS");
+                        tabla.appendChild(textoCelda1);
+                    }
+
+
+
+                },
+                error: function (xhr,status) {
+
+                    alert("Ha ocurrido un error")
+                }
+
+            })
+
+        });
+
+        $("#btnLimpiar").on("click",function () {
+
+            $("#palabra").val("");
+            $("table").show();
+            $(".pagination").show();
+        });
+
+    </script>
     {% if paginador and paginador.haveToPaginate %}
         {{ pagerfanta(paginador,'twitter_bootstrap4') }}
     {% endif %}

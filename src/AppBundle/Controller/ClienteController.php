@@ -12,6 +12,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -128,5 +129,24 @@ class ClienteController extends Controller
 
         ]);
 
+    }
+
+    /**
+     * @Route("/cliente/buscar", name="cliente_buscar")
+     */
+
+    public function buscarCliente(ClienteRepository $clienteRepository, Request $request){
+
+
+        if($request->isXmlHttpRequest()){
+
+            $palabra = $request->get('palabra');
+
+                $resultado = $clienteRepository->obtenerResultados($palabra);
+
+                return new JsonResponse($resultado);
+        }
+
+        return $this->redirectToRoute('clientes_Listar');
     }
 }
