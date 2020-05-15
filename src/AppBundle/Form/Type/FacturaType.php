@@ -20,13 +20,6 @@ class FacturaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('empleado', EntityType::class,[
-
-                'label'=>'Empleado:',
-                'class'=> Empleado::class,
-                'placeholder'=> '<-Seleccione un empleado->'
-
-            ])
             ->add('cliente', EntityType::class,[
 
                 'label'=> 'Cliente:',

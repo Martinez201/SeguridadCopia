@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Factura;
 use AppBundle\Form\Type\FacturaType;
 use AppBundle\Repository\ClienteRepository;
@@ -61,6 +62,11 @@ class FacturaController extends Controller
     public function nuevaAction(Request $request){
 
         $factura = new Factura();
+        /**
+         * @var Empleado
+         */
+        $empleado = $this->getUser();
+        $factura->setEmpleado($empleado);
         $this->getDoctrine()->getManager()->persist($factura);
         return $this->formAction($request,$factura);
     }
