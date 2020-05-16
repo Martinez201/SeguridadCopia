@@ -165,3 +165,63 @@ AppBundle\Entity\Producto:
     tipo: 'Servicio'
     precio: 40.98
     cantidad: 20
+AppBundle\Entity\Factura:
+  factura_j{1..5}:
+    empleado: "@empleado_Jaen_Gestor"
+    cliente: "@cliente_Jaen_Alta*"
+    fecha: '<dateTime()>'
+    precioSinIva: 240.05
+    precioConIva: 247.05
+    concepto: 'Mensualidad'
+AppBundle\Entity\Presupuesto:
+  presupuesto_Ent{1..10}:
+    empleado: "@empleado_Jaen_Gestor"
+    fecha: '<dateTime()>'
+    instalacion: '<es_ES:streetAddress()>'
+    precioSinIva: 240.05
+    precioConIva: 247.05
+AppBundle\Entity\ContenidoPresupuesto:
+  contendioPrespuesto_rs{1..20}:
+    producto: "@productos_A"
+    presupuesto: "@presupuesto_Ent*"
+    cantidad: 10
+    total: 100
+  contendioPrespuesto_s{1..20}:
+    producto: "@productos_B"
+    presupuesto: "@presupuesto_Ent*"
+    cantidad: 10
+    total: 100
+AppBundle\Entity\Albaran:
+  albaran_Ent{1..10}:
+    empleado: "@empleado_Jaen_Gestor"
+    fecha: '<dateTime()>'
+    proveedor: '<en_US:company()>'
+AppBundle\Entity\ContenidoAlbaran:
+  contendioAlbaran_rs{1..20}:
+    producto: "@productos_A"
+    albaran: "@albaran_Ent*"
+    cantidad: 10
+    total: 100
+  contendioAlbaran_s{1..20}:
+    producto: "@productos_B"
+    albaran: "@albaran_Ent*"
+    cantidad: 10
+    total: 100
+AppBundle\Entity\DatosBancarios:
+  datosBank{1..2}:
+    cliente: '@cliente_Jaen_Alta*'
+    iban: '<randomNumber(8)> - <randomLetter()>'
+    moneda: 'Euro'
+    sucursal: 'CaixaBank'
+    entidad: '<randomNumber(7)>'
+    bic: '<randomNumber(5)> - <randomLetter()>'
+AppBundle\Entity\Parte:
+  partesTRabajo{1..10}:
+    cliente: '@cliente_Jaen_Alta*'
+    delegacion: "@delegacion_Jaen"
+    empleado: "@empleado_Jaen_Gestor"
+    fecha: '<dateTime()>'
+    estado: 0
+    tipo: 'Instalación'
+    detalle: 'prueba'
+    observaciones: 'prueba'
