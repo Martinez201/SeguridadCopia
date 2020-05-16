@@ -16,14 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- *
- */
 
 class ParteController extends Controller
 {
     /**
      * @Route("/partes/{page}",name="partes_Listar")
+     * @Security("is_granted('ROLE_INSTALADOR')")
      */
 
     public function partesAction(ParteRepository $parteRepository,$page=1){
