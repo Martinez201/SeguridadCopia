@@ -176,26 +176,26 @@
         <tr>
             <td class="service">{{ factura.concepto }}</td>
             <td class="desc">Cuota mensual de servicios de seguridad</td>
-            <td class="unit">{{ factura.precioSinIva}} $</td>
+            <td class="unit">{{ factura.precioSinIva}} €</td>
             <td class="qty">1</td>
-            <td class="total">{{ factura.precioSinIva}} $</td>
+            <td class="total">{{ factura.precioSinIva}} €</td>
         </tr>
         <tr>
             <td colspan="4">SUBTOTAL</td>
-            <td class="total">{{ factura.precioSinIva}} $</td>
+            <td class="total">{{ factura.precioSinIva}} €</td>
         </tr>
         <tr>
             <td colspan="4">Impuestos 21%</td>
-            <td class="total">{{ factura.precioConIva - factura.precioSinIva }} $</td>
+            <td class="total">{{ factura.precioConIva - factura.precioSinIva }} €</td>
         </tr>
         <tr>
             <td colspan="4" class="grand total">Total a deducir</td>
-            <td class="grand total">{{ factura.precioConIva }} $</td>
+            <td class="grand total">{{ factura.precioConIva }} €</td>
         </tr>
         </tbody>
     </table>
     <div id="notices">
-        <div>NOTICE:</div>
+        <div>Aviso:</div>
         <div class="notice">Se le aplicará un recargo del 1.5% del precio total si no se abona en los siguientes 30 días</div>
     </div>
 </main>
