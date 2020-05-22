@@ -208,13 +208,20 @@ AppBundle\Entity\ContenidoAlbaran:
     cantidad: 10
     total: 100
 AppBundle\Entity\DatosBancarios:
-  datosBank{1..2}:
-    cliente: '@cliente_Jaen_Alta*'
-    iban: '<randomNumber(8)> - <randomLetter()>'
+  datosBank{1..5}:
+    cliente: '@cliente_Jaen_Alta<current()>'
+    iban: '<iban(34)>'
     moneda: 'Euro'
-    sucursal: 'CaixaBank'
-    entidad: '<randomNumber(7)>'
-    bic: '<randomNumber(5)> - <randomLetter()>'
+    sucursal: '<randomNumber(7)>'
+    entidad: 'Caja Sur'
+    bic: '<swiftBicNumber()>'
+  datosBank2{1..5}:
+    cliente: '@cliente_Jaen_Baja<current()>'
+    iban: '<iban(34)>'
+    moneda: 'Euro'
+    sucursal: '<randomNumber(7)>'
+    entidad: 'CaixaBank'
+    bic: '<swiftBicNumber()>'
 AppBundle\Entity\Parte:
   partesTRabajo{1..10}:
     cliente: '@cliente_Jaen_Alta*'
