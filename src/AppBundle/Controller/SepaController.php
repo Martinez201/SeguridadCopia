@@ -227,6 +227,7 @@ class SepaController extends Controller
                 $DbtrA =  Array();
                 $DbtrAcctA = Array();
                 $DbtrAgtA = Array();
+                $AmtA = Array();
 
                 foreach ($facturas as $dato){
 
@@ -236,6 +237,9 @@ class SepaController extends Controller
                     $DbtrAcct = new DbtrAcct();
                     $PstlAdr = new PstlAdr();
                     $DbtrAgt = new DbtrAgt ();
+                    $Amt = new Amt();
+
+                    $Amt->setInstdAmt($dato->getPrecioConIva());
 
                     $Dbtr->setNm($dato->getCliente()->getNombre());
 
@@ -254,6 +258,7 @@ class SepaController extends Controller
                     array_push($DbtrA,$Dbtr);
                     array_push($DbtrAcctA,$DbtrAcct);
                     array_push($DbtrAgtA,$DbtrAgt);
+                    array_push($AmtA, $Amt);
 
                 }
 
@@ -262,9 +267,7 @@ class SepaController extends Controller
                 $GrpHdr->setCtrlSum($catidadADeducir); // CANTIDAD A COBRAR FACTURA
                 $GrpHdr->setInitgPty($InitgPty);
 
-                $Amt = new Amt();
 
-                $Amt->setInstdAmt($catidadADeducir);
 
                 $PmtTpInf = new PmtTpInf();
                 $PmtInf = new PmtInf();
@@ -284,9 +287,9 @@ class SepaController extends Controller
                 $PmtInf->setPmtTpInf($PmtTpInf);
                 $PmtInf->setReqdExctnDt($fechalimitePago);
                 $PmtInf->setDbtr($DbtrA);
-                $PmtInf->setDbtrAcct($DbtrA);
+                $PmtInf->setDbtrAcct($DbtrAcctA);
                 $PmtInf->setDbtrAgt($DbtrAgtA);
-                $PmtInf->setAmt($Amt);
+                $PmtInf->setAmt($AmtA);
                 $PmtInf->setPurp('GDDS');
 
                 $documento->setGrpHdr($GrpHdr); //cabecera documento xml
@@ -311,7 +314,6 @@ class SepaController extends Controller
 
             }catch (\Exception $ex){
 
-                $this->addFlash('error',$ex);
 
                 $this->addFlash('error','Error: No se ha podido generar el documento Sepa');
             }
