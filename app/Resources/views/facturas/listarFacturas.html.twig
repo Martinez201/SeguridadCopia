@@ -45,6 +45,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('generar_Sepa_Fecha') }}" class="btn btn-success"><i class="fas fa-plus-circle mt-auto mb-auto"></i> Generar Sepa general</a>
     {% if paginador and paginador.haveToPaginate %}
         {{ pagerfanta(paginador,'twitter_bootstrap4') }}
     {% endif %}

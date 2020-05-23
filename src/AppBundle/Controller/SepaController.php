@@ -4,9 +4,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Factura;
+use AppBundle\Form\Type\SepaType;
+use AppBundle\Repository\ClienteRepository;
+use AppBundle\Repository\FacturaRepository;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
@@ -168,7 +172,159 @@ class SepaController extends Controller
 
  }
 
+    /**
+     * @Route("/factura/generarSepa",name="generar_Sepa_Fecha", methods={"GET","POST"})
+     */
 
+    public function obtenerDatos(Request $request, FacturaRepository $facturaRepository, ClienteRepository $clienteRepository){
+
+        $form = $this->createForm(SepaType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            try {
+
+                $encoders =[ new XmlEncoder()];
+                $normalizers = [new ObjectNormalizer()];
+                $serializer = new Serializer($normalizers,$encoders);
+
+
+                $fechaEmisionDocumento =  new DateTime();
+                $aux1 = new DateTime();
+                $fechalimitePago = $aux1->add(date_interval_create_from_date_string('6 days'))->format('d-m-Y');
+                $aux2 = $fechaEmisionDocumento->format('d-m-Y');
+                $fechaInicial = $form->get('fechaInicial')->getData();
+                $fechaFinal = $form->get('fechaFinal')->getData();
+                $facturas = $facturaRepository->obtenerFacturasPorFechas($fechaInicial,$fechaFinal);
+                $catidadADeducir = 0;
+                $transacciones = 0;
+
+                ///////////////COMPOSICIÓN DEL DOCUMENTO SEPA //////////////////////
+
+                $documento = new Document();
+
+
+                //cabecera
+                $GrpHdr = new GrpHdr();
+                $InitgPty = new InitgPty();
+
+
+                //cabecera
+                $GrpHdr->setMsId("ABC/060928/CCT001"); //DEJARLO
+                $GrpHdr->setCreDtTm($aux2); //PONER FECHA FACTURA
+                $GrpHdr->setNbOfTxs(1); // DEJARLO
+
+                $idDocumento = rand(8,15);
+
+                //cabecera
+                $InitgPty->setId($idDocumento); // DEJARLO
+                $InitgPty->setIssr('KBO-BCE');//DEJARLO
+                $InitgPty->setNm('ROBCO SECURITY S.A.U'); // NOMBRE DE LA EMPRESA QUE FACTURA
+
+
+
+                $DbtrA =  Array();
+                $DbtrAcctA = Array();
+                $DbtrAgtA = Array();
+
+                foreach ($facturas as $dato){
+
+                    $catidadADeducir = $catidadADeducir + $dato->getPrecioConIva(); // Suma todos los importes de las facturas
+                    $transacciones = $transacciones + 1; //para contar el numero de transacciones del documento
+                    $Dbtr = new Dbtr();
+                    $DbtrAcct = new DbtrAcct();
+                    $PstlAdr = new PstlAdr();
+                    $DbtrAgt = new DbtrAgt ();
+
+                    $Dbtr->setNm($dato->getCliente()->getNombre());
+
+                    $PstlAdr->setAdrLine($dato->getCliente()->getDireccion()." ". $dato->getCliente()->getCiudad()." (".$dato->getCliente()->getProvincia(). " )");
+                    $PstlAdr->setCtry('España');
+                    $PstlAdr->setPstCd($dato->getCliente()->getCPostal());
+                    $PstlAdr->setTwnNm($dato->getCliente()->getCiudad());
+
+                    $Dbtr->setPstlAdr($PstlAdr);
+
+                    $DbtrAcct->setCcy('EUR');
+                    $DbtrAcct->setIBAN($dato->getCliente()->getDatosBancarios()->getIban());
+
+                    $DbtrAgt->setBIC($dato->getCliente()->getDatosBancarios()->getBic());
+
+                    array_push($DbtrA,$Dbtr);
+                    array_push($DbtrAcctA,$DbtrAcct);
+                    array_push($DbtrAgtA,$DbtrAgt);
+
+                }
+
+
+
+                $GrpHdr->setCtrlSum($catidadADeducir); // CANTIDAD A COBRAR FACTURA
+                $GrpHdr->setInitgPty($InitgPty);
+
+                $Amt = new Amt();
+
+                $Amt->setInstdAmt($catidadADeducir);
+
+                $PmtTpInf = new PmtTpInf();
+                $PmtInf = new PmtInf();
+
+
+                $PmtTpInf->setCtgyPurp('SUPP');
+                $PmtTpInf->setInstrPrty('HIGH');
+                $PmtTpInf->setLclInstrm('TRF');
+                $PmtTpInf->setSvclvl('SEPA');
+
+
+                $PmtInf->setPmtInfId('ABC/4560/'.$aux2);
+                $PmtInf->setPmtMtd('TRF');
+                $PmtInf->setBtchBookg(0);
+                $PmtInf->setNbOfTxs($transacciones);
+                $PmtInf->setCtrlSum($catidadADeducir);
+                $PmtInf->setPmtTpInf($PmtTpInf);
+                $PmtInf->setReqdExctnDt($fechalimitePago);
+                $PmtInf->setDbtr($DbtrA);
+                $PmtInf->setDbtrAcct($DbtrA);
+                $PmtInf->setDbtrAgt($DbtrAgtA);
+                $PmtInf->setAmt($Amt);
+                $PmtInf->setPurp('GDDS');
+
+                $documento->setGrpHdr($GrpHdr); //cabecera documento xml
+                $documento->setPmtInf($PmtInf); //Cuerpo transacciones
+
+                /// AQUI ES DONDE SE CREA LA CADENA CON LA ESTRUCTURA DEL DOCUMENTO SEPA
+
+                $resultado = $serializer->serialize($documento,'xml');
+
+                //PROCESO DE DESCARGA DEL FICHERO XML
+
+                $nombreFichero = 'DocumentoSepa.xml';
+
+                $response = new Response($resultado);
+                $response->headers->set('Content-Type','application/xml');
+                $disposicion = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,$nombreFichero);
+
+                $response->headers->set('Content-Disposition',$disposicion);
+
+                return  $response;
+
+
+            }catch (\Exception $ex){
+
+                $this->addFlash('error',$ex);
+
+                dump($ex);
+            }
+
+        }
+
+        return $this->render('facturas/sepaTotal.html.twig',[
+
+            'form'=> $form->createView(),
+
+        ]);
+
+    }
 
 }
 
