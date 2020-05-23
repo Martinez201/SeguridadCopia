@@ -313,7 +313,7 @@ class SepaController extends Controller
 
                 $this->addFlash('error',$ex);
 
-                dump($ex);
+                $this->addFlash('error','Error: No se ha podido generar el documento Sepa');
             }
 
         }

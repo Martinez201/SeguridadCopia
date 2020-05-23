@@ -165,7 +165,6 @@ class EmpleadoController extends Controller
         $usuario = $this->getUser();
         $form = $this->createForm(MyUsuarioType::class,$usuario);
         $form->handleRequest($request);
-        dump($usuario);
         $imagen = $form->get('avatar')->getData();
 
         if($imagen){
