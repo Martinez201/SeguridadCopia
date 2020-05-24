@@ -18,13 +18,13 @@ class SepaType extends AbstractType
             ->add('fechaInicial', DateType::class,[
 
                 'label'=>'Fecha Inicio:',
-                'years'=> range(date('1910'),date('Y')-18)
+                'years'=> range(date('1980'),date('Y')-18)
 
             ])
             ->add('fechaFinal',DateType::class,[
 
                 'label'=>'Fecha Fin:',
-                'years'=> range(date('1910'),date('Y'))
+                'years'=> range(date('1980'),date('Y'))
 
             ]);
 

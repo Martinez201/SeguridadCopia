@@ -61,7 +61,8 @@ class ParteType extends AbstractType
             ])
             ->add('fecha', DateType::class,[
 
-                'label'=> 'Fecha:'
+                'label'=> 'Fecha:',
+                'years'=> range(date('1980'),date('Y'))
             ])
             ->add('estado', ChoiceType::class,[
 

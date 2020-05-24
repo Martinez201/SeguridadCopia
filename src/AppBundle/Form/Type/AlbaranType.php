@@ -28,7 +28,8 @@ class AlbaranType extends AbstractType
             ])
             ->add('fecha',DateType::class,[
 
-                'label' => 'Fecha:'
+                'label' => 'Fecha:',
+                'years'=> range(date('1980'),date('Y'))
             ])
             ->add('proveedor', TextType::class,[
 
