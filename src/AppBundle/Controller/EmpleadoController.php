@@ -62,13 +62,13 @@ class EmpleadoController extends Controller
      * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
-    public function nuevoAction(Request $request){
+    public function nuevoAction(Request $request,UserPasswordEncoderInterface $encoder){
 
         $nuevoEmpleado = new Empleado();
         $em = $this->getDoctrine()->getManager();
         $em->persist($nuevoEmpleado);
 
-        return $this->formAction($request,$nuevoEmpleado);
+        return $this->formAction($request,$nuevoEmpleado, $encoder);
     }
 
 
@@ -77,7 +77,7 @@ class EmpleadoController extends Controller
      * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
-    public function formAction(Request $request, Empleado $empleado){
+    public function formAction(Request $request, Empleado $empleado, UserPasswordEncoderInterface $encoder){
 
         $form = $this->createForm(EmpleadoType::class, $empleado);
         $form->handleRequest($request);
@@ -86,6 +86,7 @@ class EmpleadoController extends Controller
         if($form->isSubmitted() && $form->isValid()){
 
             $imagen = $form->get('avatar')->getData();
+            $clave = $form->get('clave')->getData();
 
             if($imagen){
 
@@ -93,6 +94,12 @@ class EmpleadoController extends Controller
                 $guardarNuevo = $nombreOriginal.'-'.uniqid().'.'.$imagen->guessExtension();
                 $imagen->move($this->getParameter('directorioAvatares'), $guardarNuevo);
                 $empleado->setAvatar($guardarNuevo);
+            }
+
+            if($clave){
+
+                $empleado->setClave($encoder->encodePassword($empleado,$clave));
+
             }
             try {
 

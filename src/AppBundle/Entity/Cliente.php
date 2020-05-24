@@ -43,7 +43,7 @@ class Cliente
      */
     private $dni;
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", unique= true)
      * @Assert\NotBlank()
      * @Assert\Date
      * @var \DateTime

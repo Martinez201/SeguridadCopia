@@ -11,6 +11,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -86,6 +88,15 @@ class EmpleadoType extends AbstractType
                 'label'=> 'Comercial:',
                 'required'=> false
             ])
+            ->add('usuario',TextType::class,[
+
+                'label'=> 'Usuario:'
+            ])
+            ->add('clave', PasswordType::class,[
+
+                'label'=> 'Contraseña (Provisional):'
+
+            ])
             ->add('delegacion', EntityType::class,[
 
                 'label'=> 'Delegación:',
@@ -110,9 +121,8 @@ class EmpleadoType extends AbstractType
                        'mimeTypesMessage'=>'Error: Archivo de imagen no válido',
                    ])
                 ],
-
-
             ]);
+
 
     }
 
