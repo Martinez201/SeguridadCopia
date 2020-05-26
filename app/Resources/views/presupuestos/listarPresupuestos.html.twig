@@ -28,9 +28,8 @@
                 <td>{{ presupuesto.fecha|date("d/m/Y") }}</td>
                 <td>{{ presupuesto.instalacion }}</td>
                 <td><a href="{{ path('contenido_presupuesto_Listar',{'id': presupuesto.id}) }}" class="btn btn-info"><i class="fas fa-eye"></i> Ver contenido</a></td>
-                {% if presupuesto.contrato %}
-                <td><a href="{{ asset('Contratos/')}}{{presupuesto.contrato}}" class="btn btn-warning"><i class="fas fa-download"></i> Descargar</a></td>
-                {% endif %}
+                <td>{% if presupuesto.contrato %}<a href="{{ asset('Contratos/')}}{{presupuesto.contrato}}" class="btn btn-warning"><i class="fas fa-download"></i> Descargar</a>{% else %}
+                    <a href="#" class="btn btn-danger">No tiene</a>{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -38,10 +37,10 @@
     {% if paginador and paginador.haveToPaginate %}
         {{ pagerfanta(paginador,'twitter_bootstrap4') }}
     {% endif %}
-    <h2>Información del cliente</h2>
-    <p>
-        <a href="{{ asset('Contrato.pdf') }} " target="_blank"  class="btn btn-danger"> <i class="fas fa-file-pdf"></i> Generar Contrato (PDF)</a>
-        <a href="{{ asset('Contrato.odt') }} " target="_blank"  class="btn btn-info"><i class="fas fa-file-word"></i> Generar Contrato (WORD)</a>
+    <h2 class="mt-5">Información del cliente</h2>
+    <p class="mt-5">
+        <a href="{{ asset('Contrato.pdf') }} " target="_blank"  class="btn btn-success"> <i class="fas fa-file-pdf"></i> Generar Contrato (PDF)</a>
+        <a href="{{ asset('Contrato.odt') }} " target="_blank"  class="btn btn-success"><i class="fas fa-file-word"></i> Generar Contrato (WORD)</a>
     </p>
 
 {% endblock %}
