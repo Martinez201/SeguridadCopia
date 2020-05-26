@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Empleado;
+use AppBundle\Form\Type\InformeEmpleadoDelegacionType;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
@@ -49,23 +50,6 @@ class InformesController extends Controller
 
         return $mpdfService->generatePdfResponse($html);
 
-    }
-
-    /**
-     * @Route("/informes/empleados", name="empleado_informe", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMINISTRADOR')")
-     */
-
-    public function  informeAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){
-
-        $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
-        $mpdfService = new MpdfService();
-        $html = $twig->render('informes/informe.html.twig',[
-
-            'empleados'=> $empleados
-        ]);
-
-        return $mpdfService->generatePdfResponse($html);
     }
 
     /**
@@ -129,5 +113,48 @@ class InformesController extends Controller
         ]);
 
         return $mpdfService->generatePdfResponse($html);
+    }
+
+    /**
+     * @Route("/infome/empleados", name="empleado_informe", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
+     */
+
+    public function empleadosDelegacionAction(Request $request, EmpleadoRepository $empleadoRepository, Environment $twig){
+
+        $form = $this->createForm(InformeEmpleadoDelegacionType::class);
+        $form->handleRequest($request);
+
+
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $delegacion = $form->get('delegacion')->getData();
+
+            if(!$delegacion){
+
+                $empleados = $empleadoRepository->obtenerEmpleadosOrdenados();
+
+            }
+            else{
+
+                $empleados = $empleadoRepository->obtenerEmpleadosDelegacion($delegacion);
+
+            }
+
+            $mpdfService = new MpdfService();
+            $html = $twig->render('informes/informe.html.twig',[
+
+                'empleados'=> $empleados
+            ]);
+
+            return $mpdfService->generatePdfResponse($html);
+
+        }
+
+        return $this->render('informes/empleadoDelgeacion.html.twig',[
+
+            'form'=> $form->createView()
+        ]);
     }
 }

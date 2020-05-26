@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Delegacion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use AppBundle\Entity\Empleado;
@@ -30,6 +31,19 @@ class EmpleadoRepository extends ServiceEntityRepository
         return $this->obtenerEmpleadosQueryBuilder()
             ->getQuery()
             ->getResult();
+    }
+
+    function obtenerEmpleadosDelegacion(Delegacion $delegacion){
+
+        return $this->createQueryBuilder('em')
+            ->where('em.delegacion = :delegacion')
+            ->setParameter('delegacion',$delegacion)
+            ->orderBy('em.nombre')
+            ->addOrderBy('em.apellidos')
+            ->getQuery()
+            ->getResult();
+
+
     }
 
 }
