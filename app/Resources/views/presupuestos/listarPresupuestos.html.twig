@@ -8,7 +8,7 @@
 {% block content %}
 
     <h1>Presupuestos</h1>
-    <a href="{{ path('altas_presupuestos') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir presupuesto</a>
+    <a href="{{ path('presupuesto_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
@@ -39,10 +39,4 @@
     {% if paginador and paginador.haveToPaginate %}
         {{ pagerfanta(paginador,'twitter_bootstrap4') }}
     {% endif %}
-    <h2 class="mt-5">Información del cliente</h2>
-    <p class="mt-5">
-        <a href="{{ asset('Contrato.pdf') }} " target="_blank"  class="btn btn-success"> <i class="fas fa-file-pdf"></i> Generar Contrato (PDF)</a>
-        <a href="{{ asset('Contrato.odt') }} " target="_blank"  class="btn btn-success"><i class="fas fa-file-word"></i> Generar Contrato (WORD)</a>
-    </p>
-
 {% endblock %}
