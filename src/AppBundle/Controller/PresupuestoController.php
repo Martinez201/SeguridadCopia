@@ -14,6 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use TFox\MpdfPortBundle\Service\MpdfService;
+use Twig\Environment;
 
 /**
  * @Security("is_granted('ROLE_COMERCIAL')")
@@ -136,4 +138,24 @@ class PresupuestoController extends Controller
         ]);
 
     }
+
+    /**
+     * @Route("/informe/informe/{id}", name="presupuesto_informe", methods={"GET"})
+     */
+
+    public function informeAction(Request $request,Presupuesto $presupuesto, Environment $twig){
+
+        $mpdfService = new MpdfService();
+        $productos = $presupuesto->getContenido();
+
+        $html = $twig->render('presupuestos/informe.html.twig',[
+
+            'presupuesto'=> $presupuesto,
+            'contenido'=> $productos
+
+        ]);
+
+        return $mpdfService->generatePdfResponse($html);
+    }
+
 }
