@@ -14,6 +14,6 @@ class PortadaController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('portada.html.twig');
+        return $this->render('portadas/portada.html.twig');
     }
 }

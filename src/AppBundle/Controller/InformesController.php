@@ -30,7 +30,7 @@ class InformesController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('portadaInformes.html.twig');
+        return $this->render('portadas/portadaInformes.html.twig');
     }
 
     /**
