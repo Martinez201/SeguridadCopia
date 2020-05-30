@@ -1,0 +1,17 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block content %}
+
+    <h1>Cambiar Clave</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Cambiar contraseña</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block title %}
+    Cambio de Clave
+{% endblock %}
+

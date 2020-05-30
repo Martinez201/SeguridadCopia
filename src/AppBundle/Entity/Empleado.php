@@ -136,6 +136,24 @@ class Empleado implements UserInterface
      */
     private $clave;
 
+    /**
+     * @ORM\Column(type="string", nullable= true)
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="string", nullable= true)
+     * @var string
+     */
+    private $tokenType;
+
+    /**
+     * @ORM\Column(type="datetime", nullable= true)
+     * @var \DateTime
+     */
+    private $ExpireToken;
+
 ////////////////////////////////////
     /**
      * @ORM\ManyToOne(targetEntity="Delegacion",inversedBy="empleados")
@@ -577,6 +595,63 @@ private $albaranes;
         $this->clave = $clave;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     * @return Empleado
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTokenType()
+    {
+        return $this->tokenType;
+    }
+
+    /**
+     * @param string $tokenType
+     * @return Empleado
+     */
+    public function setTokenType($tokenType)
+    {
+        $this->tokenType = $tokenType;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpireToken()
+    {
+        return $this->ExpireToken;
+    }
+
+    /**
+     * @param \DateTime $ExpireToken
+     * @return Empleado
+     */
+    public function setExpireToken($ExpireToken)
+    {
+        $this->ExpireToken = $ExpireToken;
+        return $this;
+    }
+
+
+
 
 
     public function getRoles()

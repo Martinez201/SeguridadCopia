@@ -1,0 +1,9 @@
+
+{% block body %}
+
+    <h2>Haga click sobre el enlace para poder recuperar su contraseña</h2>
+
+    <a href="{{ url('restablecer_clave_login_do',{'usuario': usuario, 'token' : token}) }}"> Restablecer contraseña</a>
+    
+{% endblock %}
+
