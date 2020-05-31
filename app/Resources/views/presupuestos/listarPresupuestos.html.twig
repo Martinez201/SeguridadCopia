@@ -28,7 +28,7 @@
                 <td>{{ presupuesto.empleado }}</td>
                 <td>{{ presupuesto.fecha|date("d/m/Y") }}</td>
                 <td>{{ presupuesto.instalacion }}</td>
-                <td><a href="{{ path('contenido_presupuesto_Listar',{'id': presupuesto.id}) }}" class="btn btn-info"><i class="fas fa-eye"></i> Ver contenido</a></td>
+                <td><a href="{{ path('contenido_presupuesto_Listar',{'id': presupuesto.id}) }}" class="btn btn-secondary"><i class="fas fa-eye"></i> Ver contenido</a></td>
                 <td><a href="{{ path('presupuesto_informe',{'id': presupuesto.id}) }}" class="btn btn-warning"><i class="fas fa-download"></i> Generar Presupuesto</a></td>
                 <td>{% if presupuesto.contrato %}<a href="{{ asset('Contratos/')}}{{presupuesto.contrato}}" class="btn btn-warning"><i class="fas fa-download"></i> Descargar</a>{% else %}
                     <a href="#" class="btn btn-danger">No tiene</a>{% endif %}</td>

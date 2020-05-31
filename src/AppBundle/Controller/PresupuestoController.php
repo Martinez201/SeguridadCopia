@@ -159,23 +159,4 @@ class PresupuestoController extends Controller
     }
 
 
-    /**
-     * @Route("/informe/portada", name="presupuesto_portada")
-     */
-
-    public function portadaAction(){
-
-        return $this->render('portadas/portadaPrespuestos.html.twig');
-
-    }
-
-    /**
-     * @Route("/informe/documentacion", name="presupuesto_documentacion")
-     */
-
-    public function portadaDocumentacionAction(){
-
-        return $this->render('presupuestos/documentacion.html.twig');
-
-    }
 }
