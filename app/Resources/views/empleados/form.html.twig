@@ -15,7 +15,7 @@
             Alta Empleado
         {% endif %}
     </h1>
-
+    <a href="{{ path('empleado_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
     {{ form_widget(form) }}
     {{ form_row(form.avatar) }}

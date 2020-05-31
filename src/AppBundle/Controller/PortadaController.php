@@ -101,5 +101,15 @@ class PortadaController extends Controller
 
     }
 
+    /**
+     * @Route("/empleado/portada", name="empleado_portada")
+     */
+
+    public function portadaEmpleados(){
+
+        return $this->render('portadas/empleadoPortada.html.twig');
+
+    }
+
 
 }
