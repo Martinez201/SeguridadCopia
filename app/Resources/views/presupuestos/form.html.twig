@@ -15,13 +15,13 @@
             Alta presupuesto
         {% endif %}
     </h1>
-
+    <a href="{{ path('presupuesto_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     {{ form_start(form) }}
     {{ form_widget(form) }}
 
     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
 
-    <a href="{{ path('presupuesto_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <a href="{{ path('presupuestos_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
     {% if not presupuesto.id %}
         <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
     {% else %}

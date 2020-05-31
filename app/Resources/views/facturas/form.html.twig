@@ -9,6 +9,7 @@
             Alta factura
         {% endif %}
     </h1>
+    <a href="{{ path('factura_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
@@ -17,7 +18,7 @@
     {% else %}
         <a href="{{ path('facturas_eliminar',{'id': factura.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a>
     {% endif %}
-    <a href="{{ path('factura_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás </a>
+    <a href="{{ path('facturas_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
     {{ form_end(form) }}
 {% endblock %}
 

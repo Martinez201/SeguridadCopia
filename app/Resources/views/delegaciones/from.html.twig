@@ -18,7 +18,7 @@
     {% else %}
         <a href="{{ path('delegacion_eliminar',{'id': delegacion.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
     {% endif %}
-    <a href="{{ path('delegaciones_listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    <a href="{{ path('delegaciones_listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado </a>
 
     {{ form_end(form) }}
 {% endblock %}
