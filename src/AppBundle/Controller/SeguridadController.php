@@ -97,7 +97,7 @@ class SeguridadController extends Controller
 
             if ($usuario->getToken() && $usuario->getExpireToken() >  new \DateTime()){
 
-                $this->addFlash('error','Error: ya se ha pedido un restablecimiento de contraseña recientemente intentelo mas tarde');
+                $this->addFlash('error','Error: ya se ha pedido un restablecimiento de contraseña recientemente intentelo de nuevo más tarde');
 
             }
             else{
@@ -124,12 +124,9 @@ class SeguridadController extends Controller
                         'text/html'
 
                     );
-
+                $this->addFlash('success','Enivado link para restablecer la contraseña al correo '.$email);
                 $this->getDoctrine()->getManager()->flush();
                 $swift_Mailer->send($mensaje);
-                $this->addFlash('succes','Enivado link para restablecer la contraseña al correo');
-
-
             }
         }
         return  $this->redirectToRoute('usuario_entrar');
