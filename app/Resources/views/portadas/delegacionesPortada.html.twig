@@ -1,0 +1,56 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block content %}
+    <h1>Menú Delegación</h1>
+    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <div class="box">
+        <div class="container">
+            <div class="row">
+                {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                        <div class="box-part text-center">
+
+                            <i class="fa fa-list-ul fa-3x" aria-hidden="true"></i>
+
+                            <div class="title">
+                                <h4>Listado Delegaciones</h4>
+                            </div>
+
+                            <div class="text">
+                                <span>Listados de las delegaciones</span>
+                            </div>
+
+                            <a href="{{ path('delegaciones_listar') }}" class="btn btn-warning">Ir al listado</a>
+
+                        </div>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                        <div class="box-part text-center">
+
+                            <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+
+                            <div class="title">
+                                <h4>Añadir Cliente</h4>
+                            </div>
+
+                            <div class="text">
+                                <span>Dar de alta a una Delegación</span>
+                            </div>
+
+                            <a href="{{ path('altas_delegaciones') }}" class="btn btn-warning">Añadir Delegación</a>
+
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Menú Delegaciones
+{% endblock %}
