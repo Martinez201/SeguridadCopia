@@ -9,12 +9,12 @@
 
     <h1>Partes</h1>
     {% if is_granted('ROLE_GESTOR') %}
-    <a href="{{ path('partes_alta') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Añadir parte</a>
+    <a href="{{ path('partes_alta') }}" class="btn btn-success mt-3"><i class="fas fa-plus-circle"></i> Añadir parte</a>
     {% endif %}
-    <table class="table table-bordered table-striped text-center">
+    <table class="table table-bordered table-striped text-center mt-3">
         <thead class="thead-dark">
         <tr>
-            <td>id</td>
+            <td>Editar</td>
             <td>Cliente</td>
             <td>Delegación</td>
             <td>Empleado</td>
@@ -26,7 +26,7 @@
         <tbody>
         {% for parte in paginador.currentPageResults %}
             <tr>
-                <td><a href="{{ path('partes_form',{'id': parte.id}) }}">{{ parte.id }}</a></td>
+                <td><a href="{{ path('partes_form',{'id': parte.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
                 <td>{{ parte.cliente }}</td>
                 <td>{{ parte.delegacion }}</td>
                 <td>{{ parte.empleado }}</td>
