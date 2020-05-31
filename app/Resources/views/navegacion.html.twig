@@ -16,7 +16,7 @@
                     </li>
                     {% if is_granted('ROLE_GESTOR') %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('clientes_Listar') }}" title="Clientes"><i class="fas fa-briefcase"></i> Clientes <i class="fas fa-briefcase shortmenu animate"></i></a>
+                        <a class="nav-link" href="{{ path('cliente_portada') }}" title="Clientes"><i class="fas fa-briefcase"></i> Clientes <i class="fas fa-briefcase shortmenu animate"></i></a>
                     </li>
                     {% endif %}
                     {% if is_granted('ROLE_INSTALADOR') %}

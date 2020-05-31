@@ -48,4 +48,16 @@ class PortadaController extends Controller
         return $this->render('portadas/facturaPortada.html.twig');
 
     }
+
+
+    /**
+     * @Route("/cliente/portada", name="cliente_portada")
+     */
+
+    public function portadaClientes(){
+
+        return $this->render('portadas/clientePortada.html.twig');
+
+    }
+
 }

@@ -9,6 +9,7 @@
             Alta Cliente
         {% endif %}
     </h1>
+    <a href="{{ path('cliente_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     {{ form_start(form) }}
     {{ form_widget(form) }}
         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
@@ -18,7 +19,7 @@
         <a href="{{ path('listar_datos',{'id': cliente.id}) }}" class="btn btn-dark"><i class="fas fa-money-bill"></i> Datos bancarios </a>
         <a href="{{ path('cliente_eliminar',{'id': cliente.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Dar de baja</a>
     {% endif %}
-    <a href="{{ path('clientes_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    <a href="{{ path('clientes_Listar') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
 
     {{ form_end(form) }}
 {% endblock %}

@@ -14,14 +14,14 @@
                             <i class="fa fa-list-ul fa-3x" aria-hidden="true"></i>
 
                             <div class="title">
-                                <h4>Listado Facturas</h4>
+                                <h4>Listado Clientes</h4>
                             </div>
 
                             <div class="text">
-                                <span>Listados de las facturas</span>
+                                <span>Listados de los clientes</span>
                             </div>
 
-                            <a href="{{ path('facturas_Listar') }}" class="btn btn-warning">Ir al listado</a>
+                            <a href="{{ path('clientes_Listar') }}" class="btn btn-warning">Ir al listado</a>
 
                         </div>
                     </div>
@@ -34,34 +34,14 @@
                             <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
 
                             <div class="title">
-                                <h4>Añadir Factura</h4>
+                                <h4>Añadir Cliente</h4>
                             </div>
 
                             <div class="text">
-                                <span>Dar de alta a una Factura</span>
+                                <span>Dar de alta a un cliente</span>
                             </div>
 
-                            <a href="{{ path('altas_facturas') }}" class="btn btn-warning">Añadir Factura</a>
-
-                        </div>
-                    </div>
-                {% endif %}
-                {% if is_granted('ROLE_GESTOR') %}
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                        <div class="box-part text-center">
-
-                            <i class="fa fa-passport fa-3x" aria-hidden="true"></i>
-
-                            <div class="title">
-                                <h4>Documentación</h4>
-                            </div>
-
-                            <div class="text">
-                                <span>Generar sepa por periodos de facturación </span>
-                            </div>
-
-                            <a href="{{ path('generar_Sepa_Fecha') }}" class="btn btn-warning">Generar Sepa</a>
+                            <a href="{{ path('altas_clientes') }}" class="btn btn-warning">Añadir Cliente</a>
 
                         </div>
                     </div>
@@ -72,6 +52,6 @@
 {% endblock %}
 
 {% block title %}
-    Menú Facturas
+    Menú Clientes
 {% endblock %}
 
