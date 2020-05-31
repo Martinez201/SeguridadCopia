@@ -9,6 +9,7 @@
             Alta producto
         {% endif %}
     </h1>
+    <a href="{{ path('producto_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_row(form.imagen) }}
