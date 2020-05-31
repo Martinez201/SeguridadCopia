@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/presupuesto/portada", name="presupuesto_portada")
+     * @Security("is_granted('ROLE_COMERCIAL')")
      */
 
     public function portadaAction(){
@@ -30,6 +32,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/presupuesto/documentacion", name="presupuesto_documentacion")
+     * @Security("is_granted('ROLE_COMERCIAL')")
      */
 
     public function portadaDocumentacionAction(){
@@ -41,6 +44,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/factura/portada", name="factura_portada")
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function portadaFacturas(){
@@ -52,6 +56,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/cliente/portada", name="cliente_portada")
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function portadaClientes(){
@@ -62,6 +67,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/parte/portada", name="parte_portada")
+     * @Security("is_granted('ROLE_INSTALADOR')")
      */
 
     public function portadaPartes(){
@@ -73,6 +79,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/producto/portada", name="producto_portada")
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function portadaProductos(){
@@ -83,6 +90,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/albaran/portada", name="albaran_portada")
+     * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function portadaAlbaranes(){
@@ -93,6 +101,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/delegacion/portada", name="delegacion_portada")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function portadaDelegaciones(){
@@ -103,6 +112,7 @@ class PortadaController extends Controller
 
     /**
      * @Route("/empleado/portada", name="empleado_portada")
+     * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
     public function portadaEmpleados(){
