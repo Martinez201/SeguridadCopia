@@ -60,4 +60,16 @@ class PortadaController extends Controller
 
     }
 
+    /**
+     * @Route("/parte/portada", name="parte_portada")
+     */
+
+    public function portadaPartes(){
+
+        return $this->render('portadas/partesPortada.html.twig');
+
+    }
+
+
+
 }

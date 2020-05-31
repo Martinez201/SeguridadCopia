@@ -1,0 +1,57 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block content %}
+    <h1>Menú Presupuestos</h1>
+    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <div class="box">
+        <div class="container">
+            <div class="row">
+                {% if is_granted('ROLE_INSTALADOR') %}
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                        <div class="box-part text-center">
+
+                            <i class="fa fa-list-ul fa-3x" aria-hidden="true"></i>
+
+                            <div class="title">
+                                <h4>Listado Partes</h4>
+                            </div>
+
+                            <div class="text">
+                                <span>Listados de los partes de trabajo</span>
+                            </div>
+
+                            <a href="{{ path('partes_Listar') }}" class="btn btn-warning">Ir al listado</a>
+
+                        </div>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_GESTOR') %}
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                        <div class="box-part text-center">
+
+                            <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+
+                            <div class="title">
+                                <h4>Añadir Parte</h4>
+                            </div>
+
+                            <div class="text">
+                                <span>Dar de alta a un parte de trabajo</span>
+                            </div>
+
+                            <a href="{{ path('partes_alta') }}" class="btn btn-warning">Añadir Parte</a>
+
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Menú Partes
+{% endblock %}
+

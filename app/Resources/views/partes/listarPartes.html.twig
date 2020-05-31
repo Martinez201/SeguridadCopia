@@ -8,9 +8,9 @@
 {% block content %}
 
     <h1>Partes</h1>
-    {% if is_granted('ROLE_GESTOR') %}
-    <a href="{{ path('partes_alta') }}" class="btn btn-success mt-3"><i class="fas fa-plus-circle"></i> Añadir parte</a>
-    {% endif %}
+
+    <a href="{{ path('parte_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+
     <table class="table table-bordered table-striped text-center mt-3">
         <thead class="thead-dark">
         <tr>
