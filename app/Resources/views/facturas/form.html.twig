@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>
+    <h1 class="mb-5">
         {% if factura.id %}
             Factura {{ factura.id }}
         {% else %}
@@ -17,7 +17,7 @@
     {% else %}
         <a href="{{ path('facturas_eliminar',{'id': factura.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a>
     {% endif %}
-    <a href="{{ path('factura_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    <a href="{{ path('factura_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás </a>
     {{ form_end(form) }}
 {% endblock %}
 
