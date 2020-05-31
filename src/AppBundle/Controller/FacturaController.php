@@ -63,7 +63,7 @@ class FacturaController extends Controller
 
         $factura = new Factura();
         /**
-         * @var Empleado
+         * @var Empleado $empleado
          */
         $empleado = $this->getUser();
         $factura->setEmpleado($empleado);

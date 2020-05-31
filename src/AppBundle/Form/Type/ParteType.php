@@ -27,19 +27,6 @@ class ParteType extends AbstractType
                 'class'=> Cliente::class,
                 'placeholder'=>'<-Seleccione un cliente->'
             ])
-            ->add('empleado', EntityType::class,[
-
-                'label'=>'Empleado:',
-                'class'=> Empleado::class,
-                'placeholder'=> '<-Seleccione un empleado->'
-
-            ])
-            ->add('delegacion', EntityType::class,[
-
-                'label'=> 'Delegación:',
-                'class'=> Delegacion::class,
-                'placeholder'=> '<-Seleccione una delegación->'
-            ])
             ->add('detalle', TextareaType::class,[
 
                 'label'=> 'Detalles:'

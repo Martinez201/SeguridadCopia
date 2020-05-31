@@ -80,6 +80,15 @@ class ParteController extends Controller
     public function nuevoAction(Request $request){
 
         $nuevoParte = new Parte();
+
+        /**
+         * @var Empleado $empleado
+         */
+        $empleado = $this->getUser();
+
+        $nuevoParte->setEmpleado($empleado);
+        $nuevoParte->setDelegacion($empleado->getDelegacion());
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($nuevoParte);
 
