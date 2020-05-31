@@ -71,5 +71,35 @@ class PortadaController extends Controller
     }
 
 
+    /**
+     * @Route("/producto/portada", name="producto_portada")
+     */
+
+    public function portadaProductos(){
+
+        return $this->render('portadas/productosPortada.html.twig');
+
+    }
+
+    /**
+     * @Route("/albaran/portada", name="albaran_portada")
+     */
+
+    public function portadaAlbaranes(){
+
+        return $this->render('portadas/albaranesPortada.html.twig');
+
+    }
+
+    /**
+     * @Route("/delegacion/portada", name="delegacion_portada")
+     */
+
+    public function portadaDelegaciones(){
+
+        return $this->render('portadas/delegacionesPortada.html.twig');
+
+    }
+
 
 }
