@@ -12,7 +12,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
-            <td>id</td>
+            <td>Editar</td>
             <td>Empleado</td>
             <td>Fecha</td>
             <td>Dirección(Instalación)</td>
@@ -24,7 +24,7 @@
         <tbody>
         {% for presupuesto in paginador.currentPageResults %}
             <tr>
-                <td><a href="{{ path('presupuestos_form',{'id': presupuesto.id}) }}">{{ presupuesto.id }}</a></td>
+                <td><a href="{{ path('presupuestos_form',{'id': presupuesto.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
                 <td>{{ presupuesto.empleado }}</td>
                 <td>{{ presupuesto.fecha|date("d/m/Y") }}</td>
                 <td>{{ presupuesto.instalacion }}</td>

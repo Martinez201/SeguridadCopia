@@ -12,6 +12,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
+            <td>Editar</td>
             <td>Nombre</td>
             <td>Dirección</td>
             <td>Ciudad</td>
@@ -24,7 +25,8 @@
         <tbody>
         {% for delegacion in paginador.currentPageResults %}
             <tr>
-                <td><a href="{{ path('delegaciones_form',{'id': delegacion.id}) }}">{{ delegacion.nombre }}</a></td>
+                <td><a href="{{ path('delegaciones_form',{'id': delegacion.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
+                <td>{{ delegacion.nombre }}</td>
                 <td>{{ delegacion.direccion}}</td>
                 <td>{{ delegacion.ciudad }}</td>
                 <td>{{ delegacion.provincia }}</td>

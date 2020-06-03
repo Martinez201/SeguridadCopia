@@ -12,6 +12,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
+            <td>Editar</td>
             <td>Imagen</td>
             <td>Nombre</td>
             <td>Tipo</td>
@@ -22,8 +23,9 @@
         <tbody>
         {% for producto in paginador.currentPageResults %}
             <tr>
+                <td><a href="{{ path('productos_form',{'id': producto.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
                 <td><img src="{% if producto.imagen %} {{ asset('imagenesProductos/') }}{{ producto.imagen }} {% else %} {{ asset('imagenesProductos/sin-imagen12.jpg') }}{% endif %}" width="100px"></td>
-                <td><a href="{{ path('productos_form',{'id': producto.id}) }}">{{ producto.nombre }}</a></td>
+                <td>{{ producto.nombre }}</td>
                 <td>{{ producto.tipo }}</td>
                 <td>{{ producto.precio }}</td>
                 <td>{{ producto.cantidad}}</td>
