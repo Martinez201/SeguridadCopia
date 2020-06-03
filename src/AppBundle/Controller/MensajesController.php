@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\Type\MensajeFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ class MensajesController extends Controller
 
     /**
      * @Route("/mensaje", name="envioMensaje", methods={"GET","POST"})
+     *  @Security("is_granted('ROLE_GESTOR')")
      */
     public function envioAction(Request $request,\Swift_Mailer $swift_Mailer){
 
