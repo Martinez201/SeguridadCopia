@@ -59,6 +59,11 @@
                             <a class="nav-link" href="{{ path('portada_informes') }}" title="Informes"><i class="fas fa-book"></i> Informes <i class="fas fa-book shortmenu animate"></i></a>
                         </li>
                     {% endif %}
+                    {% if is_granted('ROLE_GESTOR') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('envioMensaje') }}" title="Mensajes"><i class="fas fa-envelope"></i> Mensajes <i class="fas fa-envelope shortmenu animate"></i></a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item" id="usuardio2">
                         {% if app.user %}
                             <a class="nav-link" href="{{ path('usuario_salir') }}" title="Salir"><i class="fas fa-sign-out-alt"></i> Salir <i class="fas fa-sign-out-alt shortmenu animate"></i></a>
