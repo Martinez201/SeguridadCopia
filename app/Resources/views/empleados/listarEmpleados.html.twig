@@ -12,6 +12,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
+            <td>Editar</td>
             <td>Avatar</td>
             <td>Nombre</td>
             <td>Apellidos</td>
@@ -28,8 +29,9 @@
         <tbody>
         {% for empleado in paginador.currentPageResults %}
         <tr>
+            <td><a href="{{ path('empleados_form',{'id': empleado.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
             <td><img src="{% if empleado.avatar %} {{ asset('avatares/') }}{{ empleado.avatar}} {% else %} {{ asset('avatares/person_8x10.png') }}{% endif %}" width="100px"></td>
-            <td><a href="{{ path('empleados_form',{'id': empleado.id}) }}">{{ empleado.nombre }}</a></td>
+            <td>{{ empleado.nombre }} </td>
             <td>{{ empleado.apellidos }}</td>
             <td>{{ empleado.dni }}</td>
             <td>{{ empleado.edad|date("d/m/Y") }}</td>
