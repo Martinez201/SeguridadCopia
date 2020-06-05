@@ -30,6 +30,30 @@ class MensajeFormType extends AbstractType
             ->add('mensaje',TextareaType::class,[
 
                 'label'=> 'Mensaje:'
+            ])
+            ->add('adjunto', FileType::class,[
+
+                'label' => 'Adjunto:',
+                'required'=> false,
+                'mapped'=>false,
+                'constraints'=>[
+                    new File([
+                        'maxSize'=> '10000k',
+                        'mimeTypes'=>[
+                            'image/jpeg',
+                            'image/x-icon',
+                            'image/gif',
+                            'image/png',
+                            'application/x-rar-compressed',
+                            'application/zip',
+                            'application/x-7z-compressed',
+                            'application/pdf',
+                            'application/msword',
+                            'application/vnd.oasis.opendocument.text'
+                        ],
+                        'mimeTypesMessage'=>'Error: Archivo de imagen no válido',
+                    ])
+                ],
             ]);
     }
 

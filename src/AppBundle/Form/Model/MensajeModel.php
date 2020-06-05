@@ -4,6 +4,8 @@
 namespace AppBundle\Form\Model;
 
 
+use Symfony\Component\HttpFoundation\File\File;
+
 class MensajeModel
 {
     /**
@@ -20,6 +22,10 @@ class MensajeModel
      * @var string
      */
     private $mensaje;
+
+
+
+
 
     /**
      * @return string
