@@ -23,20 +23,14 @@ class PresupuestoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('empleado', EntityType::class,[
-
-                'label'=>'Empleado:',
-                'class'=> Empleado::class,
-                'placeholder'=> '<-Seleccione un empleado->'
-
-            ])
             ->add('instalacion',TextType::class,[
 
-                'label'=> 'Instalación(Dirección):'
+                'label'=> 'Dirección de la instalación'
             ])
             ->add('fecha', DateType::class,[
 
-                'label'=> 'Fecha prevista(Instalación):'
+                'label'=> 'Fecha prevista de instalación',
+                'widget'=> 'single_text'
             ])
             ->add('precioSinIva',NumberType::class,[
 

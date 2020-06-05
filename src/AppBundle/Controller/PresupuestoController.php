@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Presupuesto;
 use AppBundle\Form\Type\PresupuestoType;
 use AppBundle\Repository\PresupuestoRepository;
@@ -57,7 +58,13 @@ class PresupuestoController extends Controller
 
     public function nuevaAction(Request $request){
 
+        /**
+         * @var Empleado $empleado
+         */
+        $empleado = $this->getUser();
         $presupuesto = new Presupuesto();
+        $presupuesto->setFecha(new \DateTime());
+        $presupuesto->setEmpleado($empleado);
         $this->getDoctrine()->getManager()->persist($presupuesto);
         return $this->formAction($request,$presupuesto);
     }
