@@ -20,20 +20,15 @@ class AlbaranType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('empleado',EntityType::class,[
-
-                'label'=> 'Empleado:',
-                'class'=> Empleado::class,
-                'placeholder'=>'<-Seleccione un empleado->'
-            ])
             ->add('fecha',DateType::class,[
 
-                'label' => 'Fecha:',
-                'years'=> range(date('1980'),date('Y'))
+                'label' => 'Fecha',
+                'years'=> range(date('1980'),date('Y')),
+                'widget'=> 'single_text'
             ])
             ->add('proveedor', TextType::class,[
 
-                'label'=> 'Proveedor:'
+                'label'=> 'Proveedor'
             ]);
     }
 

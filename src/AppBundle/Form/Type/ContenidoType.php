@@ -19,13 +19,13 @@ class ContenidoType extends AbstractType
         $builder
             ->add('producto', EntityType::class,[
 
-                'label'=>'Producto:',
+                'label'=>'Producto',
                 'class'=> Producto::class,
                 'placeholder'=>'<-Seleccione un producto->'
             ])
             ->add('cantidad',NumberType::class,[
 
-                'label'=>'Cantidad:'
+                'label'=>'Cantidad'
             ]);
     }
 

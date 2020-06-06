@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Albaran;
 use AppBundle\Entity\ContenidoAlbaran;
+use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\AlbaranType;
 use AppBundle\Repository\AlbaranRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -61,7 +62,12 @@ class AlbaranController extends Controller
 
     public function nuevaAction(Request $request){
 
+        /** @var Empleado $usuario */
+        $usuario = $this->getUser();
+
         $albaran = new Albaran();
+        $albaran->setFecha(new \DateTime());
+        $albaran->setEmpleado($usuario);
         $this->getDoctrine()->getManager()->persist($albaran);
         return $this->formAction($request,$albaran);
     }
