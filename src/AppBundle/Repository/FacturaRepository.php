@@ -55,4 +55,18 @@ class FacturaRepository extends ServiceEntityRepository
             ->getResult();
 
     }
+
+    public function obtenerFacturasPorFechasCliente($fechaInicial, $fechaFinal,$cliente){
+
+        return $this->createQueryBuilder('fa')
+            ->Where('fa.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->andWhere('fa.cliente = :cliente')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->setParameter('cliente',$cliente)
+            ->getQuery()
+            ->getResult();
+
+    }
+
 }

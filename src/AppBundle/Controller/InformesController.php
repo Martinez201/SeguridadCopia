@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\InformeEmpleadoDelegacionType;
+use AppBundle\Form\Type\InformeFacturaType;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
@@ -34,21 +35,44 @@ class InformesController extends Controller
     }
 
     /**
-     *  @Route("/informes/factura", name="facturas_informes", methods={"GET"})
+     *  @Route("/informes/factura", name="facturas_informes", methods={"GET","POST"})
      * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig){
 
-        $facturas = $facturaRepository->obtenerFacturasOrdenadas();
-        $mpdfService = new MpdfService();
-        $html = $twig->render('informes/iformeTotal.htm.twig',[
+        $form = $this->createForm(InformeFacturaType::class);
+        $form->handleRequest($request);
 
-            'facturas'=> $facturas
+        if ($form->isSubmitted() && $form->isValid()) {
 
+            $buscar = $form->get('cliente')->getData();
+            $fechaInicial = $form->get('fechaPrincipio')->getData();
+            $fechaFinal = $form->get('fechaFinal')->getData();
+
+            if(!$buscar){
+
+                $facturas = $facturaRepository->obtenerFacturasPorFechas($fechaInicial, $fechaFinal);
+            }
+            else{
+
+                $facturas = $facturaRepository->obtenerFacturasPorFechasCliente($fechaInicial, $fechaFinal,$buscar);
+
+            }
+
+            $mpdfService = new MpdfService();
+            $html = $twig->render('informes/iformeTotal.htm.twig',[
+
+                'facturas'=> $facturas
+
+            ]);
+            return $mpdfService->generatePdfResponse($html);
+        }
+
+        return  $this->render('informes/informeFacturasForm.html.twig',[
+
+            'form'=> $form->createView()
         ]);
-
-        return $mpdfService->generatePdfResponse($html);
 
     }
 
