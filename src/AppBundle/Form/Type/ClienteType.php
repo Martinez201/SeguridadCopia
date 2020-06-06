@@ -19,48 +19,49 @@ class ClienteType extends AbstractType
         $builder
             ->add('nombre',TextType::class,[
 
-                'label'=> 'Nombre:'
+                'label'=> 'Nombre'
             ])
             ->add('apellidos',TextType::class,[
 
-                'label'=> 'Apellidos:'
+                'label'=> 'Apellidos'
             ])
             ->add('dni',TextType::class,[
 
-                'label'=> 'D.N.I:'
+                'label'=> 'D.N.I'
             ])
             ->add('fechaNacimiento',DateType::class,[
 
-                'label'=> 'Fecha nacimiento:',
-                'years'=> range(date('1910'),date('Y')-18)
+                'label'=> 'Fecha nacimiento',
+                'years'=> range(date('1920'),date('Y')-18),
+                'widget'=> 'single_text'
             ])
             ->add('direccion',TextType::class,[
 
-                'label'=> 'Dirección:'
+                'label'=> 'Dirección'
             ])
             ->add('ciudad', TextType::class,[
 
-                'label'=> 'Ciudad:'
+                'label'=> 'Ciudad'
             ])
             ->add('CPostal', TextType::class,[
 
-                'label'=> 'Código Postal:'
+                'label'=> 'Código Postal'
             ])
             ->add('provincia', TextType::class,[
 
-                'label'=> 'Provincia:'
+                'label'=> 'Provincia'
             ])
             ->add('telefono', TextType::class,[
 
-                'label'=> 'Teléfono:'
+                'label'=> 'Teléfono'
             ])
             ->add('email', TextType::class,[
 
-                'label'=> 'Email:'
+                'label'=> 'Email'
             ])
             ->add('estado',ChoiceType::class,[
 
-                'label' => 'Estado:',
+                'label' => 'Estado',
                 'choices' =>[
 
                     'Alta' => true,
