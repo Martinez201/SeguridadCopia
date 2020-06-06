@@ -9,6 +9,7 @@ use AppBundle\Entity\Empleado;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -121,6 +122,19 @@ class EmpleadoType extends AbstractType
                        'mimeTypesMessage'=>'Error: Archivo de imagen no válido',
                    ])
                 ],
+            ])
+            ->add('mensaje',ChoiceType::class,[
+
+                'mapped'=>false,
+                'label'=>'¿Enviar usuario y contraseña?',
+                'choices'=>[
+
+                    'SI'=> 1,
+                    'No'=> 0
+                ],
+                'placeholder'=>'<- Seleccione una opcion ->',
+                'required'=>false
+
             ]);
 
 

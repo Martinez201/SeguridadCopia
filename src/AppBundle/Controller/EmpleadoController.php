@@ -62,13 +62,13 @@ class EmpleadoController extends Controller
      * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
-    public function nuevoAction(Request $request,UserPasswordEncoderInterface $encoder){
+    public function nuevoAction(Request $request,UserPasswordEncoderInterface $encoder,\Swift_Mailer $swift_Mailer ){
 
         $nuevoEmpleado = new Empleado();
         $em = $this->getDoctrine()->getManager();
         $em->persist($nuevoEmpleado);
 
-        return $this->formAction($request,$nuevoEmpleado, $encoder);
+        return $this->formAction($request,$nuevoEmpleado, $encoder,$swift_Mailer );
     }
 
 
@@ -77,7 +77,7 @@ class EmpleadoController extends Controller
      * @Security("is_granted('ROLE_ADMINISTRADOR')")
      */
 
-    public function formAction(Request $request, Empleado $empleado, UserPasswordEncoderInterface $encoder){
+    public function formAction(Request $request, Empleado $empleado, UserPasswordEncoderInterface $encoder,\Swift_Mailer $swift_Mailer){
 
         $form = $this->createForm(EmpleadoType::class, $empleado);
         $form->handleRequest($request);
@@ -87,6 +87,23 @@ class EmpleadoController extends Controller
 
             $imagen = $form->get('avatar')->getData();
             $clave = $form->get('clave')->getData();
+
+            if($form->get('mensaje')->getData() === 1){
+
+                $mensaje = (new \Swift_Message('Datos de acceso'))
+                    ->setFrom('jesus.martinez.gonzalez1993@gmail.com')
+                    ->setTo($form->get('email')->getData())
+                    ->setBody(      $this->renderView('empleados/emailEmpleados.html.twig',[
+
+                        'clave' => $form->get('clave')->getData(),
+                        'usuario'=> $form->get('usuario')->getData()
+
+                    ]),
+                        'text/html'
+                    );
+
+                $swift_Mailer->send($mensaje);
+            }
 
             if($imagen){
 
