@@ -11,7 +11,7 @@
     <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
         <tr>
-            <td>ID</td>
+            <td>Editar</td>
             <td>Producto</td>
             <td>Cantidad</td>
             <td>Total(P.V.P * Unidades)</td>
@@ -20,7 +20,7 @@
         <tbody>
         {% for content in contenido %}
             <tr>
-                <td><a href="{{ path('contenido_presupuesto_form',{'presupuesto': presupuesto.id,'id': content.id}) }}">{{ content.id }}</a></td>
+                <td><a href="{{ path('contenido_presupuesto_form',{'presupuesto': presupuesto.id,'id': content.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
                 <td>{{ content.producto }}</td>
                 <td>{{ content.cantidad }}</td>
                 <td>{{ content.total }}</td>

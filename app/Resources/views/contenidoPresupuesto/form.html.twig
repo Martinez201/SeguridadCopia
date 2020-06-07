@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>
+    <h1 class="mb-5">
         {% if contenido.id %}
             Contendio {{ contenido.id }}
         {% else %}
@@ -11,13 +11,13 @@
     </h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+    <button type="submit" class="btn btn-success mt-5"><i class="fas fa-save"></i> Guardar</button>
     {% if not contenido.id %}
-        <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
+        <button type="reset" class="btn btn-warning mt-5"><i class="fas fa-broom"></i> Limpiar</button>
     {% else %}
-        <a href="{{ path('contenido_presupuesto_eliminar',{'presupuesto': presupuesto.id ,'id': contenido.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a>
+        <a href="{{ path('contenido_presupuesto_eliminar',{'presupuesto': presupuesto.id ,'id': contenido.id}) }}" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Borrar</a>
     {% endif %}
-    <a href="{{ path('presupuestos_Listar',{'id': presupuesto.id}) }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    <a href="{{ path('presupuestos_Listar',{'id': presupuesto.id}) }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
     {{ form_end(form) }}
 {% endblock %}
 
