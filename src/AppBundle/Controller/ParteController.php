@@ -88,6 +88,7 @@ class ParteController extends Controller
 
         $nuevoParte->setEmpleado($empleado);
         $nuevoParte->setDelegacion($empleado->getDelegacion());
+        $nuevoParte->setFecha(new \DateTime());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($nuevoParte);

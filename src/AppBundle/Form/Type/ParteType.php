@@ -49,7 +49,8 @@ class ParteType extends AbstractType
             ->add('fecha', DateType::class,[
 
                 'label'=> 'Fecha:',
-                'years'=> range(date('1980'),date('Y'))
+                'years'=> range(date('1980'),date('Y')),
+                'widget'=> 'single_text'
             ])
             ->add('estado', ChoiceType::class,[
 
