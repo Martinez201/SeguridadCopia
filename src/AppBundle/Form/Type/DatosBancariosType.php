@@ -20,23 +20,23 @@ class DatosBancariosType extends AbstractType
         $builder
             ->add('iban', TextType::class,[
 
-                'label'=> 'IBAM:'
+                'label'=> 'IBAM'
             ])
             ->add('moneda', TextType::class,[
 
-                'label'=> 'Moneda:'
+                'label'=> 'Moneda'
             ])
             ->add('entidad',TextType::class,[
 
-                'label'=> 'Entidad:'
+                'label'=> 'Entidad'
             ])
             ->add('sucursal', NumberType::class,[
 
-                'label'=> 'Sucursal:'
+                'label'=> 'Sucursal'
             ])
             ->add('bic',TextType::class,[
 
-                'label'=> 'Código B.I.C:'
+                'label'=> 'Código B.I.C'
             ]);
 
     }

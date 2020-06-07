@@ -17,34 +17,34 @@ class DelegacionType extends AbstractType
         $builder
             ->add('nombre', TextType::class,[
 
-                'label'=>'Nombre de la delegación:'
+                'label'=>'Identificación'
             ])
             ->add('direccion', TextType::class,[
 
-                'label'=>'Dirección:'
+                'label'=>'Dirección'
             ])
             ->add('ciudad', TextType::class,[
 
-                'label'=> 'Ciudad:'
+                'label'=> 'Ciudad'
 
             ])
             ->add('provincia', TextType::class,[
 
-                'label'=> 'Provincia:'
+                'label'=> 'Provincia'
             ])
             ->add('cPostal', TextType::class, [
 
-                'label'=> 'Código Postal:'
+                'label'=> 'Código Postal'
 
             ])
             ->add('telefono', TextType::class,[
 
-                'label'=> 'Teléfono:'
+                'label'=> 'Teléfono'
 
             ])
             ->add('email', TextType::class,[
 
-                'label'=>'Email:'
+                'label'=>'Email'
             ]);
     }
 

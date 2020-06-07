@@ -21,11 +21,11 @@ class ProductoType extends AbstractType
         $builder
             ->add('nombre',TextType::class,[
 
-                'label'=> 'Nombre:'
+                'label'=> 'Nombre'
             ])
             ->add('tipo', ChoiceType::class,[
 
-                'label'=> 'Tipo:',
+                'label'=> 'Tipo',
                 'choices'=>[
 
                     'Producto'=>'Producto',
@@ -34,15 +34,15 @@ class ProductoType extends AbstractType
             ])
             ->add('precio', NumberType::class,[
 
-                'label'=> 'Precio:'
+                'label'=> 'Precio'
             ])
             ->add('cantidad', NumberType::class,[
 
-                'label'=> 'Stock:'
+                'label'=> 'Stock'
             ])
             ->add('imagen', FileType::class,[
 
-                'label' => 'Imagen:',
+                'label' => 'Imagen',
                 'mapped' => false,
                 'required'=> false,
                 'constraints'=>[
