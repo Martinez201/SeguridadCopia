@@ -10,13 +10,13 @@
 
     <h1>Eliminar domicializacióne</h1>
 
-    <div class="alert alert-warning">
+    <div class="alert alert-warning mt-5">
         ¿Esta seguro de que quiere eliminar los datos bancarios del cliente {{ datos.cliente }}?  Esta operación no se puede deshacer.
     </div>
 
     <form method="post">
-        <a href="{{ path('domiciliacion_form',{'id': datos.id}) }}" class="btn btn-info">Volver atrás</a>
-        <button type="submit" class="btn btn-danger">Borrar</button>
+        <a href="{{ path('domiciliacion_form',{'id': datos.id}) }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+        <button type="submit" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Borrar</button>
     </form>
 {% endblock %}
 

@@ -10,13 +10,13 @@
 
     <h1>Baja Clienteelegación</h1>
 
-    <div class="alert alert-warning">
+    <div class="alert alert-warning mt-5">
         ¿Esta seguro de que quiere dar a la Delegación {{ delegacion.nombre }} de baja?  Esta operación no se puede deshacer.
     </div>
 
     <form method="post">
-        <a href="{{ path('delegaciones_form',{'id': delegacion.id}) }}" class="btn btn-info">Volver atrás</a>
-        <button type="submit" class="btn btn-danger">Dar de baja</button>
+        <a href="{{ path('delegaciones_form',{'id': delegacion.id}) }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+        <button type="submit" class="btn btn-danger mt-5"><i class="fas fa-trash"></i>Dar de baja</button>
     </form>
 {% endblock %}
 
