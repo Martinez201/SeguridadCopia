@@ -26,88 +26,89 @@ class EmpleadoType extends AbstractType
         $builder
             ->add('nombre',TextType::class,[
 
-                'label'=> 'Nombre:'
+                'label'=> 'Nombre'
             ])
             ->add('apellidos',TextType::class,[
 
-                'label'=> 'Apellidos:'
+                'label'=> 'Apellidos'
             ])
             ->add('dni',TextType::class,[
 
-                'label'=> 'D.N.I:'
+                'label'=> 'D.N.I'
             ])
             ->add('edad',DateType::class,[
 
-                'label'=> 'Fecha nacimiento:',
-                'years'=> range(date('1910'),date('Y')-18)
+                'label'=> 'Fecha nacimiento',
+                'years'=> range(date('1910'),date('Y')-18),
+                'widget'=>'single_text'
             ])
             ->add('telefono',TextType::class,[
 
-                'label'=> 'Teléfono:'
+                'label'=> 'Teléfono'
             ])
             ->add('direccion',TextType::class,[
 
-                'label'=> 'Dirección:'
+                'label'=> 'Dirección'
             ])
             ->add('ciudad',TextType::class,[
 
-                'label'=> 'Ciudad:'
+                'label'=> 'Ciudad'
             ])
             ->add('cPostal',TextType::class,[
 
-                'label'=> 'Código postal:'
+                'label'=> 'Código postal'
             ])
             ->add('provincia',TextType::class,[
 
-                'label'=> 'Provincia:'
+                'label'=> 'Provincia'
             ])
             ->add('email',TextType::class,[
 
-                'label'=> 'Correo electrónico:'
+                'label'=> 'Correo electrónico'
             ])
             ->add('direccion',TextType::class,[
 
-                'label'=> 'Dirección:'
+                'label'=> 'Dirección'
             ])
             ->add('administrador',CheckboxType::class,[
 
-                'label'=> 'Administrador:',
+                'label'=> 'Administrador',
                 'required'=> false
             ])
             ->add('gestor',CheckboxType::class,[
 
-                'label'=> 'Gestor:',
+                'label'=> 'Gestor',
                 'required'=> false
             ])
             ->add('instalador',CheckboxType::class,[
 
-                'label'=> 'Instalador:',
+                'label'=> 'Instalador',
                 'required'=> false
             ])
             ->add('comercial',CheckboxType::class,[
 
-                'label'=> 'Comercial:',
+                'label'=> 'Comercial',
                 'required'=> false
             ])
             ->add('usuario',TextType::class,[
 
-                'label'=> 'Usuario:'
+                'label'=> 'Usuario'
             ])
             ->add('clave', PasswordType::class,[
 
-                'label'=> 'Contraseña (Provisional):'
+                'label'=> 'Contraseña (provisional)'
 
             ])
             ->add('delegacion', EntityType::class,[
 
-                'label'=> 'Delegación:',
+                'label'=> 'Delegación',
                 'class' => Delegacion::class,
                 'placeholder'=> '<-Selecione una delegación->'
 
             ])
             ->add('avatar', FileType::class,[
 
-                'label' => 'Avatar:',
+                'label' => 'Avatar',
                 'mapped' => false,
                 'required'=> false,
                 'constraints'=>[
@@ -129,7 +130,7 @@ class EmpleadoType extends AbstractType
                 'label'=>'¿Enviar usuario y contraseña?',
                 'choices'=>[
 
-                    'SI'=> 1,
+                    'Si'=> 1,
                     'No'=> 0
                 ],
                 'placeholder'=>'<- Seleccione una opcion ->',

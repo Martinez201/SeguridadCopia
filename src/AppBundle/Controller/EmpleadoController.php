@@ -65,6 +65,7 @@ class EmpleadoController extends Controller
     public function nuevoAction(Request $request,UserPasswordEncoderInterface $encoder,\Swift_Mailer $swift_Mailer ){
 
         $nuevoEmpleado = new Empleado();
+        $nuevoEmpleado->setEdad(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->persist($nuevoEmpleado);
 
