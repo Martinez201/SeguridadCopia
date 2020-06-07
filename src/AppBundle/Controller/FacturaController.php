@@ -67,6 +67,7 @@ class FacturaController extends Controller
          */
         $empleado = $this->getUser();
         $factura->setEmpleado($empleado);
+        $factura->setFecha(new \DateTime());
         $this->getDoctrine()->getManager()->persist($factura);
         return $this->formAction($request,$factura);
     }

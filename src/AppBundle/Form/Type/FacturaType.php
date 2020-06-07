@@ -22,22 +22,23 @@ class FacturaType extends AbstractType
         $builder
             ->add('cliente', EntityType::class,[
 
-                'label'=> 'Cliente:',
+                'label'=> 'Cliente',
                 'class'=> Cliente::class,
                 'placeholder'=>'<-Seleccione un cliente->'
             ])
             ->add('fecha', DateType::class,[
 
-                'label'=> 'Fecha:',
-                'years'=> range(date('1980'),date('Y'))
+                'label'=> 'Fecha',
+                'years'=> range(date('1980'),date('Y')),
+                'widget'=> 'single_text'
             ])
             ->add('precioSinIva',NumberType::class,[
 
-                'label'=> 'Precio sin Iva:'
+                'label'=> 'Precio sin Iva'
             ])
             ->add('concepto', TextType::class,[
 
-                'label'=> 'Concepto:'
+                'label'=> 'Concepto'
             ]);
     }
 
