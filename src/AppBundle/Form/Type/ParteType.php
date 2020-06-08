@@ -8,6 +8,9 @@ use AppBundle\Entity\Cliente;
 use AppBundle\Entity\Delegacion;
 use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Parte;
+use AppBundle\Repository\ClienteRepository;
+use AppBundle\Repository\DelegacionRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,11 +23,19 @@ class ParteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $usuario = $options['user'];
         $builder
             ->add('cliente', EntityType::class,[
 
                 'label'=> 'Cliente:',
                 'class'=> Cliente::class,
+                'query_builder'=> function(EntityRepository $entityRepository) use($usuario){
+
+                return $entityRepository->createQueryBuilder('cli')
+                    ->where('cli.provincia = :provincia')
+                    ->setParameter('provincia', $usuario->getDelegacion()->getProvincia());
+
+                },
                 'placeholder'=>'<-Seleccione un cliente->'
             ])
             ->add('detalle', TextareaType::class,[
@@ -66,7 +77,8 @@ class ParteType extends AbstractType
     {
      $resolver->setDefaults([
 
-         'data_class'=> Parte::class
+         'data_class'=> Parte::class,
+         'user' => null
 
      ]);
 

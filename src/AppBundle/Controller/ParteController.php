@@ -111,7 +111,7 @@ class ParteController extends Controller
         }
         else{
 
-            $form = $this->createForm(ParteType::class,$parte);
+            $form = $this->createForm(ParteType::class,$parte, array('user' => $this->getUser()));
             $form->handleRequest($request);
 
         }
