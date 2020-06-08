@@ -163,7 +163,7 @@
         <thead>
         <tr>
             <th class="service">CONCEPTO</th>
-            <th class="desc">DECRIPCIÓN</th>
+            <th class="desc">DESCRIPCIÓN</th>
             <th>PRECIO</th>
             <th>UNIDAD</th>
             <th>PRECIO TOTAL</th>
@@ -174,7 +174,7 @@
         {% set contador = 0 %}
         {% for producto in contenido %}
         <tr>
-            <td class="service">{{ albaran.proveedor}}</td>
+            <td class="service">{{ producto.producto}}</td>
             <td class="desc">{{ producto.producto }}</td>
             <td class="unit">{{ producto.total / producto.cantidad }} $</td>
             <td class="qty">{{ producto.cantidad}}</td>

@@ -67,7 +67,7 @@ class ContenidoController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash('success','Se han guardado los datos con éxito');
-                return $this->redirectToRoute('albaranes_Listar');
+                return $this->redirectToRoute('contenido_Listar',['id'=>$albaran->getId()]);
 
             }catch (\Exception $ex){
 

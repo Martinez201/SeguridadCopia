@@ -19,6 +19,9 @@
         <a href="{{ path('albaranes_eliminar',{'id': albaran.id}) }}" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Borrar</a>
     {% endif %}
     <a href="{{ path('albaranes_Listar') }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado </a>
+    {% if albaran.id %}
+        <a href="{{ path('contenido_Listar',{'id': albaran.id}) }}" class="btn btn-secondary mt-5"><i class="fas fa-clipboard"></i> Contenido</a>
+    {% endif %}
     {{ form_end(form) }}
 {% endblock %}
 
