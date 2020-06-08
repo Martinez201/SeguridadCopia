@@ -93,6 +93,9 @@
                 </ul>
             </div>
         </nav>
+        <div class="container-fluid ">
+            {%  block content %}{% endblock %}
+        </div>
         <div class="container">
             {% for mensaje in app.session.flashBag.get('success') %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -110,7 +113,8 @@
                     </button>
                 </div>
             {% endfor %}
-            {%  block content %}{% endblock %}
+            {% block formularios %}
+            {% endblock %}
         </div>
     </div>
 

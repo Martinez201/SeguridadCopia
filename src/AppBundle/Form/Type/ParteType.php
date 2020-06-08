@@ -31,11 +31,12 @@ class ParteType extends AbstractType
                 'class'=> Cliente::class,
                 'query_builder'=> function(EntityRepository $entityRepository) use($usuario){
 
-                    $qb = $entityRepository->createQueryBuilder('cli');
+                    $qb = $entityRepository->createQueryBuilder('cli')
+                        ->where('cli.estado = 1');
 
                     if (!$usuario->isAdministrador()){
 
-                        $qb->where('cli.provincia = :provincia')
+                        $qb->andWhere('cli.provincia = :provincia')
                             ->setParameter('provincia', $usuario->getDelegacion()->getProvincia());
                     }
 

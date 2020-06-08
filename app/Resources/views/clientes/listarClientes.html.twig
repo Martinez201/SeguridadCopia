@@ -91,7 +91,7 @@
             var texto = document.getElementById("palabra").value;
             var datos = {};
             var fila;
-            var celda,textoCelda;
+            var celda,celda0,textoCelda;
             var celda1,textoCelda1;
             var celda2,textoCelda2,celda3,textoCelda3,celda4,textoCelda4,celda5,textoCelda5;
             var celda6,textoCelda6,celda7,textoCelda7,celda8,textoCelda8,celda9,textoCelda9;
@@ -136,6 +136,7 @@
                             celda11 = document.createElement("td");
                             icono = document.createElement("i");
                             celda = document.createElement("td");
+                            celda0 = document.createElement("td");
                             enlace = document.createElement("a");
                             enlace.href ="/cliente/"+respuesta[i].id
                             textoCelda = document.createTextNode(respuesta[i].nombre);
@@ -178,7 +179,6 @@
                             icono.classList.add("fas","fa-pen");
                             enlace.appendChild(icono);
                             enlace.classList.add("btn","btn-primary");
-                            celda11.appendChild(enlace);
                             celda1.appendChild(textoCelda1);
                             celda2.appendChild(textoCelda2);
                             celda3.appendChild(textoCelda3);
@@ -188,9 +188,11 @@
                             celda7.appendChild(textoCelda7);
                             celda8.appendChild(textoCelda8);
                             celda9.appendChild(textoCelda9);
+                            celda0.appendChild(textoCelda);
                             celda10.appendChild(enlace2);
                             celda.appendChild(enlace);
                             fila.appendChild(celda);
+                            fila.appendChild(celda0);
                             fila.appendChild(celda1);
                             fila.appendChild(celda2);
                             fila.appendChild(celda3);
@@ -200,7 +202,6 @@
                             fila.appendChild(celda7);
                             fila.appendChild(celda8);
                             fila.appendChild(celda9);
-                            fila.appendChild(celda11);
                             fila.appendChild(celda10);
                             tabla.appendChild(fila);
 
