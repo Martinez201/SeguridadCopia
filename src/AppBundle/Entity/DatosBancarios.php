@@ -23,7 +23,7 @@ class DatosBancarios
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Length(min=3,max=50)
+     * @Assert\Iban()
      * @var string
      */
     private $iban;
@@ -50,7 +50,7 @@ class DatosBancarios
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Length(min=3,max=50)
+     * @Assert\Bic()
      * @var string
      */
     private $bic;
