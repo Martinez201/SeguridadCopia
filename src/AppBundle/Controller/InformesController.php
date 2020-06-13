@@ -60,13 +60,34 @@ class InformesController extends Controller
 
             }
 
+            $cantidadFacturas = $facturaRepository->obtenerFacturasPorFechasCantidad($fechaInicial,$fechaFinal);
+
+            if($fechaInicial > $fechaFinal || $fechaInicial->diff($fechaFinal)->invert){
+
+                $this->addFlash('error','La fecha inicial debe de ser menor  que la fecha final');
+                return $this->redirectToRoute('facturas_informes');
+            }
+           if($fechaInicial->diff($fechaFinal)->format('%a') > 93){
+
+                $this->addFlash('error','No se puede generar un informe de mas de un trimestre');
+                return $this->redirectToRoute('facturas_informes');
+            }
+
+            if(!$cantidadFacturas){
+
+                $this->addFlash('error','Error: no se han encontrado facturas en esas fechas');
+                return $this->redirectToRoute('facturas_informes');
+            }
+
+
             $mpdfService = new MpdfService();
             $html = $twig->render('informes/iformeTotal.htm.twig',[
 
                 'facturas'=> $facturas
 
             ]);
-            return $mpdfService->generatePdfResponse($html);
+
+           return $mpdfService->generatePdfResponse($html);
         }
 
         return  $this->render('informes/informeFacturasForm.html.twig',[
