@@ -65,7 +65,7 @@ class Delegacion
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Length(min=10,max=40)
+     * @Assert\Length(min=9,max=40)
      * @var string
      */
     private $email;
