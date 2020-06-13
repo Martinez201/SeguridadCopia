@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,12 +22,15 @@ class Albaran
     private $id;
     /**
      * @ORM\Column(type="date")
+     * @Assert\Date()
      * @var \DateTime
      */
     private $fecha;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="5", max="15")
      * @var string
      */
     private $proveedor;
