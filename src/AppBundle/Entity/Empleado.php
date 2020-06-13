@@ -40,7 +40,7 @@ class Empleado implements UserInterface
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank()
-     * @Assert\Length(min=9,max=9)
+     * @Assert\Length(min=9,max=12)
      * @var string
      */
     private $dni;
@@ -54,7 +54,7 @@ class Empleado implements UserInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Length(min=5,max=9)
+     * @Assert\Length(min=5,max=15)
      * @var string
      */
     private $telefono;
