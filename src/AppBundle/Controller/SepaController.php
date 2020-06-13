@@ -200,6 +200,27 @@ class SepaController extends Controller
                 $catidadADeducir = 0;
                 $transacciones = 0;
 
+                $cantidadFacturas = $facturaRepository->obtenerFacturasPorFechasCantidad($fechaInicial,$fechaFinal);
+
+                if($fechaInicial->diff($fechaFinal)->format('%a') > 93){
+
+                    $this->addFlash('error','No se puede generar un sepa de mas de un trimestre');
+                    return $this->redirectToRoute('generar_Sepa_Fecha');
+                }
+
+                if(!$cantidadFacturas){
+
+                    $this->addFlash('error','Error: no se han encontrado facturas en esas fechas');
+                    return $this->redirectToRoute('generar_Sepa_Fecha');
+                }
+
+                if($fechaInicial > $fechaFinal){
+
+                    $this->addFlash('error','La fecha inicial debe de ser menor  que la fecha final');
+                    return $this->redirectToRoute('generar_Sepa_Fecha');
+                }
+
+
                 ///////////////COMPOSICIÓN DEL DOCUMENTO SEPA //////////////////////
 
                 $documento = new Document();
