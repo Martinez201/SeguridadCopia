@@ -104,7 +104,18 @@ class InformesController extends Controller
 
     public function  informeClientesAction(Request $request, ClienteRepository $clienteRepository, Environment $twig){
 
-        $clientes = $clienteRepository->obtenerClientesOrdenados();
+        /** @var Empleado $empleado */
+        $empleado = $this->getUser();
+
+        if(!$empleado->isAdministrador()){
+
+            $clientes = $clienteRepository->obtenerClientesDelegacion($empleado->getDelegacion()->getProvincia());
+        }
+        else{
+
+            $clientes = $clienteRepository->obtenerClientesOrdenados();
+        }
+
         $mpdfService = new MpdfService();
         $html = $twig->render('informes/informe_clientes.html.twig',[
 
