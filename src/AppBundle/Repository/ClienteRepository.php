@@ -44,11 +44,22 @@ class ClienteRepository extends ServiceEntityRepository
                 ->getArrayResult();
     }
 
-    public function obtenerClientesDelegacion($delegacion){
+    public function obtenerClientesDelegacion($delegacion,$estado){
 
         return $this->createQueryBuilder('cl')
             ->where('cl.provincia = :delegacion')
+            ->andwhere('cl.estado = :estado')
             ->setParameter('delegacion',$delegacion)
+            ->setParameter('estado',$estado)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function obtenerClientesEstado($estado){
+
+        return $this->createQueryBuilder('cl')
+            ->where('cl.estado = :estado')
+            ->setParameter('estado',$estado)
             ->getQuery()
             ->getResult();
     }

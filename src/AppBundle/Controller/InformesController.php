@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Empleado;
+use AppBundle\Form\Type\InformeClientesType;
 use AppBundle\Form\Type\InformeEmpleadoDelegacionType;
 use AppBundle\Form\Type\InformeFacturaType;
 use AppBundle\Repository\ClienteRepository;
@@ -98,31 +99,45 @@ class InformesController extends Controller
     }
 
     /**
-     * @Route("/informes/clientes", name="cliente_informe", methods={"GET"})
+     * @Route("/informes/clientes", name="cliente_informe", methods={"GET","POST"})
      * @Security("is_granted('ROLE_GESTOR')")
      */
 
     public function  informeClientesAction(Request $request, ClienteRepository $clienteRepository, Environment $twig){
 
-        /** @var Empleado $empleado */
-        $empleado = $this->getUser();
+        $form = $this->createForm(InformeClientesType::class);
+        $form->handleRequest($request);
 
-        if(!$empleado->isAdministrador()){
+        if($form->isSubmitted() && $form->isValid()){
+            /** @var Empleado $empleado */
+            $empleado = $this->getUser();
 
-            $clientes = $clienteRepository->obtenerClientesDelegacion($empleado->getDelegacion()->getProvincia());
+            $provincia = $empleado->getDelegacion()->getProvincia();
+            $estado = $form->get('estado')->getData();
+
+
+            if(!$empleado->isAdministrador()){
+
+                $clientes = $clienteRepository->obtenerClientesDelegacion($provincia, $estado);
+            }
+            else{
+
+                $clientes = $clienteRepository->obtenerClientesEstado($estado);
+            }
+
+            $mpdfService = new MpdfService();
+            $html = $twig->render('informes/informe_clientes.html.twig',[
+
+                'clientes'=> $clientes
+            ]);
+
+            return $mpdfService->generatePdfResponse($html);
         }
-        else{
 
-            $clientes = $clienteRepository->obtenerClientesOrdenados();
-        }
+        return  $this->render('informes/informeClienteform.html.twig',[
 
-        $mpdfService = new MpdfService();
-        $html = $twig->render('informes/informe_clientes.html.twig',[
-
-            'clientes'=> $clientes
+            'form'=> $form->createView()
         ]);
-
-        return $mpdfService->generatePdfResponse($html);
     }
 
     /**

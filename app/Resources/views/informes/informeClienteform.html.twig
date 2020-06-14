@@ -1,0 +1,25 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block formularios %}
+
+    <h1 class="text-center mb-5">
+        Informe Clientes
+    </h1>
+    <a href="{{ path('portada_informes') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Ir atrás</a>
+    <p class="mt-5  text-center mb-5">Seleccione el estado del cliente</p>
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <p class="mt-5">
+        <button type="submit" class="btn btn-success"><i class="fas fa-file-pdf"></i> Generar informe</button>
+    </p>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block title %}
+
+    Informe Clientes
+
+{% endblock %}
