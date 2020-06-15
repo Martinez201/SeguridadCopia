@@ -34,22 +34,18 @@ class PresupuestoType extends AbstractType
             ])
             ->add('precioSinIva',NumberType::class,[
 
-                'label'=> 'Precio sin Iva:'
+                'label'=> 'Precio sin Iva'
             ])
             ->add('contrato', FileType::class,[
 
-                'label' => 'Contrato:',
+                'label' => 'Documentación (ZIP)',
                 'mapped' => false,
                 'required'=> false,
                 'constraints'=>[
                     new File([
-                        'maxSize'=> '5000k',
+                        'maxSize'=> '10000k',
                         'mimeTypes'=>[
-                            'application/vnd.oasis.opendocument.text',
-                            'application/pdf',
                             'application/x-7z-compressed',
-                            'application/msword',
-                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                             'application/zip',
                             'application/x-rar-compressed'
                         ],
