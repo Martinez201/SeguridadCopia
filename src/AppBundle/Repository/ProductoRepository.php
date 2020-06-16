@@ -40,4 +40,14 @@ class ProductoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    function obtenerProducto($producto){
+
+        return $this->createQueryBuilder('pro')
+            ->where('pro.id = :producto')
+            ->setParameter('producto',$producto)
+            ->getQuery()
+            ->getResult();
+
+    }
+
 }

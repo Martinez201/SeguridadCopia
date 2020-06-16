@@ -6,9 +6,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\ContenidoPresupuesto;
 use AppBundle\Entity\Presupuesto;
+use AppBundle\Entity\Producto;
 use AppBundle\Form\Type\ContenidoPresupuestoType;
 use AppBundle\Form\Type\ContenidoType;
 use AppBundle\Repository\ContenidoPresRepository;
+use AppBundle\Repository\ProductoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,19 +38,19 @@ class ContenidoPresController extends Controller
      * @Route("/contenido_presupuesto/{id}/alta", name="altas_contenido_presupuesto",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
-    public function nuevaAction(Request $request,Presupuesto $presupuesto){
+    public function nuevaAction(Request $request,Presupuesto $presupuesto,ProductoRepository $productoRepository){
 
         $contendio = new ContenidoPresupuesto();
         $this->getDoctrine()->getManager()->persist($contendio);
-        return $this->formAction($request,$presupuesto,$contendio);
+        return $this->formAction($request,$presupuesto,$contendio,$productoRepository);
     }
 
 
     /**
-     * @Route("/contenido_presupuesto/{presupuesto}/{id}",name="contenido_presupuesto_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
+     * @Route("/contenido_presupuesto/{presupuesto}/{id}",name="contenido_presupuesto_form", methods={"GET","POST"})
      */
 
-    public function formAction(Request $request,Presupuesto $presupuesto,ContenidoPresupuesto $contenidoPresupuesto){
+    public function formAction(Request $request,Presupuesto $presupuesto,ContenidoPresupuesto $contenidoPresupuesto, ProductoRepository $productoRepository){
 
         $form = $this->createForm(ContenidoPresupuestoType::class,$contenidoPresupuesto);
         $form->handleRequest($request);
@@ -60,6 +62,19 @@ class ContenidoPresController extends Controller
             $total =  ($contenidoPresupuesto->getProducto()->getPrecio() * $form->getData()->getCantidad());
 
             $contenidoPresupuesto->setTotal($total);
+            /** @var Producto $producto */
+            $producto = $productoRepository->obtenerProducto($form->get('producto')->getData()->getId());
+
+            if($producto[0]->getCantidad() == 0 ||  $form->get('cantidad')->getData() > $producto[0]->getCantidad() ){
+
+                $this->addFlash('error','Error: no hay stock de ese producto');
+                return $this->redirectToRoute('contenido_presupuesto_Listar',['id'=> $presupuesto->getId()]);
+
+            }
+            else{
+                $stock = $producto[0]->getCantidad();
+                $producto[0]->setCantidad($stock - $form->get('cantidad')->getData());
+            }
 
             try {
 
