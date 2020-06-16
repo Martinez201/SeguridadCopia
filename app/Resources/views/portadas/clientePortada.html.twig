@@ -1,15 +1,15 @@
 {% extends 'navegacion.html.twig' %}
 
 {% block content %}
-    <h1>Menú Clientes</h1>
-    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <h1 class="bg-navegacion-cabecera">Menú Clientes</h1>
+    <a href="{{ path('portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <div class="box">
         <div class="container">
             <div class="row">
                 {% if is_granted('ROLE_GESTOR') %}
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-                        <div class="box-part text-center">
+                        <div class="box-part text-center bg-cuadrosNavegacion">
 
                             <i class="fa fa-list-ul fa-3x" aria-hidden="true"></i>
 
@@ -21,7 +21,7 @@
                                 <span>Listados de los clientes</span>
                             </div>
 
-                            <a href="{{ path('clientes_Listar') }}" class="btn btn-warning">Ir al listado</a>
+                            <a href="{{ path('clientes_Listar') }}" class="btn bg-warning2">Ir al listado</a>
 
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                 {% if is_granted('ROLE_GESTOR') %}
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-                        <div class="box-part text-center">
+                        <div class="box-part text-center bg-cuadrosNavegacion">
 
                             <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
 
@@ -41,7 +41,7 @@
                                 <span>Dar de alta a un cliente</span>
                             </div>
 
-                            <a href="{{ path('altas_clientes') }}" class="btn btn-warning">Añadir Cliente</a>
+                            <a href="{{ path('altas_clientes') }}" class="btn bg-warning2">Añadir Cliente</a>
 
                         </div>
                     </div>

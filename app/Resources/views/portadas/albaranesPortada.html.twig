@@ -1,8 +1,8 @@
 {% extends 'navegacion.html.twig' %}
 
 {% block content %}
-    <h1>Menú Albaranes</h1>
-    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <h1 class="bg-navegacion-cabecera">Menú Albaranes</h1>
+    <a href="{{ path('portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <div class="box">
         <div class="container">
             <div class="row">
@@ -21,7 +21,7 @@
                                 <span>Listados de los albaranes</span>
                             </div>
 
-                            <a href="{{ path('albaranes_Listar') }}" class="btn btn-warning">Ir al listado</a>
+                            <a href="{{ path('albaranes_Listar') }}" class="btn bg-warning2">Ir al listado</a>
 
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                 <span>Dar de alta a un albarán</span>
                             </div>
 
-                            <a href="{{ path('altas_albaranes') }}" class="btn btn-warning">Añadir Albarán</a>
+                            <a href="{{ path('altas_albaranes') }}" class="btn bg-warning2">Añadir Albarán</a>
 
                         </div>
                     </div>
