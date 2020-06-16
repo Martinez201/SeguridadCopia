@@ -178,8 +178,6 @@ AppBundle\Entity\Presupuesto:
     empleado: "@empleado_Jaen_Gestor"
     fecha: "<dateTimeBetween('-20 years','now',null)>"
     instalacion: '<es_ES:streetAddress()>'
-    precioSinIva: 240.05
-    precioConIva: 247.05
 AppBundle\Entity\ContenidoPresupuesto:
   contendioPrespuesto_rs{1..20}:
     producto: "@productos_A"

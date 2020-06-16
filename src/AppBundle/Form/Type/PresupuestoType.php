@@ -32,10 +32,6 @@ class PresupuestoType extends AbstractType
                 'label'=> 'Fecha prevista de instalación',
                 'widget'=> 'single_text'
             ])
-            ->add('precioSinIva',NumberType::class,[
-
-                'label'=> 'Precio sin Iva'
-            ])
             ->add('contrato', FileType::class,[
 
                 'label' => 'Documentación (ZIP)',

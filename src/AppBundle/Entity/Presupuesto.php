@@ -34,17 +34,6 @@ class Presupuesto
      * @var string
      */
     private $instalacion;
-    /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
-     * @var float
-     */
-    private $precioSinIva;
-    /**
-     * @ORM\Column(type="float")
-     * @var float
-     */
-    private $precioConIva;
 
     /**
      * @ORM\Column(type="string" , nullable= true)
@@ -103,43 +92,6 @@ class Presupuesto
         $this->instalacion = $instalacion;
         return $this;
     }
-
-    /**
-     * @return float
-     */
-    public function getPrecioSinIva()
-    {
-        return $this->precioSinIva;
-    }
-
-    /**
-     * @param float $precioSinIva
-     * @return Presupuesto
-     */
-    public function setPrecioSinIva($precioSinIva)
-    {
-        $this->precioSinIva = $precioSinIva;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getPrecioConIva()
-    {
-        return $this->precioConIva;
-    }
-
-    /**
-     * @param float $precioConIva
-     * @return Presupuesto
-     */
-    public function setPrecioConIva($precioConIva)
-    {
-        $this->precioConIva = $precioConIva;
-        return $this;
-    }
-
     /**
      * @return int
      */
