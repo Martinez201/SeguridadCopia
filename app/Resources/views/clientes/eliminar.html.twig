@@ -8,15 +8,15 @@
 
 {% block formularios %}
 
-    <h1>Baja Cliente</h1>
+    <h1 class="bg-navegacion-cabecera">Baja Cliente</h1>
 
     <div class="alert alert-warning mt-5">
         ¿Esta seguro de que quiere dar al cliente {{ cliente.id }} de baja?  Esta operación no se puede deshacer.
     </div>
 
     <form method="post">
-        <a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
-        <button type="submit" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Dar de baja</button>
+        <a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+        <button type="submit" class="btn bg-danger2 mt-5"><i class="fas fa-trash"></i> Dar de baja</button>
     </form>
 {% endblock %}
 

@@ -8,21 +8,21 @@
 {% block content %}
 
 
-    <h1>Clientes</h1>
-    <a href="{{ path('cliente_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <h1 class="bg-navegacion-cabecera">Clientes</h1>
+    <a href="{{ path('cliente_portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <p>
         <div class="input-group mb-3">
             <div>
                 <input type="text" name="palabra" id="palabra" placeholder="Buscar ..">
             </div>
             <div>
-                <button class="btn btn-warning" id="btnLimpiar"><i class="fas fa-broom"></i> Limpiar</button>
+                <button class="btn bg-warning2" id="btnLimpiar"><i class="fas fa-broom"></i> Limpiar</button>
             </div>
         </div>
 
     </p>
-    <table class="table table-bordered table-striped text-center" id="tabla1">
-        <thead class="thead-dark">
+    <table class="table table-bordered table-striped text-center bg-cuadrosNavegacion" id="tabla1">
+        <thead class="bg-dark bg-navegacion-cabecera">
         <tr>
             <td>Editar</td>
             <td>Nombre</td>
@@ -41,7 +41,7 @@
         <tbody>
         {% for cliente in paginador.currentPageResults %}
             <tr>
-                <td><a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
+                <td><a href="{{ path('clientes_form',{'id': cliente.id}) }}" class="btn bg-primary2"><i class="fas fa-pen"></i></a></td>
                 <td>{{ cliente.nombre }}</td>
                 <td>{{ cliente.apellidos }}</td>
                 <td>{{ cliente.dni }}</td>

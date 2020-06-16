@@ -2,26 +2,28 @@
 
 {% block formularios %}
 
-    <h1 class="mb-5">
+    <h1 class="mb-5 bg-navegacion-cabecera">
         {% if cliente.id %}
             Cliente {{ cliente.id }}
         {% else %}
             Alta Cliente
         {% endif %}
     </h1>
-    <a href="{{ path('cliente_portada') }}" class="btn btn-info mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <a href="{{ path('cliente_portada') }}" class="btn bg-info2 mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <div class="bg-cuadrosNavegacion p-5">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-        <button type="submit" class="btn btn-success mt-5"><i class="fas fa-save"></i> Guardar</button>
+        <button type="submit" class="btn bg-success2 mt-5"><i class="fas fa-save"></i> Guardar</button>
     {% if not cliente.id %}
-        <button type="reset" class="btn btn-warning mt-5"><i class="fas fa-broom"></i> Limpiar</button>
+        <button type="reset" class="btn bg-warning2 mt-5"><i class="fas fa-broom"></i> Limpiar</button>
     {% else %}
         <a href="{{ path('listar_datos',{'id': cliente.id}) }}" class="btn btn-dark mt-5"><i class="fas fa-money-bill"></i> Datos bancarios </a>
-        <a href="{{ path('cliente_eliminar',{'id': cliente.id}) }}" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Dar de baja</a>
+        <a href="{{ path('cliente_eliminar',{'id': cliente.id}) }}" class="btn bg-danger2 mt-5"><i class="fas fa-trash"></i> Dar de baja</a>
     {% endif %}
-    <a href="{{ path('clientes_Listar') }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
+    <a href="{{ path('clientes_Listar') }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
 
     {{ form_end(form) }}
+    </div>
 {% endblock %}
 
 {% block title %}
