@@ -6,8 +6,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Albaran;
 use AppBundle\Entity\ContenidoAlbaran;
+use AppBundle\Entity\Producto;
 use AppBundle\Form\Type\ContenidoType;
 use AppBundle\Repository\ContenidoRepository;
+use AppBundle\Repository\ProductoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,11 +42,11 @@ class ContenidoController extends Controller
      * @Route("/contendio/{id}/alta", name="altas_contenido",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
-    public function nuevaAction(Request $request,Albaran $albaran){
+    public function nuevaAction(Request $request,Albaran $albaran, ProductoRepository $productoRepository){
 
         $contendio = new ContenidoAlbaran();
         $this->getDoctrine()->getManager()->persist($contendio);
-        return $this->formAction($request,$albaran,$contendio);
+        return $this->formAction($request,$albaran,$contendio,$productoRepository);
     }
 
 
@@ -52,7 +54,7 @@ class ContenidoController extends Controller
      * @Route("/contenido/{albaran}/{id}",name="contenido_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
-    public function formAction(Request $request,Albaran $albaran,ContenidoAlbaran $contenidoAlbaran){
+    public function formAction(Request $request,Albaran $albaran,ContenidoAlbaran $contenidoAlbaran,ProductoRepository $productoRepository){
 
         $form = $this->createForm(ContenidoType::class,$contenidoAlbaran);
         $form->handleRequest($request);
@@ -62,6 +64,11 @@ class ContenidoController extends Controller
             $contenidoAlbaran->setAlbaran($albaran);
             $total =  $contenidoAlbaran->getProducto()->getPrecio() * $form->getData()->getCantidad();
             $contenidoAlbaran->setTotal($total);
+
+            /** @var Producto $producto */
+            $producto = $productoRepository->obtenerProducto($form->get('producto')->getData()->getId());
+            $stock = $producto[0]->getCantidad();
+            $producto[0]->setCantidad($stock + $form->get('cantidad')->getData());
             try {
 
                 $em = $this->getDoctrine()->getManager();
