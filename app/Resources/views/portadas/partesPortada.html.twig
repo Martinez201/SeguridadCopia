@@ -1,8 +1,8 @@
 {% extends 'navegacion.html.twig' %}
 
 {% block content %}
-    <h1>Menú Partes</h1>
-    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <h1 class="bg-navegacion-cabecera">Menú Partes</h1>
+    <a href="{{ path('portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <div class="box">
         <div class="container">
             <div class="row">
@@ -21,7 +21,7 @@
                                 <span>Listados de los partes de trabajo</span>
                             </div>
 
-                            <a href="{{ path('partes_Listar') }}" class="btn btn-warning">Ir al listado</a>
+                            <a href="{{ path('partes_Listar') }}" class="btn bg-warning2">Ir al listado</a>
 
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                 <span>Dar de alta a un parte de trabajo</span>
                             </div>
 
-                            <a href="{{ path('partes_alta') }}" class="btn btn-warning">Añadir Parte</a>
+                            <a href="{{ path('partes_alta') }}" class="btn bg-warning2">Añadir Parte</a>
 
                         </div>
                     </div>

@@ -7,12 +7,12 @@
 
 {% block content %}
 
-    <h1>Partes</h1>
+    <h1 class="bg-navegacion-cabecera">Partes</h1>
 
-    <a href="{{ path('parte_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <a href="{{ path('parte_portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
 
-    <table class="table table-bordered table-striped text-center mt-3">
-        <thead class="thead-dark">
+    <table class="table table-bordered table-striped text-center mt-3 bg-cuadrosNavegacion">
+        <thead class="bg-dark bg-navegacion-cabecera">
         <tr>
             <td>Editar</td>
             <td>Cliente</td>
@@ -26,7 +26,7 @@
         <tbody>
         {% for parte in paginador.currentPageResults %}
             <tr>
-                <td><a href="{{ path('partes_form',{'id': parte.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
+                <td><a href="{{ path('partes_form',{'id': parte.id}) }}" class="btn bg-primary2"><i class="fas fa-pen"></i></a></td>
                 <td>{{ parte.cliente }}</td>
                 <td>{{ parte.delegacion }}</td>
                 <td>{{ parte.empleado }}</td>
