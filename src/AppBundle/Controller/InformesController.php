@@ -8,6 +8,7 @@ use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\InformeClientesType;
 use AppBundle\Form\Type\InformeEmpleadoDelegacionType;
 use AppBundle\Form\Type\InformeFacturaType;
+use AppBundle\Form\Type\InformePresupuestosType;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
@@ -141,22 +142,68 @@ class InformesController extends Controller
     }
 
     /**
-     * @Route("/informes/presupuestos", name="presupuestos_informe", methods={"GET"})
+     * @Route("/informes/presupuestos", name="presupuestos_informe", methods={"GET","POST"})
      * @Security("is_granted('ROLE_COMERCIAL')")
      */
 
     public function  informePresupuestosAction(Request $request, PresupuestoRepository $presupuestoRepository, Environment $twig){
 
+        $form = $this->createForm(InformePresupuestosType::class);
+        $form->handleRequest($request);
 
-        $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenados();
-        $mpdfService = new MpdfService();
-        $html = $twig->render('informes/informe_presupuestos.html.twig',[
+        if($form->isSubmitted() && $form->isValid()){
 
-            'presupuestos'=> $presupuestos
+            $fechaInicial = $form->get('fechaInicial')->getData();
+            $fechaFinal = $form->get('fechaFinal')->getData();
 
+            /** @var Empleado $empleado */
+            $empleado = $this->getUser();
+
+            $cantidadPresupuestos = $presupuestoRepository->obtenerPresupuestosPorFechasCantidad($fechaInicial,$fechaFinal);
+
+            if($empleado->isAdministrador()){
+
+                $presupuestos = $presupuestoRepository->obtenerPresupuestosPorFechas($fechaInicial,$fechaFinal);
+            }
+            else{
+
+                $presupuestos = $presupuestoRepository->obtenerPresupuestosPorFechasEmpleado($fechaFinal,$fechaFinal,$empleado);
+            }
+
+            if($fechaInicial > $fechaFinal || $fechaInicial->diff($fechaFinal)->invert){
+
+                $this->addFlash('error','La fecha inicial debe de ser menor  que la fecha final');
+                return $this->redirectToRoute('presupuestos_informe');
+            }
+            if($fechaInicial->diff($fechaFinal)->format('%a') > 93){
+
+                $this->addFlash('error','No se puede generar un informe de mas de un trimestre');
+                return $this->redirectToRoute('presupuestos_informe');
+            }
+
+            if(!$cantidadPresupuestos){
+
+                $this->addFlash('error','Error: no se han encontrado presupuestos en esas fechas');
+                return $this->redirectToRoute('presupuestos_informe');
+            }
+
+
+            $mpdfService = new MpdfService();
+            $html = $twig->render('informes/informe_presupuestos.html.twig',[
+
+                'presupuestos'=> $presupuestos
+
+            ]);
+
+            return $mpdfService->generatePdfResponse($html);
+        }
+
+
+        return  $this->render('informes/informePresupuestosForm.html.twig',[
+
+            'form'=> $form->createView()
         ]);
 
-        return $mpdfService->generatePdfResponse($html);
     }
 
     /**

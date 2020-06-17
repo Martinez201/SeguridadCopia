@@ -1,0 +1,26 @@
+{% extends 'navegacion.html.twig' %}
+
+{% block formularios %}
+
+    <h1 class="text-center mb-5 bg-navegacion-cabecera">
+        Informe Presupuestos
+    </h1>
+    <a href="{{ path('portada_informes') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Ir atrás</a>
+
+
+    <div class="bg-cuadrosNavegacion p-5">
+        <p class="mt-5  text-center mb-5">Seleccione las fechas por las que desea filtrar y luego pulse en generar informe</p>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <p class="mt-5">
+            <button type="submit" class="btn bg-success2"><i class="fas fa-file-pdf"></i> Generar informe</button>
+        </p>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+
+    Informe Presupuestos
+
+{% endblock %}

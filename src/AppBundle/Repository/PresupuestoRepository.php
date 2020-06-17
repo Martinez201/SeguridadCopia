@@ -32,4 +32,50 @@ class PresupuestoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerPresupuestosPorFechasCantidad($fechaInicial, $fechaFinal){
+
+        return $this->createQueryBuilder('pre')
+            ->select('COUNT(pre)')
+            ->Where('pre.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
+
+    public function obtenerPresupuestosPorEmpleado($empleado){
+
+        return $this->createQueryBuilder('pre')
+            ->Where('pre.empleado = :empleado')
+            ->setParameter('empleado',$empleado)
+            ->getQuery()
+            ->getResult();
+
+    }
+    public function obtenerPresupuestosPorFechas($fechaInicial, $fechaFinal){
+
+        return $this->createQueryBuilder('pre')
+            ->Where('pre.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    public function obtenerPresupuestosPorFechasEmpleado($fechaInicial, $fechaFinal,$empleado){
+
+        return $this->createQueryBuilder('pre')
+            ->Where('pre.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->andWhere('pre.empleado = :empleado')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->setParameter('empleado',$empleado)
+            ->getQuery()
+            ->getResult();
+
+    }
+
+
 }
