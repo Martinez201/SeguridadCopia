@@ -2,23 +2,25 @@
 
 {% block formularios %}
 
-    <h1 class="mb-5">
+    <h1 class="bg-navegacion-cabecera mb-5">
         {% if contenido.id %}
             Contendio {{ contenido.id }}
         {% else %}
             Alta contenido
         {% endif %}
     </h1>
+<div class="bg-cuadrosNavegacion p-5">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success mt-5"><i class="fas fa-save"></i> Guardar</button>
+    <button type="submit" class="btn bg-success2 mt-5"><i class="fas fa-save"></i> Guardar</button>
     {% if not contenido.id %}
-        <button type="reset" class="btn btn-warning mt-5"><i class="fas fa-broom"></i> Limpiar</button>
+        <button type="reset" class="btn bg-warning2 mt-5"><i class="fas fa-broom"></i> Limpiar</button>
     {% else %}
-        <a href="{{ path('contenido_presupuesto_eliminar',{'presupuesto': presupuesto.id ,'id': contenido.id}) }}" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Borrar</a>
+        <a href="{{ path('contenido_presupuesto_eliminar',{'presupuesto': presupuesto.id ,'id': contenido.id}) }}" class="btn bg-danger2 mt-5"><i class="fas fa-trash"></i> Borrar</a>
     {% endif %}
-    <a href="{{ path('presupuestos_Listar',{'id': presupuesto.id}) }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    <a href="{{ path('presupuestos_Listar',{'id': presupuesto.id}) }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
     {{ form_end(form) }}
+    <div/>
 {% endblock %}
 
 {% block title %}

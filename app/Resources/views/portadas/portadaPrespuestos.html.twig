@@ -1,15 +1,15 @@
 {% extends 'navegacion.html.twig' %}
 
 {% block content %}
-    <h1>Menú Presupuestos</h1>
-    <a href="{{ path('portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <h1 class="bg-navegacion-cabecera">Menú Presupuestos</h1>
+    <a href="{{ path('portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <div class="box">
         <div class="container">
             <div class="row">
                 {% if is_granted('ROLE_COMERCIAL') %}
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-                        <div class="box-part text-center">
+                        <div class="box-part text-center bg-cuadrosNavegacion">
 
                             <i class="fa fa-list-ul fa-3x" aria-hidden="true"></i>
 
@@ -21,7 +21,7 @@
                                 <span>Listados de los presupuestos</span>
                             </div>
 
-                            <a href="{{ path('presupuestos_Listar') }}" class="btn btn-warning">Ir al listado</a>
+                            <a href="{{ path('presupuestos_Listar') }}" class="btn bg-warning2">Ir al listado</a>
 
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                 {% if is_granted('ROLE_COMERCIAL') %}
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-                        <div class="box-part text-center">
+                        <div class="box-part text-center bg-cuadrosNavegacion">
 
                             <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
 
@@ -41,7 +41,7 @@
                                 <span>Dar de alta a un presupuesto</span>
                             </div>
 
-                            <a href="{{ path('altas_presupuestos') }}" class="btn btn-warning">Añadir Presupuesto</a>
+                            <a href="{{ path('altas_presupuestos') }}" class="btn bg-warning2">Añadir Presupuesto</a>
 
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                 {% if is_granted('ROLE_COMERCIAL') %}
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-                        <div class="box-part text-center">
+                        <div class="box-part text-center bg-cuadrosNavegacion">
 
                             <i class="fa fa-passport fa-3x" aria-hidden="true"></i>
 
@@ -61,7 +61,7 @@
                                 <span>Generar contratos de Clientes</span>
                             </div>
 
-                            <a href="{{ path('presupuesto_documentacion') }}" class="btn btn-warning">Generar contratos</a>
+                            <a href="{{ path('presupuesto_documentacion') }}" class="btn bg-warning2">Generar contratos</a>
 
                         </div>
                     </div>
