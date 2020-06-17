@@ -8,6 +8,7 @@ use AppBundle\Entity\Empleado;
 use AppBundle\Form\Type\InformeClientesType;
 use AppBundle\Form\Type\InformeEmpleadoDelegacionType;
 use AppBundle\Form\Type\InformeFacturaType;
+use AppBundle\Form\Type\InformePartesType;
 use AppBundle\Form\Type\InformePresupuestosType;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
@@ -207,30 +208,80 @@ class InformesController extends Controller
     }
 
     /**
-     * @Route("/informes/partes", name="partes_informe", methods={"GET"})
+     * @Route("/informes/partes", name="partes_informe", methods={"GET","POST"})
      * @Security("is_granted('ROLE_INSTALADOR')")
      */
 
     public function  informePartesAction(Request $request, ParteRepository $parteRepository, Environment $twig){
 
-        /**@var Empleado */
-        $usuario = $this->getUser();
-        $partes = $parteRepository->obtenerPartesOrdenados(1);
+        $form = $this->createForm(InformePartesType::class);
+        $form->handleRequest($request);
 
-        $mpdfService = new MpdfService();
-        $html = $twig->render('informes/informe_partes.html.twig',[
+        if($form->isSubmitted() && $form->isValid()){
 
-            'partes'=> $partes
+
+            $fechaInicial = $form->get('fechaInicial')->getData();
+            $fechaFinal = $form->get('fechaFinal')->getData();
+
+            /** @var Empleado $empleado */
+            $empleado = $this->getUser();
+            $estado = $form->get('estado')->getData();
+
+
+            if(!$fechaInicial || !$fechaFinal){
+
+                $partes = $parteRepository->obtenerPartesEstado($estado);
+
+            }else{
+
+                if($empleado->isAdministrador()){
+
+                    $partes = $parteRepository->obtenerPartesPorFechas($fechaInicial,$fechaFinal,$estado);
+                }
+                else{
+
+                    $partes = $parteRepository->obtenerPartesPorFechasDelegacion($fechaFinal,$fechaFinal,$empleado->getDelegacion(),$estado);
+                }
+
+                if($fechaInicial > $fechaFinal || $fechaInicial->diff($fechaFinal)->invert){
+
+                    $this->addFlash('error','La fecha inicial debe de ser menor  que la fecha final');
+                    return $this->redirectToRoute('partes_informe');
+                }
+                if($fechaInicial->diff($fechaFinal)->format('%a') > 93){
+
+                    $this->addFlash('error','No se puede generar un informe de mas de un trimestre');
+                    return $this->redirectToRoute('partes_informe');
+                }
+            }
+            $cantidadPartes = $parteRepository->obtenerPartesPorFechasCantidad($fechaInicial,$fechaFinal);
+
+
+
+            if(!$cantidadPartes){
+
+                $this->addFlash('error','Error: no se han encontrado partes en esas fechas');
+                return $this->redirectToRoute('partes_informe');
+            }
+
+
+            $mpdfService = new MpdfService();
+
+            $html = $twig->render('informes/informe_partes.html.twig',[
+
+                'partes'=> $partes
+
+            ]);
+
+            return $mpdfService->generatePdfResponse($html);
+        }
+
+        return $this->render('informes/informePartesForm.html.twig',[
+
+            'form'=> $form->createView()
 
         ]);
 
-        $html = $twig->render('informes/informe_partes.html.twig',[
-
-            'partes'=> $partes
-
-        ]);
-
-        return $mpdfService->generatePdfResponse($html);
     }
 
     /**

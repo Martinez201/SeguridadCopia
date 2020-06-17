@@ -45,4 +45,55 @@ class ParteRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerPartesPorFechas($fechaInicial, $fechaFinal, $estado){
+
+        return $this->createQueryBuilder('pa')
+            ->Where('pa.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->andWhere('pa.estado = :estado')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->setParameter('estado',$estado)
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
+    public function obtenerPartesPorFechasDelegacion($fechaInicial, $fechaFinal, $delegacion,$estado){
+
+        return $this->createQueryBuilder('pa')
+            ->Where('pa.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->andWhere('pa.delegacion = :delegacion')
+            ->andWhere('pa.estado = :estado')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->setParameter('delegacion',$delegacion)
+            ->setParameter('estado',$estado)
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    public function obtenerPartesEstado($estado){
+
+        return $this->createQueryBuilder('pa')
+            ->where('pa.estado = :estado')
+            ->setParameter('estado',$estado)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function obtenerPartesPorFechasCantidad($fechaInicial, $fechaFinal){
+
+        return $this->createQueryBuilder('pa')
+            ->select('COUNT(pa)')
+            ->Where('pa.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
+
+
 }
