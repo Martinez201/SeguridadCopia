@@ -2,15 +2,17 @@
 
 {% block formularios %}
 
-    <h1>
+    <h1 class="bg-navegacion-cabecera">
         Empleados informe
     </h1>
+    <a href="{{ path('portada_informes') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Ir atrás</a>
+<div class="bg-cuadrosNavegacion p-5">
     <h4 class="mt-5 mb-5">Seleccione una delegación para mostar los empleados de esa delegación o dejelo en blanco para mostrar todos</h4>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success mt-5"><i class="fas fa-save"></i> Aceptar</button>
+    <button type="submit" class="btn bg-success2 mt-5"><i class="fas fa-save"></i> Aceptar</button>
     {{ form_end(form) }}
-
+</div>
 {% endblock %}
 
 {% block title %}

@@ -45,16 +45,12 @@
         <th>Empleado</th>
         <th>Fecha</th>
         <th>Dirección(Instalación)</th>
-        <th>Precio sin Iva</th>
-        <th>Precio con Iva</th>
     </tr>
     {% for presupuesto in presupuestos %}
         <tr>
             <td>{{ presupuesto.empleado }}</td>
             <td>{{ presupuesto.fecha|date("d/m/Y") }}</td>
             <td>{{ presupuesto.instalacion }}</td>
-            <td>{{ presupuesto.precioSinIva }}</td>
-            <td>{{ presupuesto.precioConIva }}</td>
         </tr>
     {% endfor %}
 </table>
