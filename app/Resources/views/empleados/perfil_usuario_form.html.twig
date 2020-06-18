@@ -1,7 +1,7 @@
 {% extends 'navegacion.html.twig' %}
 
 {% block formularios %}
-    <div id="user" class="container profile">
+    <div id="user" class="container profile p-3 bg-cuadrosNavegacion">
         <div class="row">
             <div class="col text-center mt-3">
                 <img alt="picture" src="{% if usuario.avatar %}{{ asset('avatares/') }}{{ usuario.avatar }}{% else %}{{ asset('avatares/person_8x10.png') }}{% endif %}" class="img-lg rounded-circle border shadow" />
@@ -77,7 +77,7 @@
             </div>
         </div>
     </div>
-    <a href="{{ path('usuario_perfil_form') }}" class="btn btn-info">Editar Datos</a>
+    <a href="{{ path('usuario_perfil_form') }}" class="btn bg-info2 mt-5">Editar Datos</a>
 {% endblock %}
 
 {% block title %}

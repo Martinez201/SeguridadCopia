@@ -7,10 +7,10 @@
 
 {% block content %}
 
-    <h1>Empleados</h1>
-    <a href="{{ path('empleado_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
-    <table class="table table-bordered table-striped text-center">
-        <thead class="thead-dark">
+    <h1 class="bg-navegacion-cabecera">Empleados</h1>
+    <a href="{{ path('empleado_portada') }}" class="btn bg-info2 mt-5 mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <table class="table table-bordered table-striped text-center bg-cuadrosNavegacion">
+        <thead class="bg-dark bg-navegacion-cabecera">
         <tr>
             <td>Editar</td>
             <td>Avatar</td>
@@ -29,7 +29,7 @@
         <tbody>
         {% for empleado in paginador.currentPageResults %}
         <tr>
-            <td><a href="{{ path('empleados_form',{'id': empleado.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
+            <td><a href="{{ path('empleados_form',{'id': empleado.id}) }}" class="btn bg-primary2"><i class="fas fa-pen"></i></a></td>
             <td><img src="{% if empleado.avatar %} {{ asset('avatares/') }}{{ empleado.avatar}} {% else %} {{ asset('avatares/person_8x10.png') }}{% endif %}" width="100px"></td>
             <td>{{ empleado.nombre }} </td>
             <td>{{ empleado.apellidos }}</td>

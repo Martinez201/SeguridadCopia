@@ -8,30 +8,31 @@
 
 {% block formularios %}
 
-    <h1 class="mb-5">
+    <h1 class="mb-5 bg-navegacion-cabecera">
         {% if empleado.id %}
             Empleado{{ empleado.id }}
         {% else %}
             Alta Empleado
         {% endif %}
     </h1>
-    <a href="{{ path('empleado_portada') }}" class="btn btn-info mt-5 mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <a href="{{ path('empleado_portada') }}" class="btn bg-info2 mt-5 mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+<div class="bg-cuadrosNavegacion p-5">
     {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
     {{ form_widget(form) }}
     {{ form_row(form.avatar) }}
 
-    <button type="submit" class="btn btn-success mt-5"><i class="fas fa-save"></i> Guardar</button>
+    <button type="submit" class="btn bg-success2 mt-5"><i class="fas fa-save"></i> Guardar</button>
 
-    <a href="{{ path('empleados_listar') }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
+    <a href="{{ path('empleados_listar') }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
     {% if not empleado.id %}
-    <button type="reset" class="btn btn-warning mt-5"><i class="fas fa-broom"></i> Limpiar</button>
+    <button type="reset" class="btn bg-warning2 mt-5"><i class="fas fa-broom"></i> Limpiar</button>
         {% else %}
-            <a href="{{ path('empleados_eliminar',{'id': empleado.id}) }}" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Dar de baja</a>
-            <a href="{{ path('admin_cambiar_clave',{'id': empleado.id}) }}" class="btn btn-warning mt-5"><i class="fas fa-key"></i> Cambiar contraseña</a>
+            <a href="{{ path('empleados_eliminar',{'id': empleado.id}) }}" class="btn bg-danger2 mt-5"><i class="fas fa-trash"></i> Dar de baja</a>
+            <a href="{{ path('admin_cambiar_clave',{'id': empleado.id}) }}" class="btn bg-warning2 mt-5"><i class="fas fa-key"></i> Cambiar contraseña</a>
     {%  endif %}
 
     {{ form_end(form) }}
-
+</div>
 {% endblock %}
 
 

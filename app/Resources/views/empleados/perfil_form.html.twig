@@ -8,16 +8,16 @@
 
 {% block formularios %}
 
-    <h1>
+    <h1 class="bg-navegacion-cabecera mb-5">
      Mi perfil
     </h1>
-
+<div class="bg-cuadrosNavegacion p-5">
     {{ form_start(form,{'enctype:': "multipart/form-data"}) }}
     {{ form_widget(form) }}
     {{ form_row(form.avatar) }}
-    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar cambios</button>
-    <a href="{{ path('usuario_perfil') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver al perfil</a>
-    <a href="{{ path('usuario_cambiar_clave') }}" class="btn btn-warning"><i class="fas fa-key"></i> Cambiar contraseña</a>
+    <button type="submit" class="btn bg-success2 mt-5"><i class="fas fa-save"></i> Guardar cambios</button>
+    <a href="{{ path('usuario_perfil') }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver al perfil</a>
+    <a href="{{ path('usuario_cambiar_clave') }}" class="btn bg-warning2 mt-5"><i class="fas fa-key"></i> Cambiar contraseña</a>
     {{ form_end(form) }}
-
+</div>
 {% endblock %}
