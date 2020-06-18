@@ -8,7 +8,7 @@
 {% block content %}
 
     <h1 class="bg-navegacion-cabecera">Albaranes</h1>
-    <a href="{{ path('albaran_portada') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <a href="{{ path('albaran_portada') }}" class="btn bg-info2 mt-5 mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
     <table class="table table-bordered table-striped text-center bg-cuadrosNavegacion">
         <thead class="bg-dark bg-navegacion-cabecera">
         <tr>
@@ -28,7 +28,7 @@
                 <td>{{ albaran.fecha|date("d/m/Y") }}</td>
                 <td>{{ albaran.proveedor }}</td>
                 <td><a href="{{ path('contenido_Listar',{'id': albaran.id}) }}" class="btn btn-secondary"><i class="fas fa-eye"></i> Ver contenido</a></td>
-                <td><a href="{{ path('albaran_informe',{'id': albaran.id}) }}" class="btn bg-warning2"><i class="fas fa-download"></i> Generar Albaran</a></td>
+                <td><a href="{{ path('albaran_informe',{'id': albaran.id}) }}" class="btn btn-warning"><i class="fas fa-download"></i> Generar Albaran</a></td>
             </tr>
         {% endfor %}
         </tbody>
