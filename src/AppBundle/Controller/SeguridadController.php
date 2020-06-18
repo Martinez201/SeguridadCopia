@@ -92,7 +92,7 @@ class SeguridadController extends Controller
         }
         else{
 
-            $expire = (int) '5';
+            $expire = (int) '30';
 
 
             if ($usuario->getToken() && $usuario->getExpireToken() >  new \DateTime()){

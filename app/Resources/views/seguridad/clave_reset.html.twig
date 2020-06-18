@@ -2,13 +2,13 @@
 
 {% block formularios %}
 
-    <h1>Cambiar Clave</h1>
-
+    <h1 class="bg-navegacion-cabecera">Cambiar Clave</h1>
+<div class="bg-cuadrosNavegacion p-5">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Cambiar contraseña</button>
+    <button type="submit" class="btn bg-success2"><i class="fas fa-check"></i> Cambiar contraseña</button>
     {{ form_end(form) }}
-
+</div>
 {% endblock %}
 
 {% block title %}

@@ -4,7 +4,7 @@
     RobCo Security
 {% endblock %}
 {% block content %}
-    <h1 class="bg-navegacion-cabecera">Menú Principal</h1>
+   {% if app.user %} <h1 class="bg-navegacion-cabecera">Menú Principal</h1>{% endif %}
 <div class="box">
     <div class="container">
         <div class="row">
