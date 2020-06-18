@@ -8,15 +8,15 @@
 
 {% block formularios %}
 
-    <h1>Eliminar factura</h1>
+    <h1 class="bg-navegacion-cabecera">Eliminar factura</h1>
 
     <div class="alert alert-warning mt-5">
         ¿Esta seguro de que quiere eliminar la factura {{ factura.id }}?  Esta operación no se puede deshacer.
     </div>
 
     <form method="post">
-        <a href="{{ path('facturas_form',{'id': factura.id}) }}" class="btn btn-info mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
-        <button type="submit" class="btn btn-danger mt-5"><i class="fas fa-trash"></i> Borrar</button>
+        <a href="{{ path('facturas_form',{'id': factura.id}) }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+        <button type="submit" class="btn bg-danger2 mt-5"><i class="fas fa-trash"></i> Borrar</button>
     </form>
 {% endblock %}
 

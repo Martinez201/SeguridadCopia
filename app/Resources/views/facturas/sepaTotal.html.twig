@@ -1,16 +1,17 @@
 {% extends 'navegacion.html.twig' %}
 
 {% block formularios %}
-    <h1 class="text-center">
+    <h1 class="text-center bg-navegacion-cabecera">
             Documento Sepa
     </h1>
-    <a href="{{ path('factura_portada') }}" class="btn btn-info mt-3 mb-3"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
-
+    <a href="{{ path('factura_portada') }}" class="btn bg-info2 mt-5 mb-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+<div class="bg-cuadrosNavegacion p-5">
     <h3 class="text-center mt-5 mb-5">Seleccione periodo de facturación y a continuación pulse 'Generar Documento'</h3>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success  mt-5 mb-5"><i class="fas fa-save"></i> Generar Documento</button>
+    <button type="submit" class="btn bg-success2  mt-5 mb-5"><i class="fas fa-save"></i> Generar Documento</button>
     {{ form_end(form) }}
+</div>
 {% endblock %}
 
 {% block title %}

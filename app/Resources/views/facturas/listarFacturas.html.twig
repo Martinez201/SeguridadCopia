@@ -7,10 +7,10 @@
 
 {% block content %}
 
-    <h1>Facturas</h1>
-    <a href="{{ path('factura_portada') }}" class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
-    <table class="table table-bordered table-striped text-center">
-        <thead class="thead-dark">
+    <h1 class="bg-navegacion-cabecera">Facturas</h1>
+    <a href="{{ path('factura_portada') }}" class="btn bg-info2 mb-5 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver atrás</a>
+    <table class="table table-bordered table-striped text-center bg-cuadrosNavegacion">
+        <thead class="bg-dark bg-navegacion-cabecera">
         <tr>
             <td>Editar</td>
             <td>Empleado</td>
@@ -26,17 +26,17 @@
         <tbody>
         {% for factura in paginador.currentPageResults %}
             <tr>
-                <td><a href="{{ path('facturas_form',{'id': factura.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
+                <td><a href="{{ path('facturas_form',{'id': factura.id}) }}" class="btn bg-primary2"><i class="fas fa-pen"></i></a></td>
                 <td>{{ factura.empleado }}</td>
                 <td>{{ factura.cliente }}</td>
                 <td>{{ factura.fecha|date("d/m/Y") }}</td>
                 <td>{{ factura.concepto}}</td>
                 <td>{{ factura.precioSinIva }}</td>
                 <td>{{ factura.precioConIva }}</td>
-                <td><a href="{{ path('facturas_informe',{'id': factura.id}) }}" class="btn btn-dark"><i class="fas fa-file-invoice-dollar"></i> Generar factura</a></td>
+                <td><a href="{{ path('facturas_informe',{'id': factura.id}) }}" class="btn btn-warning"><i class="fas fa-file-invoice-dollar"></i> Generar factura</a></td>
                 <td>
                     {% if factura.cliente.datosBancarios %}
-                    <a href="{{ path('sepa_generar',{'id': factura.id}) }}" class="btn btn-info"><i class="fas fa-download"></i> Generar SEPA</a>
+                    <a href="{{ path('sepa_generar',{'id': factura.id}) }}" class="btn bg-info2"><i class="fas fa-download"></i> Generar SEPA</a>
                         {% else %}
                         No tiene domiciliación
                     {% endif %}
