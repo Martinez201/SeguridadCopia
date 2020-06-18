@@ -7,7 +7,7 @@
 {% block content %}
 
     <h1 class="bg-navegacion-cabecera">Contenido presupuesto</h1>
-    <a href="{{ path('altas_contenido_presupuesto',{'id': presupuesto.id}) }}" class="btn bg-success2"><i class="fas fa-plus-circle"></i> Añadir contenido</a>
+    <a href="{{ path('altas_contenido_presupuesto',{'id': presupuesto.id}) }}" class="btn bg-success2 mt-5 mb-5"><i class="fas fa-plus-circle"></i> Añadir contenido</a>
     <table class="table table-bordered table-striped text-center bg-cuadrosNavegacion">
         <thead class="bg-dark bg-navegacion-cabecera">
         <tr>
@@ -28,5 +28,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('presupuestos_Listar') }}" class="btn bg-info2"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
+    <a href="{{ path('presupuestos_Listar') }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Volver al listado </a>
 {% endblock %}
