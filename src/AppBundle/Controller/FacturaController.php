@@ -30,8 +30,17 @@ class FacturaController extends Controller
      */
 
     public function FacturasAction(FacturaRepository $facturaRepository,$page=1){
+        /** @var Empleado $usuario */
+        $usuario = $this->getUser();
 
-        $facturas = $facturaRepository->obtenerFacturasOrdenadasQueryBuilder();
+        if(!$usuario->isAdministrador()){
+
+            $facturas = $facturaRepository->obtenerFacturasOrdenadasQueryBuilder($usuario);
+        }
+        else{
+
+            $facturas = $facturaRepository->obtenerFacturasOrdenadasQueryBuilder();
+        }
         $adaptador = new DoctrineORMAdapter($facturas, false);
         $pager = new Pagerfanta($adaptador);
 

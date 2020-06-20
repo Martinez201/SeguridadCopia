@@ -3,6 +3,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Factura;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -15,14 +16,22 @@ class FacturaRepository extends ServiceEntityRepository
     }
 
 
-    public function obtenerFacturasOrdenadasQueryBuilder(){
+    public function obtenerFacturasOrdenadasQueryBuilder(Empleado $empleado = null){
 
-        return $this->createQueryBuilder('f')
+        $qb = $this->createQueryBuilder('f')
             ->addSelect('e')
             ->addSelect('c')
             ->leftJoin('f.empleado','e')
             ->leftJoin('f.cliente','c')
             ->orderBy('f.fecha');
+
+        if($empleado){
+
+            $qb->where('f.empleado = :empleado')
+                ->setParameter('empleado',$empleado);
+        }
+
+        return $qb;
     }
 
     public function obtenerFacturasOrdenadas(){
