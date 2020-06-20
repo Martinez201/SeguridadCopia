@@ -19,9 +19,9 @@
 <div class="bg-cuadrosNavegacion p-5">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-
+    {% if not estado %}
     <button type="submit" class="btn bg-success2 mt-5"><i class="fas fa-save"></i> Guardar</button>
-
+    {% endif %}
     <a href="{{ path('partes_Listar') }}" class="btn bg-info2 mt-5"><i class="fas fa-arrow-alt-circle-left"></i> Ir al listado</a>
     {% if not parte.id %}
         <button type="reset" class="btn bg-warning2 mt-5"><i class="fas fa-broom"></i> Limpiar</button>

@@ -7,6 +7,7 @@ use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Parte;
 use AppBundle\Form\Type\ParteInstalador;
 use AppBundle\Form\Type\ParteType;
+use AppBundle\Form\Type\VisorPartesType;
 use AppBundle\Repository\ParteRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
@@ -105,14 +106,28 @@ class ParteController extends Controller
 
         if ($this->getUser()->isInstalador()){
 
-            $form = $this->createForm(ParteInstalador::class,$parte);
-            $form->handleRequest($request);
+            $bloqueo = 0;
+
+            if($parte->isEstado()){
+
+                $form = $this->createForm(ParteInstalador::class,$parte);
+                $form->handleRequest($request);
+                $bloqueo = 0;
+            }
+            else{
+
+                $form = $this->createForm(VisorPartesType::class,$parte);
+                $form->handleRequest($request);
+                $bloqueo = 1;
+            }
+
 
         }
         else{
 
             $form = $this->createForm(ParteType::class,$parte, array('user' => $this->getUser()));
             $form->handleRequest($request);
+            $bloqueo = 0;
 
         }
 
@@ -137,7 +152,8 @@ class ParteController extends Controller
         return $this->render('partes/form.html.twig',[
 
             'form'=> $form->createView(),
-            'parte'=> $parte
+            'parte'=> $parte,
+            'estado'=> $bloqueo
         ]);
     }
 
