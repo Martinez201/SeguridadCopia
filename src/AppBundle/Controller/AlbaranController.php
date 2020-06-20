@@ -32,8 +32,18 @@ class AlbaranController extends Controller
      */
 
     public function albaranesAction(AlbaranRepository $albaranRepository,$page = 1){
+        /** @var Empleado $usuario */
+        $usuario = $this->getUser();
 
-        $albaranes = $albaranRepository->obtenerAlbaranesOrdenadosQueryBuilder();
+        if(!$usuario->isAdministrador()){
+
+            $albaranes = $albaranRepository->obtenerAlbaranesOrdenadosQueryBuilder($usuario);
+        }
+        else{
+
+            $albaranes = $albaranRepository->obtenerAlbaranesOrdenadosQueryBuilder();
+        }
+
         $adaptador = new DoctrineORMAdapter($albaranes, false);
         $pager = new Pagerfanta($adaptador);
 
