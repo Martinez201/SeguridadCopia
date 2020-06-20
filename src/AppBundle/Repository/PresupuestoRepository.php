@@ -4,6 +4,7 @@
 namespace AppBundle\Repository;
 
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Presupuesto;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -16,13 +17,19 @@ class PresupuestoRepository extends ServiceEntityRepository
         parent::__construct($registry, Presupuesto::class );
     }
 
-    public function obtenerPresupuestosOrdenadosQueryBuilder(){
+    public function obtenerPresupuestosOrdenadosQueryBuilder(Empleado $empleado = null){
 
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->addSelect('e')
             ->leftJoin('p.empleado','e')
             ->orderBy('p.fecha');
 
+        if($empleado){
+            $qb->where('p.empleado = :empleado')
+                ->setParameter('empleado',$empleado);
+        }
+
+        return $qb;
     }
 
     public function obtenerPresupuestosOrdenados(){

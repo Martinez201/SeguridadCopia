@@ -29,8 +29,16 @@ class PresupuestoController extends Controller
      */
 
     public function partesAction(PresupuestoRepository $presupuestoRepository,$page = 1){
+        /** @var Empleado $usuario */
+        $usuario = $this->getUser();
+        if(!$usuario->isAdministrador()){
 
-        $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenadosQueryBuilder();
+            $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenadosQueryBuilder($usuario);
+        }
+        else{
+            $presupuestos = $presupuestoRepository->obtenerPresupuestosOrdenadosQueryBuilder();
+        }
+
         $adaptador = new DoctrineORMAdapter($presupuestos, false);
         $pager = new Pagerfanta($adaptador);
         try {
