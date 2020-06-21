@@ -30,8 +30,18 @@ class ClienteController extends Controller
      */
 
     public function clientesAction(ClienteRepository $clienteRepository,$page=1){
+        /** @var Empleado $usuario */
+        $usuario = $this->getUser();
 
-        $clientes = $clienteRepository->obtenerClientesOrdenadosQueryBuilder();
+        if(!$usuario->isAdministrador()){
+
+            $clientes = $clienteRepository->obtenerClientesOrdenadosQueryBuilder($usuario);
+        }
+        else{
+
+            $clientes = $clienteRepository->obtenerClientesOrdenadosQueryBuilder();
+        }
+
         $adaptador = new DoctrineORMAdapter($clientes, false);
         $pager = new Pagerfanta($adaptador);
         try {

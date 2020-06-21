@@ -5,6 +5,7 @@ namespace AppBundle\Repository;
 
 
 use AppBundle\Entity\Cliente;
+use AppBundle\Entity\Empleado;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -15,14 +16,20 @@ class ClienteRepository extends ServiceEntityRepository
         parent::__construct($registry, Cliente::class);
     }
 
-    public function obtenerClientesOrdenadosQueryBuilder(){
+    public function obtenerClientesOrdenadosQueryBuilder(Empleado $empleado = null){
 
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->addSelect('d')
             ->leftJoin('c.datosBancarios','d')
             ->orderBy('c.nombre')
             ->addOrderBy('c.apellidos');
 
+        if($empleado){
+            $qb->where('c.provincia = :provincia')
+                ->setParameter('provincia', $empleado->getProvincia());
+        }
+
+        return $qb;
 
     }
 
