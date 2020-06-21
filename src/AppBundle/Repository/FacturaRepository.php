@@ -54,6 +54,22 @@ class FacturaRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerFacturasPorFechasProvincia($fechaInicial, $fechaFinal, $empleado = null){
+
+        return $this->createQueryBuilder('fa')
+            ->addSelect('m')
+            ->leftJoin('fa.empleado','m')
+            ->Where('fa.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal)
+            ->andWhere('m.provincia = :empleado')
+            ->setParameter('empleado',$empleado)
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
     public function obtenerFacturasPorFechas($fechaInicial, $fechaFinal){
 
         return $this->createQueryBuilder('fa')
@@ -63,6 +79,20 @@ class FacturaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
+
+    }
+
+
+    public function obtenerFacturasPorFechasCantidadProvincia($fechaInicial, $fechaFinal,  $empleado = null){
+
+        return $this->createQueryBuilder('fa')
+            ->addSelect('m')
+            ->leftJoin('fa.empleado','m')
+            ->select('COUNT(fa)')
+            ->Where('fa.fecha BETWEEN :fechaInicial AND :fechaFinal')
+            ->setParameter('fechaInicial',$fechaInicial)
+            ->setParameter('fechaFinal',$fechaFinal);
+
     }
 
     public function obtenerFacturasPorFechasCantidad($fechaInicial, $fechaFinal){
@@ -71,9 +101,7 @@ class FacturaRepository extends ServiceEntityRepository
             ->select('COUNT(fa)')
             ->Where('fa.fecha BETWEEN :fechaInicial AND :fechaFinal')
             ->setParameter('fechaInicial',$fechaInicial)
-            ->setParameter('fechaFinal',$fechaFinal)
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->setParameter('fechaFinal',$fechaFinal);
 
     }
 

@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Factura;
 use AppBundle\Form\Type\SepaType;
 use AppBundle\Repository\ClienteRepository;
@@ -181,6 +182,9 @@ class SepaController extends Controller
         $form = $this->createForm(SepaType::class);
         $form->handleRequest($request);
 
+        /** @var Empleado $usuario */
+        $usuario = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()){
 
             try {
@@ -196,11 +200,21 @@ class SepaController extends Controller
                 $aux2 = $fechaEmisionDocumento->format('d-m-Y');
                 $fechaInicial = $form->get('fechaInicial')->getData();
                 $fechaFinal = $form->get('fechaFinal')->getData();
-                $facturas = $facturaRepository->obtenerFacturasPorFechas($fechaInicial,$fechaFinal);
+
                 $catidadADeducir = 0;
                 $transacciones = 0;
 
-                $cantidadFacturas = $facturaRepository->obtenerFacturasPorFechasCantidad($fechaInicial,$fechaFinal);
+                if($usuario->isAdministrador()){
+
+                    $facturas = $facturaRepository->obtenerFacturasPorFechas($fechaInicial,$fechaFinal);
+                    $cantidadFacturas = $facturaRepository->obtenerFacturasPorFechasCantidad($fechaInicial, $fechaFinal);
+                }
+                else{
+                    $facturas = $facturaRepository->obtenerFacturasPorFechasProvincia($fechaInicial,$fechaFinal,$usuario->getProvincia());
+                    $cantidadFacturas = $facturaRepository->obtenerFacturasPorFechasCantidadProvincia($fechaInicial,$fechaFinal, $usuario->getProvincia());
+                }
+
+
 
                 if($fechaInicial->diff($fechaFinal)->format('%a') > 93){
 
