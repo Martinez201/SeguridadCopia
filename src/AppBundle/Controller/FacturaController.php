@@ -88,7 +88,7 @@ class FacturaController extends Controller
 
     public function formAction(Request $request, Factura $factura){
 
-        $form = $this->createForm(FacturaType::class,$factura);
+        $form = $this->createForm(FacturaType::class,$factura, array('user' => $this->getUser()));
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
