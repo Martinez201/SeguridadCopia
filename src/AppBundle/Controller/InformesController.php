@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Empleado;
+use AppBundle\Entity\Factura;
 use AppBundle\Form\Type\InformeClientesType;
 use AppBundle\Form\Type\InformeEmpleadoDelegacionType;
 use AppBundle\Form\Type\InformeFacturaType;
@@ -42,9 +43,9 @@ class InformesController extends Controller
      * @Security("is_granted('ROLE_GESTOR')")
      */
 
-    public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig){
+    public function informesAction(Request $request, FacturaRepository $facturaRepository, Environment $twig, Factura $factura = null){
 
-        $form = $this->createForm(InformeFacturaType::class);
+        $form = $this->createForm(InformeFacturaType::class,$factura,array('user' => $this->getUser()));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
