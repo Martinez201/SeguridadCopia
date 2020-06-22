@@ -120,7 +120,7 @@
             $.ajax({
 
                 method: 'GET',
-                url: '/cliente/buscar',
+                url: "{{ path('cliente_buscar') }}",
                 data: datos,
                 dataType:'json',
                 async:true,
