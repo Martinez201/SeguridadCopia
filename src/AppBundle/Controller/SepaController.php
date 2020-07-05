@@ -36,6 +36,10 @@ class SepaController extends Controller
      $normalizers = [new ObjectNormalizer()];
      $serializer = new Serializer($normalizers,$encoders);
 
+     // Genera numeros  1000000000 a 9999999999 y 0000000001
+     $digitos = 11;
+     $idDocumento = str_pad(rand(0,pow(10,$digitos) -1), $digitos, '0', STR_PAD_LEFT);
+
      $cliente = $factura->getCliente();
      $fechaEmisionDocumento =  new DateTime();
      $aux1 = new DateTime();
@@ -68,7 +72,7 @@ class SepaController extends Controller
      $UltmtCdtr = new UltmtCdtr();
 
     //cabecera
-     $GrpHdr->setMsId("ABC/060928/CCT001"); //DEJARLO
+     $GrpHdr->setMsId('ABC/'.$idDocumento.'/CCT001'); //DEJARLO
      $GrpHdr->setCreDtTm($factura->getFecha()->format('d-m-Y')); //PONER FECHA FACTURA
      $GrpHdr->setNbOfTxs(1); // DEJARLO
      $GrpHdr->setCtrlSum($factura->getPrecioConIva()); // CANTIDAD A COBRAR FACTURA
@@ -79,7 +83,7 @@ class SepaController extends Controller
      $InitgPty->setNm('ROBCO SECURITY S.A.U'); // NOMBRE DE LA EMPRESA QUE FACTURA
 
     //cuerpo
-     $PmtInf->setPmtInfId('ABC/4560/'.$aux2); //CAMBIAR LA FECHA POR LA ACTUAL DEJAR EL RESTO DE LA CADENA
+     $PmtInf->setPmtInfId('ABC/'.$idDocumento.'/'.$aux2); //CAMBIAR LA FECHA POR LA ACTUAL DEJAR EL RESTO DE LA CADENA
      $PmtInf->setPmtMtd('TRF'); // DEJARLO
      $PmtInf->setBtchBookg(false); // DEJARLO
      $PmtInf->setNbOfTxs(1); // NUMERO DE TRANSACCIONES (DEJARLO)
@@ -193,6 +197,10 @@ class SepaController extends Controller
                 $normalizers = [new ObjectNormalizer()];
                 $serializer = new Serializer($normalizers,$encoders);
 
+                // Genera numeros  1000000000 a 9999999999 y 0000000001
+                $digitos = 11;
+                $idDocumento = str_pad(rand(0,pow(10,$digitos) -1), $digitos, '0', STR_PAD_LEFT);
+
 
                 $fechaEmisionDocumento =  new DateTime();
                 $aux1 = new DateTime();
@@ -246,11 +254,11 @@ class SepaController extends Controller
 
 
                 //cabecera
-                $GrpHdr->setMsId("ABC/060928/CCT001"); //DEJARLO
+                $GrpHdr->setMsId('ABC/'.$idDocumento.'/CCT001'); //DEJARLO
                 $GrpHdr->setCreDtTm($aux2); //PONER FECHA FACTURA
                 $GrpHdr->setNbOfTxs(1); // DEJARLO
 
-                $idDocumento = rand(8,15);
+
 
                 //cabecera
                 $InitgPty->setId($idDocumento); // DEJARLO
@@ -314,7 +322,7 @@ class SepaController extends Controller
                 $PmtTpInf->setSvclvl('SEPA');
 
 
-                $PmtInf->setPmtInfId('ABC/4560/'.$aux2);
+                $PmtInf->setPmtInfId('ABC/'.$idDocumento.'/'.$aux2);
                 $PmtInf->setPmtMtd('TRF');
                 $PmtInf->setBtchBookg(0);
                 $PmtInf->setNbOfTxs($transacciones);
