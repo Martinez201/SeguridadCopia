@@ -6,8 +6,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Presupuesto;
+use AppBundle\Entity\Producto;
 use AppBundle\Form\Type\PresupuestoType;
+use AppBundle\Repository\ContenidoPresRepository;
 use AppBundle\Repository\PresupuestoRepository;
+use AppBundle\Repository\ProductoRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
@@ -64,7 +67,7 @@ class PresupuestoController extends Controller
      * @Route("/presupuesto/alta", name="altas_presupuestos", methods={"GET","POST"})
      */
 
-    public function nuevaAction(Request $request){
+    public function nuevaAction(Request $request, ContenidoPresRepository $contenidoPresRepository,ProductoRepository $productoRepository){
 
         /**
          * @var Empleado $empleado
@@ -74,7 +77,7 @@ class PresupuestoController extends Controller
         $presupuesto->setFecha(new \DateTime());
         $presupuesto->setEmpleado($empleado);
         $this->getDoctrine()->getManager()->persist($presupuesto);
-        return $this->formAction($request,$presupuesto);
+        return $this->formAction($request,$presupuesto, $contenidoPresRepository,$productoRepository);
     }
 
 
@@ -82,14 +85,46 @@ class PresupuestoController extends Controller
      * @Route("/presupuesto/{id}", name="presupuestos_form",requirements={"id" = "\d+"}, methods={"GET","POST"})
      */
 
-    public function formAction(Request $request, Presupuesto $presupuesto){
+    public function formAction(Request $request, Presupuesto $presupuesto, ContenidoPresRepository $contenidoPresRepository, ProductoRepository $productoRepository){
 
         $form = $this->createForm(PresupuestoType::class,$presupuesto);
         $form->handleRequest($request);
 
+
+
         if($form->isSubmitted() && $form->isValid()){
 
             $contrato = $form->get('contrato')->getData();
+
+            if($presupuesto->getContenido()){
+
+                $stock = $contenidoPresRepository->obtenerContenido($presupuesto);
+
+                if($presupuesto->isEstado()){
+
+                    foreach($stock as $producto){
+                        /** @var Producto $prod */
+                      $prod = $productoRepository->obtenerProducto($producto->getProducto());
+                       if($prod[0]->getCantidad() < $stock[0]->getCantidad() ){
+
+                            $this->addFlash('error','Error: no hay stock de algunos de los productos del presupuesto');
+                            return $this->redirectToRoute('presupuestos_form',['id'=> $presupuesto->getId()]);
+
+                        }else{
+
+                           $prod[0]->setCantidad($prod[0]->getCantidad() - $stock[0]->getCantidad() );
+                        }
+                    }
+                }
+               else{
+
+                    foreach($stock as $producto){
+                        /** @var Producto $prod */
+                        $prod = $productoRepository->obtenerProducto($producto->getProducto());
+                        $prod[0]->setCantidad($prod[0]->getCantidad() + $stock[0]->getCantidad() );
+                    }
+                }
+            }
 
             if($contrato){
 

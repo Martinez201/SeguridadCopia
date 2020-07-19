@@ -71,10 +71,6 @@ class ContenidoPresController extends Controller
                 return $this->redirectToRoute('contenido_presupuesto_Listar',['id'=> $presupuesto->getId()]);
 
             }
-            else{
-                $stock = $producto[0]->getCantidad();
-                $producto[0]->setCantidad($stock - $form->get('cantidad')->getData());
-            }
 
             try {
 

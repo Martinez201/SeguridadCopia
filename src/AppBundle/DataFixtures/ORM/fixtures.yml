@@ -178,6 +178,7 @@ AppBundle\Entity\Presupuesto:
     empleado: "@empleado_Jaen_Gestor"
     fecha: "<dateTimeBetween('-20 years','now',null)>"
     instalacion: '<es_ES:streetAddress()>'
+    estado: false
 AppBundle\Entity\ContenidoPresupuesto:
   contendioPrespuesto_rs{1..20}:
     producto: "@productos_A"

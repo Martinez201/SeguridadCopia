@@ -36,6 +36,12 @@ class Presupuesto
     private $instalacion;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    private $estado;
+
+    /**
      * @ORM\Column(type="string" , nullable= true)
      * @var string
      */
@@ -151,6 +157,24 @@ class Presupuesto
     public function setContrato($contrato)
     {
         $this->contrato = $contrato;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param bool $estado
+     * @return Presupuesto
+     */
+    public function setEstado(bool $estado)
+    {
+        $this->estado = $estado;
         return $this;
     }
 
