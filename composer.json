@@ -1,5 +1,5 @@
 {
-    "name": "usuario/.checkout",
+    "name": "usuario/checkout",
     "license": "proprietary",
     "type": "project",
     "autoload": {
