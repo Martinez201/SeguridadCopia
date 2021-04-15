@@ -34,7 +34,8 @@
         "symfony/symfony": "3.4.*",
         "tfox/mpdf-port-bundle": "^2.0",
         "twig/twig": "^1.0||^2.0",
-        "white-october/pagerfanta-bundle": "^1.0"
+        "white-october/pagerfanta-bundle": "^1.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "nelmio/alice": "^2.1",

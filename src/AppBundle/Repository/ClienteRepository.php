@@ -33,9 +33,10 @@ class ClienteRepository extends ServiceEntityRepository
 
     }
 
-    public function obtenerClientesOrdenados(){
+    public function obtenerCampos(){
 
         return $this->obtenerClientesOrdenadosQueryBuilder()
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult();
     }
