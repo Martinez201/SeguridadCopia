@@ -4,13 +4,19 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Albaran;
 use AppBundle\Entity\Cliente;
+use AppBundle\Entity\ContenidoAlbaran;
+use AppBundle\Entity\ContenidoPresupuesto;
+use AppBundle\Entity\DatosBancarios;
+use AppBundle\Entity\Delegacion;
 use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Factura;
 use AppBundle\Entity\Parte;
 use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
 use AppBundle\Repository\ClienteRepository;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +40,65 @@ class ApiController extends Controller
             'Provincia'=> $cliente->getProvincia(),
             'Estado'=>$cliente->isEstado(),
             'Id'=> $cliente->getId()
+        );
+
+    }
+
+    public function serializeDatosBancarios(DatosBancarios  $datosBancarios){
+
+        return array(
+            'Id'=> $datosBancarios->getId(),
+            'Iban'=> $datosBancarios->getIban(),
+            'Moneda'=> $datosBancarios->getMoneda(),
+            'Entidad'=> $datosBancarios->getEntidad(),
+            'Sucursal'=> $datosBancarios->getSucursal(),
+            'Bic'=> $datosBancarios->getBic()
+        );
+
+    }
+    public function serializeDelegacion(Delegacion $delegacion){
+
+        return array(
+            'Id'=> $delegacion->getId(),
+            'Nombre'=> $delegacion->getNombre(),
+            'Provincia'=> $delegacion->getProvincia(),
+            'Direccion'=> $delegacion->getDireccion(),
+            'Postal'=> $delegacion->getCPostal(),
+            'Telefono'=> $delegacion->getTelefono(),
+            'Email'=> $delegacion->getEmail(),
+        );
+    }
+
+    public function serializeAlbaran(Albaran $albaran){
+
+        return array(
+            'Id'=> $albaran->getId(),
+            'Fecha'=> $albaran->getFecha(),
+            'Proveedor'=> $albaran->getProveedor(),
+            'Empleado'=> $albaran->getEmpleado(),
+            'Contenido'=> $albaran->getContenido()
+        );
+    }
+
+    public function serializeContenidoAlbaran(ContenidoAlbaran $contenidoAlbaran){
+
+        return array(
+            'Id'=> $contenidoAlbaran->getId(),
+            'Producto'=> $contenidoAlbaran->getProducto(),
+            'Cantidad'=> $contenidoAlbaran->getCantidad(),
+            'Total'=> $contenidoAlbaran->getTotal(),
+            'Albaran'=> $contenidoAlbaran->getAlbaran()
+        );
+    }
+
+    public function serializeContenidoPresupuesto(ContenidoPresupuesto $contenidoPresupuesto){
+
+        return array(
+            'Id'=>$contenidoPresupuesto->getId(),
+            'Cantidad'=> $contenidoPresupuesto->getCantidad(),
+            'Total'=> $contenidoPresupuesto->getTotal(),
+            'Producto'=> $contenidoPresupuesto->getProducto(),
+            'Presupuesto'=> $contenidoPresupuesto->getPresupuesto()
         );
 
     }
