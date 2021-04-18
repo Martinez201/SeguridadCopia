@@ -19,55 +19,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ApiController extends Controller
 {
-
-    /**
-     * @Route("/movil/entrar", name= "usuario_entrar_movil")
-     */
-
-    public function entrarAction(AuthenticationUtils $authenticationUtils){
-
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $ultimoUsuario = $authenticationUtils->getLastUsername();
-
-        if ($error == null){
-
-            return new JsonResponse($ultimoUsuario);
-
-        }
-        else{
-
-            return new JsonResponse($error);
-
-        }
-    }
-
-    /**
-     * @Route("/movil/salir", name="usuario_salir_movil")
-     */
-
-    public function salirAction(){
-
-    }
-
-    /**
-     * @Route("/movil/cliente/buscar", name="cliente_buscar_movil")
-     */
-
-    public function buscarCliente(ClienteRepository $clienteRepository, Request $request){
-
-
-        if($request->isXmlHttpRequest()){
-
-            $palabra = $request->get('palabra');
-
-            $resultado = $clienteRepository->obtenerResultados($palabra);
-
-            return new JsonResponse($resultado);
-        }
-
-        return new JsonResponse("");
-    }
-
     public function serializeCliente(Cliente $cliente){
 
         return array(
