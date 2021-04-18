@@ -8,12 +8,12 @@ use AppBundle\Entity\Cliente;
 use AppBundle\Entity\Empleado;
 use AppBundle\Entity\Factura;
 use AppBundle\Entity\Parte;
+use AppBundle\Entity\Presupuesto;
+use AppBundle\Entity\Producto;
 use AppBundle\Repository\ClienteRepository;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
@@ -80,11 +80,39 @@ class ApiController extends Controller
             'Telefono'=>$cliente->getTelefono(),
             'Edad'=>$cliente->getFechaNacimiento(),
             'Direccion'=> $cliente->getDireccion(),
-            'provincia'=> $cliente->getProvincia(),
-            'estado'=>$cliente->isEstado()
+            'Provincia'=> $cliente->getProvincia(),
+            'Estado'=>$cliente->isEstado(),
+            'Id'=> $cliente->getId()
         );
 
     }
+
+    public function serializePresupuesto(Presupuesto $presupuesto){
+
+        return array(
+            'Id'=> $presupuesto->getId(),
+            'Fecha'=> $presupuesto->getFecha(),
+            'Empleado'=> $presupuesto->getEmpleado(),
+            'Instalacion'=> $presupuesto->getInstalacion(),
+            'Estado'=> $presupuesto->isEstado(),
+            'Contrato'=> $presupuesto->getContrato(),
+            'Contenido'=> $presupuesto->getContenido(),
+        );
+
+    }
+
+    public function serializeProducto(Producto $producto){
+
+        return array(
+            'Nombre'=>$producto->getNombre(),
+            'Cantidad'=> $producto->getCantidad(),
+            'Tipo'=> $producto->getTipo(),
+            'Precio'=> $producto->getPrecio(),
+            'Imagen'=>$producto->getImagen(),
+            'Id'=> $producto->getId()
+        );
+    }
+
     public function serializeEmpleado(Empleado $empleado){
 
         return array(
@@ -105,7 +133,8 @@ class ApiController extends Controller
             'Administrador'=> $empleado->isAdministrador(),
             'Gestor'=> $empleado->isGestor(),
             'Comercial'=> $empleado->isComercial(),
-            'Instalador'=> $empleado->isInstalador()
+            'Instalador'=> $empleado->isInstalador(),
+            'Id'=> $empleado->getId()
         );
     }
 
@@ -117,7 +146,8 @@ class ApiController extends Controller
             'Fecha'=> $factura->getFecha(),
             'PVP_IVA'=> $factura->getPrecioConIva(),
             'PVP_SIN_IVA'=> $factura->getPrecioSinIva(),
-            'Concepto'=> $factura->getConcepto()
+            'Concepto'=> $factura->getConcepto(),
+            'Id'=> $factura->getId()
         );
     }
 
@@ -131,7 +161,8 @@ class ApiController extends Controller
             'Observaciones'=>$parte->getObservaciones(),
             'Estado'=> $parte->isEstado(),
             'Tipo'=> $parte->getTipo(),
-            'Delegacion'=> $parte->getDelegacion()
+            'Delegacion'=> $parte->getDelegacion(),
+            'Id'=> $parte->getId()
         );
 
     }
