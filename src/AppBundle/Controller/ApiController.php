@@ -185,6 +185,32 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/parte/form", name = "partes_formulario_constructor")
+     */
+
+    public function ParteFormBuild(){
+
+        $formulario = array(
+
+            'Campos'=> array(
+                        'Cliente'=> 'Int',
+                        'Detalle'=> 'String',
+                        'Empleado'=> 'Int',
+                        'Fecha'=> 'DateTime',
+                        'Observaciones'=>'String',
+                        'Estado'=> 'Boolean',
+                        'Tipo'=> 'Int',
+                        'Delegacion'=> 'Int',
+                        'Id'=> 'Int'
+                    )
+        );
+
+        $response = new JsonResponse($formulario,200);
+
+        return $response;
+    }
+
+    /**
      * @Route("/movil/clientes", name = "clientes_Listar_movil")
      */
 
