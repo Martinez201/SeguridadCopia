@@ -1,1 +1,43 @@
 $pager->getNbPages() devuelve el numero de paginas que hay del paginador
+
+
+
+Android:
+
+        val queue = Volley.newRequestQueue(this.context)
+        val url = "localhost/symfony/web/app.php/movil/clientes"
+
+           /*val jsObjectRequest = JsonObjectRequest(
+                    Request.Method.GET, url, null,
+                    Response.Listener { response -> prueba.text = response.toString()
+                    },
+                    Response.ErrorListener { error ->
+                        prueba.text = "Comete una mierda"
+                    }
+            )
+
+            queue.add(jsObjectRequest);*/
+
+            val stringRequest = StringRequest(Request.Method.GET, url,
+                    Response.Listener<String> { response ->
+                        // Display the first 500 characters of the response string.
+                        prueba.text = "Response is: ${response.substring(0, 500)}"
+                    },
+                    Response.ErrorListener { prueba.text = "That didn't work!" })
+
+            queue.add(stringRequest)
+/*
+            val request = JsonObjectRequest(
+                Request.Method.GET, url, null,
+                Response.Listener { response ->
+
+
+                    prueba.text = response.getJSONArray("Campos").length().toString()
+
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(this.context,error.message,Toast.LENGTH_SHORT).show();
+                }
+
+            )
+*/
