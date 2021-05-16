@@ -16,6 +16,10 @@ use AppBundle\Entity\Parte;
 use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
 use AppBundle\Repository\ClienteRepository;
+use AppBundle\Repository\EmpleadoRepository;
+use AppBundle\Repository\FacturaRepository;
+use AppBundle\Repository\ParteRepository;
+use AppBundle\Repository\ProductoRepository;
 use DateTime;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -186,6 +190,42 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/productos", name = "productos_Listar_movil")
+     */
+
+    public function productosAction(ProductoRepository $productoRepository){
+
+        $productos = $productoRepository->findAll();
+
+        $data = array();
+        foreach ($productos as $producto){
+            $data [$producto->getId()] = $this->serializeProducto($producto);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/movil/empleados", name = "empleados_Listar_movil")
+     */
+
+    public function empleadosAction(EmpleadoRepository $empleadoRepository){
+
+        $empleados= $empleadoRepository->findAll();
+
+        $data = array();
+        foreach ($empleados as $empleado){
+            $data [$empleado->getId()] = $this->serializeEmpleado($empleado);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+
+    /**
      * @Route("/movil/clientes", name = "clientes_Listar_movil")
      */
 
@@ -202,6 +242,44 @@ class ApiController extends Controller
 
         return $response;
     }
+
+    /**
+     * @Route("/movil/partes", name = "partes_Listar_movil")
+     */
+
+    public function partesAction(ParteRepository $parteRepository){
+
+        $partes = $parteRepository->findAll();
+
+        $data = array();
+        foreach ($partes as $parte){
+            $data [$parte->getId()] = $this->serializeParte($parte);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/movil/facturas", name = "facturas_Listar_movil")
+     */
+
+    public function facturasAction(FacturaRepository $facturaRepository){
+
+        $facturas = $facturaRepository->findAll();
+
+        $data = array();
+        foreach ($facturas as $factura){
+            $data [$factura->getId()] = $this->serializeFactura($factura);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+
+
 
 
 }
