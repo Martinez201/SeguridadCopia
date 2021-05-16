@@ -16,6 +16,7 @@ use AppBundle\Entity\Parte;
 use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
 use AppBundle\Repository\ClienteRepository;
+use DateTime;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,7 +37,7 @@ class ApiController extends Controller
             'DNI'=> $cliente->getDni(),
             'Email'=>$cliente->getEmail(),
             'Telefono'=>$cliente->getTelefono(),
-            'Edad'=>$cliente->getFechaNacimiento(),
+            'Nacimiento'=> $cliente->getFechaNacimiento()->format('d-m-Y'),
             'Direccion'=> $cliente->getDireccion(),
             'Provincia'=> $cliente->getProvincia(),
             'Estado'=>$cliente->isEstado(),
@@ -74,7 +75,7 @@ class ApiController extends Controller
 
         return array(
             'Id'=> $albaran->getId(),
-            'Fecha'=> $albaran->getFecha(),
+            'Fecha'=> $albaran->getFecha()->format('d-m-Y'),
             'Proveedor'=> $albaran->getProveedor(),
             'Empleado'=> $albaran->getEmpleado(),
             'Contenido'=> $albaran->getContenido()
@@ -108,7 +109,7 @@ class ApiController extends Controller
 
         return array(
             'Id'=> $presupuesto->getId(),
-            'Fecha'=> $presupuesto->getFecha(),
+            'Fecha'=> $presupuesto->getFecha()->format('d-m-Y'),
             'Empleado'=> $presupuesto->getEmpleado(),
             'Instalacion'=> $presupuesto->getInstalacion(),
             'Estado'=> $presupuesto->isEstado(),
@@ -136,7 +137,7 @@ class ApiController extends Controller
             'Nombre'=> $empleado->getNombre(),
             'Apellidos'=> $empleado->getApellidos(),
             'Dni'=> $empleado->getDni(),
-            'Edad'=> $empleado->getEdad(),
+            'Edad'=> $empleado->getEdad()->format('d-m-Y'),
             'Telefono'=> $empleado->getTelefono(),
             'Direccion'=> $empleado->getDireccion(),
             'Ciudad'=>$empleado->getCiudad(),
@@ -160,7 +161,7 @@ class ApiController extends Controller
         return array(
             'Empleado'=> $factura->getEmpleado(),
             'Cliente'=> $factura->getCliente(),
-            'Fecha'=> $factura->getFecha(),
+            'Fecha'=> $factura->getFecha()->format('d-m-Y'),
             'PVP_IVA'=> $factura->getPrecioConIva(),
             'PVP_SIN_IVA'=> $factura->getPrecioSinIva(),
             'Concepto'=> $factura->getConcepto(),
@@ -174,7 +175,7 @@ class ApiController extends Controller
             'Cliente'=> $parte->getCliente(),
             'Detalle'=> $parte->getDetalle(),
             'Empleado'=> $parte->getEmpleado(),
-            'Fecha'=> $parte->getFecha(),
+            'Fecha'=> $parte->getFecha()->format('d-m-Y'),
             'Observaciones'=>$parte->getObservaciones(),
             'Estado'=> $parte->isEstado(),
             'Tipo'=> $parte->getTipo(),
@@ -185,24 +186,21 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/parte/form", name = "partes_formulario_constructor")
+     * @Route("/movil/parte/form", name = "partes_movil_form")
      */
 
     public function ParteFormBuild(){
 
         $formulario = array(
-
-            'Campos'=> array(
-                        'Cliente'=> 'Int',
-                        'Detalle'=> 'String',
-                        'Empleado'=> 'Int',
-                        'Fecha'=> 'DateTime',
-                        'Observaciones'=>'String',
-                        'Estado'=> 'Boolean',
-                        'Tipo'=> 'Int',
-                        'Delegacion'=> 'Int',
-                        'Id'=> 'Int'
-                    )
+                'Cliente'=> 'Int',
+                'Detalle'=> 'String',
+                'Empleado'=> 'Int',
+                'Fecha'=> 'DateTime',
+                'Observaciones'=>'String',
+                'Estado'=> 'Boolean',
+                'Tipo'=> 'Int',
+                'Delegacion'=> 'Int',
+                'Id'=> 'Int'
         );
 
         $response = new JsonResponse($formulario,200);
@@ -218,7 +216,7 @@ class ApiController extends Controller
 
         $clientes = $clienteRepository->findAll();
 
-        $data = array('clientes'=>array());
+        $data = array();
         foreach ($clientes as $cliente){
             $data[]= $this->serializeCliente($cliente);
         }
@@ -229,17 +227,27 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/camposFormulario", name = "clientes_Listar_campos")
+     * @Route("/movil/clientes/form", name = "clientes_movil_form")
      */
 
     public function clientesCampos(ClienteRepository $clienteRepository){
 
-        $clientes = $clienteRepository->obtenerCampos();
 
-        $data = array('clientes'=>array());
-        foreach ($clientes as $cliente){
-            $data['clientes'][] = $this->serializeCliente($cliente);
-        }
+        $data = array(
+            'Nombre'=> 'String',
+            'Apellidos'=> 'String',
+            'Ciudad'=> 'String',
+            'cPostal'=> 'String',
+            'DNI'=>'String',
+            'Email'=> 'String',
+            'Telefono'=> 'String',
+            'Edad'=> 'DateTime',
+            'Direccion'=> 'String',
+            'Provincia'=> 'String',
+            'Estado'=> 'Boolean',
+            'Id'=> 'Int'
+        );
+
 
         $response = new JsonResponse($data,200);
 
