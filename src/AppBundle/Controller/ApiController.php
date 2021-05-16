@@ -218,7 +218,7 @@ class ApiController extends Controller
 
         $data = array();
         foreach ($clientes as $cliente){
-            $data[]= $this->serializeCliente($cliente);
+            $data [$cliente->getId()] = $this->serializeCliente($cliente);
         }
 
         $response = new JsonResponse($data,200);
