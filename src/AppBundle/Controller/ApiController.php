@@ -186,29 +186,6 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/parte/form", name = "partes_movil_form")
-     */
-
-    public function ParteFormBuild(){
-
-        $formulario = array(
-                'Cliente'=> 'Int',
-                'Detalle'=> 'String',
-                'Empleado'=> 'Int',
-                'Fecha'=> 'DateTime',
-                'Observaciones'=>'String',
-                'Estado'=> 'Boolean',
-                'Tipo'=> 'Int',
-                'Delegacion'=> 'Int',
-                'Id'=> 'Int'
-        );
-
-        $response = new JsonResponse($formulario,200);
-
-        return $response;
-    }
-
-    /**
      * @Route("/movil/clientes", name = "clientes_Listar_movil")
      */
 
@@ -226,31 +203,5 @@ class ApiController extends Controller
         return $response;
     }
 
-    /**
-     * @Route("/movil/clientes/form", name = "clientes_movil_form")
-     */
 
-    public function clientesCampos(ClienteRepository $clienteRepository){
-
-
-        $data = array(
-            'Nombre'=> 'String',
-            'Apellidos'=> 'String',
-            'Ciudad'=> 'String',
-            'cPostal'=> 'String',
-            'DNI'=>'String',
-            'Email'=> 'String',
-            'Telefono'=> 'String',
-            'Edad'=> 'DateTime',
-            'Direccion'=> 'String',
-            'Provincia'=> 'String',
-            'Estado'=> 'Boolean',
-            'Id'=> 'Int'
-        );
-
-
-        $response = new JsonResponse($data,200);
-
-        return $response;
-    }
 }

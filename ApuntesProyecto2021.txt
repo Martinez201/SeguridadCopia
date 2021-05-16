@@ -41,3 +41,28 @@ Android:
 
             )
 */
+
+///Envio de los parametros de los formularios
+
+    /*
+     * @Route("/movil/parte/form", name = "partes_movil_form")
+     */
+
+    /*public function ParteFormBuild(){
+
+        $formulario = array(
+                'Cliente'=> 'Int',
+                'Detalle'=> 'String',
+                'Empleado'=> 'Int',
+                'Fecha'=> 'DateTime',
+                'Observaciones'=>'String',
+                'Estado'=> 'Boolean',
+                'Tipo'=> 'Int',
+                'Delegacion'=> 'Int',
+                'Id'=> 'Int'
+        );
+
+        $response = new JsonResponse($formulario,200);
+
+        return $response;
+    }*/
