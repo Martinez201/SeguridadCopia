@@ -15,6 +15,7 @@ use AppBundle\Entity\Factura;
 use AppBundle\Entity\Parte;
 use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
+use AppBundle\Repository\AlbaranRepository;
 use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
@@ -76,16 +77,20 @@ class ApiController extends Controller
     }
 
     public function serializeAlbaran(Albaran $albaran){
+        /**@var Albaran proveedor */
+        $proveedor = $albaran;
+
+        /**@var ContenidoAlbaran contAlba */
+
+        $empleado = $proveedor->getEmpleado()->getId();
 
         return array(
             'Id'=> $albaran->getId(),
             'Fecha'=> $albaran->getFecha()->format('d-m-Y'),
-            'Proveedor'=> $albaran->getProveedor(),
-            'Empleado'=> $albaran->getEmpleado(),
-            'Contenido'=> $albaran->getContenido()
+            'Proveedor'=> $albaran->getProveedor() ,
+            'Empleado'=> $empleado,
         );
     }
-
     public function serializeContenidoAlbaran(ContenidoAlbaran $contenidoAlbaran){
 
         return array(
@@ -279,6 +284,23 @@ class ApiController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/movil/albaranes", name = "albaranes_Listar_movil")
+     */
+
+    public function albaranesAction(AlbaranRepository $albaranRepository){
+
+        $albaranes = $albaranRepository->findAll();
+
+        $data = array();
+        foreach ($albaranes as $albaran){
+            $data [$albaran->getId()] = $this->serializeAlbaran($albaran);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
 
 
 
