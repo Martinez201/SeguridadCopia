@@ -82,13 +82,18 @@ class ApiController extends Controller
 
         /**@var ContenidoAlbaran contAlba */
 
-        $empleado = $proveedor->getEmpleado()->getId();
+        $empleado = $proveedor->getEmpleado();
 
         return array(
             'Id'=> $albaran->getId(),
             'Fecha'=> $albaran->getFecha()->format('d-m-Y'),
             'Proveedor'=> $albaran->getProveedor() ,
-            'Empleado'=> $empleado,
+            'Empleado'=> array(
+
+                'nombre'=> $empleado->getNombre(),
+                'apellidos'=> $empleado->getApellidos(),
+                'id'=> $empleado->getId()
+            ),
         );
     }
     public function serializeContenidoAlbaran(ContenidoAlbaran $contenidoAlbaran){
