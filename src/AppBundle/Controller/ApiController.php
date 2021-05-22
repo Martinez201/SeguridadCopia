@@ -167,9 +167,14 @@ class ApiController extends Controller
 
     public function serializeFactura(Factura $factura){
 
+        /** Empleado empleado */
+        $empleado = $factura->getEmpleado()->getId();
+        /** Cliente cliente */
+        $cliente = $factura->getCliente()->getId();
+
         return array(
-            'Empleado'=> $factura->getEmpleado(),
-            'Cliente'=> $factura->getCliente(),
+            'Empleado'=> $empleado,
+            'Cliente'=> $cliente,
             'Fecha'=> $factura->getFecha()->format('d-m-Y'),
             'PVP_IVA'=> $factura->getPrecioConIva(),
             'PVP_SIN_IVA'=> $factura->getPrecioSinIva(),
@@ -301,7 +306,6 @@ class ApiController extends Controller
 
         return $response;
     }
-
 
 
 }

@@ -72,4 +72,12 @@ class ClienteRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerClienteId($id){
+        return $this->createQueryBuilder('cl')
+            ->where('cl.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
