@@ -17,6 +17,7 @@ use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
 use AppBundle\Repository\AlbaranRepository;
 use AppBundle\Repository\ClienteRepository;
+use AppBundle\Repository\DatosBancariosRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
 use AppBundle\Repository\ParteRepository;
@@ -54,8 +55,19 @@ class ApiController extends Controller
 
     public function serializeDatosBancarios(DatosBancarios  $datosBancarios){
 
+        /** Cliente cliente */
+        $cliente = $datosBancarios->getCliente();
+
         return array(
             'Id'=> $datosBancarios->getId(),
+            'Cliente'=>array(
+
+                'nombre'=> $cliente->getNombre(),
+                'apellidos'=> $cliente->getApellidos(),
+                'id'=> $cliente->getId()
+
+
+            ),
             'Iban'=> $datosBancarios->getIban(),
             'Moneda'=> $datosBancarios->getMoneda(),
             'Entidad'=> $datosBancarios->getEntidad(),
@@ -110,12 +122,15 @@ class ApiController extends Controller
 
     public function serializeContenidoPresupuesto(ContenidoPresupuesto $contenidoPresupuesto){
 
+        /** Presupuesto presupuesto */
+        $presupuesto = $contenidoPresupuesto->getPresupuesto()->getId();
+
         return array(
             'Id'=>$contenidoPresupuesto->getId(),
             'Cantidad'=> $contenidoPresupuesto->getCantidad(),
             'Total'=> $contenidoPresupuesto->getTotal(),
             'Producto'=> $contenidoPresupuesto->getProducto(),
-            'Presupuesto'=> $contenidoPresupuesto->getPresupuesto()
+            'Presupuesto'=> $presupuesto
         );
 
     }
@@ -279,6 +294,24 @@ class ApiController extends Controller
         $data = array();
         foreach ($presupuestos as $presupuesto){
             $data [$presupuesto->getId()] = $this->serializePresupuesto($presupuesto);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/movil/datosBancarios", name = "datosBancarios_Listar_movil")
+     */
+
+    public function datosBancariosAction(DatosBancariosRepository $datosBancariosRepository){
+
+        $datosBancarios = $datosBancariosRepository->findAll();
+
+        $data = array();
+        foreach ($datosBancarios as $datos){
+            $data [$datos->getId()] = $this->serializeDatosBancarios($datos);
         }
 
         $response = new JsonResponse($data,200);
