@@ -142,6 +142,10 @@ class ApiController extends Controller
 
     public function serializeEmpleado(Empleado $empleado){
 
+        /**@var Delegacion delegacion */
+        $delegacion = $empleado->getDelegacion();
+
+
         return array(
             'Nombre'=> $empleado->getNombre(),
             'Apellidos'=> $empleado->getApellidos(),
@@ -156,7 +160,17 @@ class ApiController extends Controller
             'Usuario'=> $empleado->getUsuario(),
             'Password'=> $empleado->getPassword(),
             'Roles'=> $empleado->getRoles(),
-            'Delegacion'=> $empleado->getDelegacion(),
+            'Delegacion'=> array(
+
+                'id'=> $delegacion->getId(),
+                'provincia'=> $delegacion->getProvincia(),
+                'ciudad'=> $delegacion->getCiudad(),
+                'cPostal'=> $delegacion->getCPostal(),
+                'direccion'=> $delegacion->getDireccion(),
+                'email'=> $delegacion->getEmail(),
+                'telefono'=> $delegacion->getTelefono(),
+                'nombre'=> $delegacion->getNombre()
+            ),
             'Administrador'=> $empleado->isAdministrador(),
             'Gestor'=> $empleado->isGestor(),
             'Comercial'=> $empleado->isComercial(),
