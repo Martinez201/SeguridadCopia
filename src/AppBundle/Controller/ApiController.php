@@ -216,15 +216,43 @@ class ApiController extends Controller
 
     public function serializeParte(Parte $parte){
 
+        /** @var Delegacion delegacion */
+        $delegacion = $parte->getDelegacion();
+
+        /** Empleado empleado */
+        $empleado = $parte->getEmpleado();
+        /** Cliente cliente */
+        $cliente = $parte->getCliente();
+
         return array(
-            'Cliente'=> $parte->getCliente(),
+            'Cliente'=> array(
+
+                'nombre'=> $cliente->getNombre(),
+                'apellidos'=> $cliente->getApellidos(),
+                'id'=> $cliente->getId()
+
+            ),
             'Detalle'=> $parte->getDetalle(),
-            'Empleado'=> $parte->getEmpleado(),
+            'Empleado'=> array(
+
+                'nombre'=> $empleado->getNombre(),
+                'apellidos'=> $empleado->getApellidos(),
+                'id'=> $empleado->getId()
+
+            ),
             'Fecha'=> $parte->getFecha()->format('d-m-Y'),
             'Observaciones'=>$parte->getObservaciones(),
             'Estado'=> $parte->isEstado(),
             'Tipo'=> $parte->getTipo(),
-            'Delegacion'=> $parte->getDelegacion(),
+            'Delegacion'=> array(
+
+                'id'=> $delegacion->getId(),
+                'nombre'=> $delegacion->getNombre(),
+                'provincia' => $delegacion->getProvincia(),
+                'direccion'=> $delegacion->getDireccion()
+
+
+            ),
             'Id'=> $parte->getId()
         );
 
