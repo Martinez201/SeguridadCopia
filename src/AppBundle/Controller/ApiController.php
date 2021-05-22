@@ -20,6 +20,7 @@ use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
 use AppBundle\Repository\ParteRepository;
+use AppBundle\Repository\PresupuestoRepository;
 use AppBundle\Repository\ProductoRepository;
 use DateTime;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -121,14 +122,23 @@ class ApiController extends Controller
 
     public function serializePresupuesto(Presupuesto $presupuesto){
 
+        /** Empleado empleado */
+        $empleado = $presupuesto->getEmpleado();
+
         return array(
             'Id'=> $presupuesto->getId(),
             'Fecha'=> $presupuesto->getFecha()->format('d-m-Y'),
-            'Empleado'=> $presupuesto->getEmpleado(),
+            'Empleado'=> array(
+
+                'nombre'=> $empleado->getNombre(),
+                'apellidos'=> $empleado->getApellidos(),
+                'id'=> $empleado->getId()
+
+            ),
             'Instalacion'=> $presupuesto->getInstalacion(),
             'Estado'=> $presupuesto->isEstado(),
             'Contrato'=> $presupuesto->getContrato(),
-            'Contenido'=> $presupuesto->getContenido(),
+
         );
 
     }
@@ -256,6 +266,24 @@ class ApiController extends Controller
             'Id'=> $parte->getId()
         );
 
+    }
+
+    /**
+     * @Route("/movil/presupuestos", name = "presupuestos_Listar_movil")
+     */
+
+    public function presupuestosAction(PresupuestoRepository $presupuestoRepository){
+
+        $presupuestos = $presupuestoRepository->findAll();
+
+        $data = array();
+        foreach ($presupuestos as $presupuesto){
+            $data [$presupuesto->getId()] = $this->serializePresupuesto($presupuesto);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
     }
 
     /**
