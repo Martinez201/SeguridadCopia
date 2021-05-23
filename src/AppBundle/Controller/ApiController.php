@@ -189,7 +189,6 @@ class ApiController extends Controller
             'Email'=> $empleado->getEmail(),
             'Usuario'=> $empleado->getUsuario(),
             'Password'=> $empleado->getPassword(),
-            'Roles'=> $empleado->getRoles(),
             'Delegacion'=> array(
 
                 'id'=> $delegacion->getId(),
