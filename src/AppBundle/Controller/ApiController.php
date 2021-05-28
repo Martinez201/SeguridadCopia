@@ -17,6 +17,7 @@ use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
 use AppBundle\Repository\AlbaranRepository;
 use AppBundle\Repository\ClienteRepository;
+use AppBundle\Repository\ContenidoRepository;
 use AppBundle\Repository\DatosBancariosRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
@@ -419,6 +420,26 @@ class ApiController extends Controller
         foreach ($albaranes as $albaran){
             $data [$albaran->getId()] = $this->serializeAlbaran($albaran);
         }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/movil/albaran/{id}",requirements={"id" = "\d+"}, name = "albaranes_Listar_movil")
+     */
+
+    public function albaranContenidoAction(ContenidoRepository $albaranContenidoRepository, Albaran $albaran){
+
+        $albaranes = $albaranContenidoRepository->obtenerContenido($albaran);
+
+        $data = array();
+        /*foreach ($albaranes as $albaran){
+            $data [$albaran->getId()] = $this->serializeAlbaran($albaran);
+        }*/
+
+        $data [$albaranes->getId()]= $this->serializeContenidoAlbaran($albaranes);
 
         $response = new JsonResponse($data,200);
 
