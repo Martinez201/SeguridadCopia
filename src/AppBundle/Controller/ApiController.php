@@ -424,15 +424,25 @@ class ApiController extends Controller
 
         $albaranes = $albaranContenidoRepository->obtenerContenidoApi($albaran);
 
+        /**@var Delegacion delegacion */
+        $productoArray = [];
+
+
         $data = array();
         foreach ($albaranes as $albaran){
 
+            $productoArray[] = $albaran['producto']['nombre'];
+            $productoArray[] = $albaran['producto']['tipo'];
+            $productoArray[] = $albaran['producto']['precio'];
+
             $data [$albaran['id']] = array(
                 'Id'=> $albaran['id'],
-                'Producto'=> $albaran['producto'],
+                'Producto'=>  $productoArray,
                 'Cantidad'=> $albaran['cantidad'],
                 'Total'=> $albaran['total'],
             );
+
+            $productoArray = [];
         }
 
 
