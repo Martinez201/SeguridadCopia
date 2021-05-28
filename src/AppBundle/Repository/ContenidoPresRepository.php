@@ -28,4 +28,15 @@ class ContenidoPresRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerContenidoApi(Presupuesto $presupuesto){
+
+        return $this->createQueryBuilder('c')
+            ->addSelect('p')
+            ->leftJoin('c.producto','p')
+            ->where('c.presupuesto = :presupuesto')
+            ->setParameter('presupuesto',$presupuesto)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
 }

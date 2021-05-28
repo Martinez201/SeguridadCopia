@@ -17,6 +17,7 @@ use AppBundle\Entity\Presupuesto;
 use AppBundle\Entity\Producto;
 use AppBundle\Repository\AlbaranRepository;
 use AppBundle\Repository\ClienteRepository;
+use AppBundle\Repository\ContenidoPresRepository;
 use AppBundle\Repository\ContenidoRepository;
 use AppBundle\Repository\DatosBancariosRepository;
 use AppBundle\Repository\EmpleadoRepository;
@@ -417,20 +418,18 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/albaran/{id}",requirements={"id" = "\d+"}, name = "albaranes_Listar_movil")
+     * @Route("/movil/albaran/{id}",requirements={"id" = "\d+"}, name = "albaran_contenido_Listar_movil")
      */
 
     public function albaranContenidoAction(ContenidoRepository $albaranContenidoRepository, Albaran $albaran){
 
         $albaranes = $albaranContenidoRepository->obtenerContenidoApi($albaran);
 
-        /**@var Delegacion delegacion */
-        $productoArray = [];
-
 
         $data = array();
         foreach ($albaranes as $albaran){
 
+            $productoArray = [];
             $productoArray[] = $albaran['producto']['nombre'];
             $productoArray[] = $albaran['producto']['tipo'];
             $productoArray[] = $albaran['producto']['precio'];
@@ -442,9 +441,40 @@ class ApiController extends Controller
                 'Total'=> $albaran['total'],
             );
 
-            $productoArray = [];
+
         }
 
+        $response = new JsonResponse($data,200);
+
+        return $response;
+    }
+    /**
+     * @Route("/movil/presupuesto/{id}",requirements={"id" = "\d+"}, name = "presupuesto_contenido_Listar_movil")
+     */
+
+    public function presupuestoContenidoAction(ContenidoPresRepository $contenidoPresRepository, Presupuesto $presupuesto){
+
+        $contenidos = $contenidoPresRepository->obtenerContenidoApi($presupuesto);
+
+
+        $data = array();
+
+        foreach ($contenidos as $contenido){
+
+            $productoArray = [];
+            $productoArray[] = $contenido['producto']['nombre'];
+            $productoArray[] = $contenido['producto']['tipo'];
+            $productoArray[] = $contenido['producto']['precio'];
+
+            $data [$contenido['id']] = array(
+                'Id'=> $contenido['id'],
+                'Producto'=>  $productoArray,
+                'Cantidad'=> $contenido['cantidad'],
+                'Total'=> $contenido['total'],
+            );
+
+
+        }
 
         $response = new JsonResponse($data,200);
 
