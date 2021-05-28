@@ -110,16 +110,6 @@ class ApiController extends Controller
             ),
         );
     }
-    public function serializeContenidoAlbaran(ContenidoAlbaran $contenidoAlbaran){
-
-        return array(
-            'Id'=> $contenidoAlbaran->getId(),
-            'Producto'=> $contenidoAlbaran->getProducto(),
-            'Cantidad'=> $contenidoAlbaran->getCantidad(),
-            'Total'=> $contenidoAlbaran->getTotal(),
-            'Albaran'=> $contenidoAlbaran->getAlbaran()
-        );
-    }
 
     public function serializeContenidoPresupuesto(ContenidoPresupuesto $contenidoPresupuesto){
 
@@ -432,14 +422,19 @@ class ApiController extends Controller
 
     public function albaranContenidoAction(ContenidoRepository $albaranContenidoRepository, Albaran $albaran){
 
-        $albaranes = $albaranContenidoRepository->obtenerContenido($albaran);
+        $albaranes = $albaranContenidoRepository->obtenerContenidoApi($albaran);
 
         $data = array();
-        /*foreach ($albaranes as $albaran){
-            $data [$albaran->getId()] = $this->serializeAlbaran($albaran);
-        }*/
+        foreach ($albaranes as $albaran){
 
-        $data [$albaranes->getId()]= $this->serializeContenidoAlbaran($albaranes);
+            $data [$albaran['id']] = array(
+                'Id'=> $albaran['id'],
+                'Producto'=> $albaran['producto'],
+                'Cantidad'=> $albaran['cantidad'],
+                'Total'=> $albaran['total'],
+            );
+        }
+
 
         $response = new JsonResponse($data,200);
 

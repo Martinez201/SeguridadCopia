@@ -27,4 +27,15 @@ class ContenidoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerContenidoApi(Albaran $albaran){
+
+        return $this->createQueryBuilder('c')
+            ->addSelect('p')
+            ->leftJoin('c.producto','p')
+            ->where('c.albaran = :albaran')
+            ->setParameter('albaran',$albaran)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
 }
