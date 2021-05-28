@@ -175,6 +175,14 @@ class ApiController extends Controller
         /**@var Delegacion delegacion */
         $delegacion = $empleado->getDelegacion();
 
+        $delegacionArray = [];
+        $delegacionArray[] = $delegacion->getId();
+        $delegacionArray[] = $delegacion->getProvincia();
+        $delegacionArray[] = $delegacion->getCiudad();
+        $delegacionArray[] = $delegacion->getDireccion();
+        $delegacionArray[] = $delegacion->getNombre();
+        $delegacionArray[] = $delegacion->getTelefono();
+        $delegacionArray[] = $delegacion->getEmail();
 
         return array(
             'Nombre'=> $empleado->getNombre(),
@@ -189,17 +197,8 @@ class ApiController extends Controller
             'Email'=> $empleado->getEmail(),
             'Usuario'=> $empleado->getUsuario(),
             'Password'=> $empleado->getPassword(),
-            'Delegacion'=> array(
-
-                'id'=> $delegacion->getId(),
-                'provincia'=> $delegacion->getProvincia(),
-                'ciudad'=> $delegacion->getCiudad(),
-                'cPostal'=> $delegacion->getCPostal(),
-                'direccion'=> $delegacion->getDireccion(),
-                'email'=> $delegacion->getEmail(),
-                'telefono'=> $delegacion->getTelefono(),
-                'nombre'=> $delegacion->getNombre()
-            ),
+            'Roles'=> $empleado->getRoles(),
+            'Delegacion'=> $delegacionArray,
             'Administrador'=> $empleado->isAdministrador(),
             'Gestor'=> $empleado->isGestor(),
             'Comercial'=> $empleado->isComercial(),
