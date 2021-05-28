@@ -112,21 +112,6 @@ class ApiController extends Controller
         );
     }
 
-    public function serializeContenidoPresupuesto(ContenidoPresupuesto $contenidoPresupuesto){
-
-        /** Presupuesto presupuesto */
-        $presupuesto = $contenidoPresupuesto->getPresupuesto()->getId();
-
-        return array(
-            'Id'=>$contenidoPresupuesto->getId(),
-            'Cantidad'=> $contenidoPresupuesto->getCantidad(),
-            'Total'=> $contenidoPresupuesto->getTotal(),
-            'Producto'=> $contenidoPresupuesto->getProducto(),
-            'Presupuesto'=> $presupuesto
-        );
-
-    }
-
     public function serializePresupuesto(Presupuesto $presupuesto){
 
         /** Empleado empleado */
