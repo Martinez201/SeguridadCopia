@@ -156,7 +156,7 @@ class ApiController extends Controller
         $delegacionArray[] = $delegacion->getId();
         $delegacionArray[] = $delegacion->getProvincia();
         $delegacionArray[] = $delegacion->getCiudad();
-        $delegacionArray[] = $delegacion->getDireccion();
+        $delegacionArray[] = str_replace(',',' ',$delegacion->getDireccion());
         $delegacionArray[] = $delegacion->getNombre();
         $delegacionArray[] = $delegacion->getTelefono();
         $delegacionArray[] = $delegacion->getEmail();
@@ -167,7 +167,7 @@ class ApiController extends Controller
             'Dni'=> $empleado->getDni(),
             'Edad'=> $empleado->getEdad()->format('d-m-Y'),
             'Telefono'=> $empleado->getTelefono(),
-            'Direccion'=> $empleado->getDireccion(),
+            'Direccion'=> str_replace(',',' ',$empleado->getDireccion()),
             'Ciudad'=>$empleado->getCiudad(),
             'Postal'=> $empleado->getCPostal(),
             'Provincia'=> $empleado->getProvincia(),
