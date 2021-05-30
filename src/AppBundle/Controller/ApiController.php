@@ -117,16 +117,15 @@ class ApiController extends Controller
         /** Empleado empleado */
         $empleado = $presupuesto->getEmpleado();
 
+        $arrayEmpleado = [];
+        $arrayEmpleado[] = $empleado->getNombre();
+        $arrayEmpleado[] = $empleado->getApellidos();
+        $arrayEmpleado[] = $empleado->getId();
+
         return array(
             'Id'=> $presupuesto->getId(),
             'Fecha'=> $presupuesto->getFecha()->format('d-m-Y'),
-            'Empleado'=> array(
-
-                'nombre'=> $empleado->getNombre(),
-                'apellidos'=> $empleado->getApellidos(),
-                'id'=> $empleado->getId()
-
-            ),
+            'Empleado'=> $arrayEmpleado,
             'Instalacion'=> $presupuesto->getInstalacion(),
             'Estado'=> $presupuesto->isEstado(),
             'Contrato'=> $presupuesto->getContrato(),
