@@ -192,21 +192,20 @@ class ApiController extends Controller
         /** Cliente cliente */
         $cliente = $factura->getCliente();
 
+        $arrayEmpleado = [];
+        $arrayEmpleado[] = $empleado->getNombre();
+        $arrayEmpleado[] = $empleado->getApellidos();
+        $arrayEmpleado[] = $empleado->getId();
+
+        $arrayCliente = [];
+        $arrayCliente[] = $cliente->getNombre();
+        $arrayCliente[] = $cliente->getApellidos();
+        $arrayCliente[] = $cliente->getId();
+
+
         return array(
-            'Empleado'=> array(
-
-                'nombre'=> $empleado->getNombre(),
-                'apellidos'=> $empleado->getApellidos(),
-                'id'=> $empleado->getId()
-
-            ),
-            'Cliente'=> array(
-
-                'nombre'=> $cliente->getNombre(),
-                'apellidos'=> $cliente->getApellidos(),
-                'id'=> $cliente->getId()
-
-            ),
+            'Empleado'=> $arrayEmpleado,
+            'Cliente'=> $arrayCliente,
             'Fecha'=> $factura->getFecha()->format('d-m-Y'),
             'PVP_IVA'=> $factura->getPrecioConIva(),
             'PVP_SIN_IVA'=> $factura->getPrecioSinIva(),
