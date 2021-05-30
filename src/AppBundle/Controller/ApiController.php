@@ -60,16 +60,14 @@ class ApiController extends Controller
         /** Cliente cliente */
         $cliente = $datosBancarios->getCliente();
 
+        $arrayCliente = [];
+        $arrayCliente[] = $cliente->getNombre();
+        $arrayCliente[] = $cliente->getApellidos();
+        $arrayCliente[] = $cliente->getId();
+
         return array(
             'Id'=> $datosBancarios->getId(),
-            'Cliente'=>array(
-
-                'nombre'=> $cliente->getNombre(),
-                'apellidos'=> $cliente->getApellidos(),
-                'id'=> $cliente->getId()
-
-
-            ),
+            'Cliente'=>$arrayCliente,
             'Iban'=> $datosBancarios->getIban(),
             'Moneda'=> $datosBancarios->getMoneda(),
             'Entidad'=> $datosBancarios->getEntidad(),
