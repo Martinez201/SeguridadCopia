@@ -99,16 +99,16 @@ class ApiController extends Controller
 
         $empleado = $proveedor->getEmpleado();
 
+        $arrayEmpleado = [];
+        $arrayEmpleado[] = $empleado->getNombre();
+        $arrayEmpleado[] = $empleado->getApellidos();
+        $arrayEmpleado[] = $empleado->getId();
+
         return array(
             'Id'=> $albaran->getId(),
             'Fecha'=> $albaran->getFecha()->format('d-m-Y'),
             'Proveedor'=> $albaran->getProveedor() ,
-            'Empleado'=> array(
-
-                'nombre'=> $empleado->getNombre(),
-                'apellidos'=> $empleado->getApellidos(),
-                'id'=> $empleado->getId()
-            ),
+            'Empleado'=> $arrayEmpleado,
         );
     }
 
