@@ -47,7 +47,7 @@ class ApiController extends Controller
             'Email'=>$cliente->getEmail(),
             'Telefono'=>$cliente->getTelefono(),
             'Nacimiento'=> $cliente->getFechaNacimiento()->format('d-m-Y'),
-            'Direccion'=> $cliente->getDireccion(),
+            'Direccion'=> str_replace(',',' ',$cliente->getDireccion()),
             'Provincia'=> $cliente->getProvincia(),
             'Estado'=>$cliente->isEstado(),
             'Id'=> $cliente->getId()
