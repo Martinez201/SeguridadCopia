@@ -180,6 +180,7 @@ class ApiController extends Controller
             'Gestor'=> $empleado->isGestor(),
             'Comercial'=> $empleado->isComercial(),
             'Instalador'=> $empleado->isInstalador(),
+            'avatar'=> $empleado->getAvatar(),
             'Id'=> $empleado->getId()
         );
     }
