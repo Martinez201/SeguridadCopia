@@ -224,35 +224,35 @@ class ApiController extends Controller
         /** Cliente cliente */
         $cliente = $parte->getCliente();
 
+
+        $arrayEmpleado = [];
+        $arrayEmpleado[] = $empleado->getNombre();
+        $arrayEmpleado[] = $empleado->getApellidos();
+        $arrayEmpleado[] = $empleado->getId();
+
+        $arrayCliente = [];
+        $arrayCliente[] = $cliente->getNombre();
+        $arrayCliente[] = $cliente->getApellidos();
+        $arrayCliente[] = $cliente->getId();
+
+        $delegacionArray = [];
+        $delegacionArray[] = $delegacion->getId();
+        $delegacionArray[] = $delegacion->getProvincia();
+        $delegacionArray[] = $delegacion->getCiudad();
+        $delegacionArray[] = str_replace(',',' ',$delegacion->getDireccion());
+        $delegacionArray[] = $delegacion->getNombre();
+        $delegacionArray[] = $delegacion->getTelefono();
+        $delegacionArray[] = $delegacion->getEmail();
+
         return array(
-            'Cliente'=> array(
-
-                'nombre'=> $cliente->getNombre(),
-                'apellidos'=> $cliente->getApellidos(),
-                'id'=> $cliente->getId()
-
-            ),
+            'Cliente'=> $arrayCliente,
             'Detalle'=> $parte->getDetalle(),
-            'Empleado'=> array(
-
-                'nombre'=> $empleado->getNombre(),
-                'apellidos'=> $empleado->getApellidos(),
-                'id'=> $empleado->getId()
-
-            ),
+            'Empleado'=> $arrayEmpleado,
             'Fecha'=> $parte->getFecha()->format('d-m-Y'),
             'Observaciones'=>$parte->getObservaciones(),
             'Estado'=> $parte->isEstado(),
             'Tipo'=> $parte->getTipo(),
-            'Delegacion'=> array(
-
-                'id'=> $delegacion->getId(),
-                'nombre'=> $delegacion->getNombre(),
-                'provincia' => $delegacion->getProvincia(),
-                'direccion'=> $delegacion->getDireccion()
-
-
-            ),
+            'Delegacion'=> $delegacionArray,
             'Id'=> $parte->getId()
         );
 
