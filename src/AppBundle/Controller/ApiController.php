@@ -124,7 +124,7 @@ class ApiController extends Controller
             'Id'=> $presupuesto->getId(),
             'Fecha'=> $presupuesto->getFecha()->format('d-m-Y'),
             'Empleado'=> $arrayEmpleado,
-            'Instalacion'=> $presupuesto->getInstalacion(),
+            'Instalacion'=> str_replace(',',' ',$presupuesto->getInstalacion()),
             'Estado'=> $presupuesto->isEstado(),
             'Contrato'=> $presupuesto->getContrato(),
 
