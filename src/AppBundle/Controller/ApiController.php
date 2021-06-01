@@ -20,6 +20,7 @@ use AppBundle\Repository\ClienteRepository;
 use AppBundle\Repository\ContenidoPresRepository;
 use AppBundle\Repository\ContenidoRepository;
 use AppBundle\Repository\DatosBancariosRepository;
+use AppBundle\Repository\DelegacionRepository;
 use AppBundle\Repository\EmpleadoRepository;
 use AppBundle\Repository\FacturaRepository;
 use AppBundle\Repository\ParteRepository;
@@ -82,7 +83,7 @@ class ApiController extends Controller
             'Id'=> $delegacion->getId(),
             'Nombre'=> $delegacion->getNombre(),
             'Provincia'=> $delegacion->getProvincia(),
-            'Direccion'=> $delegacion->getDireccion(),
+            'Direccion'=> str_replace(',',' ',$delegacion->getDireccion()),
             'Postal'=> $delegacion->getCPostal(),
             'Telefono'=> $delegacion->getTelefono(),
             'Email'=> $delegacion->getEmail(),
@@ -253,6 +254,24 @@ class ApiController extends Controller
             'Id'=> $parte->getId()
         );
 
+    }
+
+    /**
+     * @Route("/movil/delegaciones", name = "delegaciones_Listar_movil")
+     */
+
+    public function delegacionesAction(DelegacionRepository $delegacionRepository){
+
+        $delegaciones = $delegacionRepository->findAll();
+
+        $data = array();
+        foreach ($delegaciones as $delegacion){
+            $data [$delegacion->getId()] = $this->serializeDelegacion($delegacion);
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
     }
 
     /**
