@@ -483,4 +483,17 @@ class ApiController extends Controller
     }
 
 
+    /**
+     * @Route("/movil/buscar/delegacion", name="buscar_delegaciones", methods={"GET","POST"})
+     */
+
+    public function nuevaAction(Request $request, DelegacionRepository $delegacionRepository){
+
+        $datos = $request->get('delegacion');
+
+        return new JsonResponse($datos);
+    }
+
+
+
 }
