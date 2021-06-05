@@ -489,9 +489,9 @@ class ApiController extends Controller
 
     public function nuevaAction(Request $request, DelegacionRepository $delegacionRepository){
 
-        $datos = $request->get('delegacion');
+        $datos = json_decode($request->getContent());
 
-        return new JsonResponse($datos);
+        return $datos["cPostal"];
     }
 
 
