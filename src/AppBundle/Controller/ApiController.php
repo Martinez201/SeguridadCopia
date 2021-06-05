@@ -484,14 +484,33 @@ class ApiController extends Controller
 
 
     /**
-     * @Route("/movil/buscar/delegacion", name="buscar_delegaciones", methods={"GET","POST"})
+     * @Route("/movil/alta/delegacion", name="altas_delegaciones", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request, DelegacionRepository $delegacionRepository){
 
-        $datos = json_decode($request->getContent());
+        $datos = json_decode($request->getContent(),true);
 
-        return $datos["cPostal"];
+        /**  Delegacion delegacionNueva */
+
+        $delegacionNueva = new Delegacion();
+
+        $delegacionNueva->setCiudad($datos["ciudad"]);
+        $delegacionNueva->setDireccion($datos["direccion"]);
+        $delegacionNueva->setProvincia($datos["provincia"]);
+        $delegacionNueva->setCPostal($datos["cPostal"]);
+        $delegacionNueva->setEmail($datos["email"]);
+        $delegacionNueva->setTelefono($datos["telefono"]);
+        $delegacionNueva->setNombre($datos["identificacion"]);
+
+        $this->getDoctrine()->getManager()->persist($delegacionNueva);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($delegacionNueva,200);
+
+        return $response;
     }
 
 
