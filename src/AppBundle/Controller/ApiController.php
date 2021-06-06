@@ -484,7 +484,7 @@ class ApiController extends Controller
 
 
     /**
-     * @Route("/movil/alta/delegacion", name="altas_delegaciones", methods={"GET","POST"})
+     * @Route("/movil/alta/delegacion", name="altas_delegaciones_movil", methods={"GET","POST"})
      */
 
     public function nuevaAction(Request $request, DelegacionRepository $delegacionRepository){
