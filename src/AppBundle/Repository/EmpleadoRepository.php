@@ -33,6 +33,19 @@ class EmpleadoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    function comprobarCredenciales(string $usuario, string $pass){
+
+        return $this->createQueryBuilder('em')
+            ->where('em.usuario = :usuario')
+            ->andWhere('em.password = :password')
+            ->setParameter('usuario',$usuario)
+            ->setParameter('password',$pass)
+            ->getQuery()
+            ->getArrayResult();
+
+
+    }
+
     function obtenerEmpleadosDelegacion(Delegacion $delegacion){
 
         return $this->createQueryBuilder('em')
