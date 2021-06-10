@@ -39,7 +39,7 @@ class EmpleadoRepository extends ServiceEntityRepository
             ->where('em.usuario = :usuario')
             ->andWhere('em.password = :password')
             ->setParameter('usuario',$usuario)
-            ->setParameter('password',$pass)
+            ->setParameter('clave',$pass)
             ->getQuery()
             ->getArrayResult();
 
