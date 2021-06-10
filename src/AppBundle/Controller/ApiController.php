@@ -515,4 +515,31 @@ class ApiController extends Controller
 
 
 
+    /**
+     * @Route("/movil/login", name="inicio_session_movil", methods={"GET","POST"})
+     */
+
+    public function comprobarDatosUsuario(Request $request, EmpleadoRepository $empleadoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+
+
+
+            $response = $empleadoRepository->comprobarCredenciales($datos["usuario"],$datos["password"]);
+
+
+       /* $this->getDoctrine()->getManager()->persist($delegacionNueva);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($delegacionNueva,200);*/
+
+        return $response;
+    }
+
+
+
+
 }
