@@ -31,6 +31,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -515,28 +516,33 @@ class ApiController extends Controller
 
 
 
+    private function codficicar($pass, Empleado  $empleado ,UserPasswordEncoderInterface $passwordEncoder){
+
+        return $passwordEncoder->isPasswordValid($empleado,$pass);
+    }
+
+
     /**
      * @Route("/movil/login", name="inicio_session_movil", methods={"GET","POST"})
      */
 
-    public function comprobarDatosUsuario(Request $request, EmpleadoRepository $empleadoRepository){
+    public function comprobarDatosUsuario(Request $request, EmpleadoRepository $empleadoRepository,UserPasswordEncoderInterface $passwordEncoder){
 
         $datos = json_decode($request->getContent(),true);
 
+        $usuario = $empleadoRepository->obtenerEmpleadoUsuario("admin");
 
 
 
-            $response = $empleadoRepository->comprobarCredenciales($datos["usuario"],$datos["password"]);
+        $passCod = $this->codficicar($datos["password"],$usuario,$passwordEncoder);
+
+        $respuesta = $empleadoRepository->comprobarCredenciales($datos["usuario"],$passCod);
 
 
-       /* $this->getDoctrine()->getManager()->persist($delegacionNueva);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
-
-        $response = new JsonResponse($delegacionNueva,200);*/
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
+
     }
 
 

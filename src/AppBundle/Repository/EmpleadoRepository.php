@@ -59,4 +59,13 @@ class EmpleadoRepository extends ServiceEntityRepository
 
     }
 
+    function obtenerEmpleadoUsuario($usuario){
+
+        return $this->createQueryBuilder('em')
+            ->where('em.usuario = :usuario')
+            ->setParameter('usuario',$usuario)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
 }
