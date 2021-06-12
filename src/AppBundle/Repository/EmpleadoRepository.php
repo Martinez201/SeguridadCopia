@@ -65,7 +65,7 @@ class EmpleadoRepository extends ServiceEntityRepository
             ->where('em.usuario = :usuario')
             ->setParameter('usuario',$usuario)
             ->getQuery()
-            ->getArrayResult();
+            ->getResult();
     }
 
 }

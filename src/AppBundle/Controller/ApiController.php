@@ -515,28 +515,16 @@ class ApiController extends Controller
     }
 
 
-
-    private function codficicar($pass, Empleado  $empleado ,UserPasswordEncoderInterface $passwordEncoder){
-
-        return $passwordEncoder->isPasswordValid($empleado,$pass);
-    }
-
-
     /**
      * @Route("/movil/login", name="inicio_session_movil", methods={"GET","POST"})
      */
 
-    public function comprobarDatosUsuario(Request $request, EmpleadoRepository $empleadoRepository,UserPasswordEncoderInterface $passwordEncoder){
+    public function comprobarDatosUsuario(Request $request, EmpleadoRepository $empleadoRepository){
 
         $datos = json_decode($request->getContent(),true);
 
-        $usuario = $empleadoRepository->obtenerEmpleadoUsuario("admin");
 
-
-
-        $passCod = $this->codficicar($datos["password"],$usuario,$passwordEncoder);
-
-        $respuesta = $empleadoRepository->comprobarCredenciales($datos["usuario"],$passCod);
+        $respuesta = $empleadoRepository->comprobarCredenciales($datos["usuario"],$datos["dni"]);
 
 
         $response = new JsonResponse($respuesta,200);
