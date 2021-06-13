@@ -1,7 +1,7 @@
 AppBundle\Entity\Delegacion:
   delegacion_Jaen:
     nombre: 'UnsegurJaen'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     direccion: '<es_ES:streetAddress()>'
     cPostal: '23700'
     ciudad: 'Linares'
@@ -20,7 +20,7 @@ AppBundle\Entity\Delegacion:
     provincia: 'Madrid'
     direccion: '<es_ES:streetAddress()>'
     cPostal: '28080'
-    ciudad: 'Alcalá de Henares'
+    ciudad: 'Alcala de Henares'
     telefono: '<tollFreePhoneNumber()>'
     email: 'contacto@unsegur.es'
 
@@ -34,7 +34,7 @@ AppBundle\Entity\Empleado:
     telefono: '<tollFreePhoneNumber()>'
     ciudad: 'Linares'
     cPostal: '23700'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 0
@@ -52,7 +52,7 @@ AppBundle\Entity\Empleado:
     telefono: '<tollFreePhoneNumber()>'
     ciudad: 'Linares'
     cPostal: '23700'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 0
@@ -70,7 +70,7 @@ AppBundle\Entity\Empleado:
     telefono: '<tollFreePhoneNumber()>'
     ciudad: 'Linares'
     cPostal: '23700'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 0
@@ -88,7 +88,7 @@ AppBundle\Entity\Empleado:
     telefono: '<tollFreePhoneNumber()>'
     ciudad: 'Linares'
     cPostal: '23700'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     administrador: 1
@@ -107,7 +107,7 @@ AppBundle\Entity\Cliente:
     telefono: '<tollFreePhoneNumber()>'
     ciudad: 'Linares'
     cPostal: '23700'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     estado: 1
@@ -119,7 +119,7 @@ AppBundle\Entity\Cliente:
     telefono: '<tollFreePhoneNumber()>'
     ciudad: 'Linares'
     cPostal: '23700'
-    provincia: 'Jaén'
+    provincia: 'Jaen'
     email: '<email()>'
     direccion: '<es_ES:streetAddress()>'
     estado: 0
