@@ -52,6 +52,16 @@ class ClienteRepository extends ServiceEntityRepository
                 ->getArrayResult();
     }
 
+    public function obtenerResultados2($palabra){
+
+
+        return $this->createQueryBuilder('cli')
+            ->Where('cli.apellidos LIKE :texto')
+            ->setParameter('texto','%'.$palabra.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function obtenerClientesDelegacion($delegacion,$estado){
 
         return $this->createQueryBuilder('cl')

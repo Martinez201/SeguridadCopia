@@ -540,12 +540,18 @@ class ApiController extends Controller
     public function buscarClienteMovil(Request $request, ClienteRepository $clienteRepository){
 
         $datos = json_decode($request->getContent(),true);
+        $data = array();
 
+        /**@var Cliente $respuesta*/
+        $clientes = $clienteRepository->obtenerResultados2($datos["busqueda"]);
 
-        $respuesta = $clienteRepository->obtenerResultados($datos["busqueda"]);
+        foreach ($clientes as $cliente){
 
+            $data [$cliente->getId()] = $this->serializeCliente($cliente);
 
-        $response = new JsonResponse($respuesta,200);
+        }
+
+        $response = new JsonResponse($data,200);
 
         return $response;
 
