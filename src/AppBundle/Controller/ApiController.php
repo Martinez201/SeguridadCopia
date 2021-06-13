@@ -567,7 +567,7 @@ class ApiController extends Controller
         $data = array();
 
         /**@var Albaran $respuesta*/
-        $albaranes = $albaranRepository->obtenerResultados($datos["busqueda"]);
+        $albaranes = $albaranRepository->obtenerResultados2($datos["busqueda"]);
 
         foreach ($albaranes as $albaran){
 
