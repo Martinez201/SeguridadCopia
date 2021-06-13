@@ -483,6 +483,50 @@ class ApiController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/movil/alta/parte", name="altas_parte_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActionParte(Request $request, ClienteRepository $clienteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        /**  Cliente cliente */
+        // $cliente = $clienteRepository->obtenerClienteId(intval($datos["cliente"]));
+
+        /**  Parte parte */
+
+        $parte = new Parte();
+
+        /* $parte->setCliente($cliente);
+          $parte->set($datos["direccion"]);
+          $delegacionNueva->setProvincia($datos["provincia"]);
+          $delegacionNueva->setCPostal($datos["cPostal"]);
+          $delegacionNueva->setEmail($datos["email"]);
+          $delegacionNueva->setTelefono($datos["telefono"]);
+          $delegacionNueva->setNombre($datos["identificacion"]);
+
+          $this->getDoctrine()->getManager()->persist($delegacionNueva);
+
+          $em = $this->getDoctrine()->getManager();
+          $em->flush();*/
+
+        $prueba = array(
+            'A'=> $datos["cliente"],
+            'B'=> $datos["fecha"],
+            'C'=> $datos["detalle"],
+            'D'=> $datos["observaciones"],
+            'E'=> $datos["tipo"],
+            'F'=> $datos["estado"],
+            'G'=> $datos["delegacion"],
+            'H'=> $datos["empleado"],
+        );
+
+        $response = new JsonResponse($prueba,200);
+
+        return $response;
+    }
+
 
     /**
      * @Route("/movil/alta/cliente", name="altas_clientes_movil", methods={"GET","POST"})
