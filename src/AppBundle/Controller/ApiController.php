@@ -485,10 +485,52 @@ class ApiController extends Controller
 
 
     /**
+     * @Route("/movil/alta/cliente", name="altas_clientes_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActionCliente(Request $request){
+
+        $datos = json_decode($request->getContent(),true);
+
+        /** @var  Cliente $clienteNuevo */
+
+        $clienteNuevo = new Cliente();
+
+        $clienteNuevo->setCiudad($datos["ciudad"]);
+        $clienteNuevo->setDireccion($datos["direccion"]);
+        $clienteNuevo->setProvincia($datos["provincia"]);
+        $clienteNuevo->setCPostal($datos["cPostal"]);
+        $clienteNuevo->setEmail($datos["email"]);
+        $clienteNuevo->setTelefono($datos["telefono"]);
+        $clienteNuevo->setNombre($datos["nombre"]);
+        $clienteNuevo->setFechaNacimiento(strtotime($datos["nacimiento"]));
+
+        if ($datos["estado"] == "FALSE"){
+
+            $clienteNuevo->setEstado(false);
+
+        }else{
+
+            $clienteNuevo->setEstado(true);
+        }
+
+        $this->getDoctrine()->getManager()->persist($clienteNuevo);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($clienteNuevo,200);
+
+        return $response;
+    }
+
+
+
+    /**
      * @Route("/movil/alta/delegacion", name="altas_delegaciones_movil", methods={"GET","POST"})
      */
 
-    public function nuevaAction(Request $request, DelegacionRepository $delegacionRepository){
+    public function nuevaActionDelegacion(Request $request, DelegacionRepository $delegacionRepository){
 
         $datos = json_decode($request->getContent(),true);
 
