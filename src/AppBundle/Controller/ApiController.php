@@ -533,6 +533,24 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/clientes/buscar", name="buscar_cliente_movil", methods={"GET","POST"})
+     */
+
+    public function buscarClienteMovil(Request $request, ClienteRepository $clienteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+
+        $respuesta = $clienteRepository->obtenerResultados($datos["busqueda"]);
+
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
 
 
 
