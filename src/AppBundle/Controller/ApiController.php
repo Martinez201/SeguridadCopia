@@ -492,20 +492,22 @@ class ApiController extends Controller
 
         $datos = json_decode($request->getContent(),true);
 
-        /** @var  Cliente $clienteNuevo */
+        /** Cliente clienteNuevo */
 
         $clienteNuevo = new Cliente();
 
         $clienteNuevo->setCiudad($datos["ciudad"]);
+        $clienteNuevo->setApellidos($datos["apellidos"]);
         $clienteNuevo->setDireccion($datos["direccion"]);
         $clienteNuevo->setProvincia($datos["provincia"]);
         $clienteNuevo->setCPostal($datos["cPostal"]);
         $clienteNuevo->setEmail($datos["email"]);
         $clienteNuevo->setTelefono($datos["telefono"]);
         $clienteNuevo->setNombre($datos["nombre"]);
-        $clienteNuevo->setFechaNacimiento(strtotime($datos["nacimiento"]));
+        $clienteNuevo->setDni($datos["dni"]);
+        $clienteNuevo->setFechaNacimiento(date_create_from_format('d-m-Y',$datos["nacimiento"]));
 
-        if ($datos["estado"] == "FALSE"){
+        if ($datos["estado"] == "BAJA"){
 
             $clienteNuevo->setEstado(false);
 
