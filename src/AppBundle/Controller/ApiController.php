@@ -652,6 +652,7 @@ class ApiController extends Controller
         $factura->setCliente($cliente);
         $factura->setConcepto($datos["concepto"]);
         $factura->setPrecioSinIva(floatval($datos["precio"]));
+        $factura->setPrecioConIva(floatval($datos["precio"]));
 
         $this->getDoctrine()->getManager()->persist($factura);
 
@@ -663,6 +664,7 @@ class ApiController extends Controller
 
         return $response;
     }
+
 
 
     /**
