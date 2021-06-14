@@ -648,22 +648,21 @@ class ApiController extends Controller
 
         $factura = new Factura();
         $factura->setEmpleado($empleado);
-        $factura->setFecha(date_create_from_format('d-m-Y',$datos["nacimiento"]));
+        $factura->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
         $factura->setCliente($cliente);
         $factura->setConcepto($datos["concepto"]);
-        $factura->setPrecioSinIva($datos["precio"]);
-
+        $factura->setPrecioSinIva(floatval($datos["precio"]));
 
         $this->getDoctrine()->getManager()->persist($factura);
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+
         $response = new JsonResponse($factura,200);
 
         return $response;
     }
-
 
 
     /**
