@@ -517,7 +517,6 @@ class ApiController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-
         $response = new JsonResponse($presupuesto,200);
 
         return $response;
