@@ -629,6 +629,42 @@ class ApiController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/movil/alta/factura", name="altas_factura_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActionFactura(Request $request  , ClienteRepository $clienteRepository, EmpleadoRepository  $empleadoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+
+        /**@var  Cliente $cliente */
+        $cliente = $clienteRepository->find(intval($datos["cliente"]));
+
+
+        /** @var Empleado $empleado */
+        $empleado = $empleadoRepository->find(intval($datos["empleado"]));
+
+
+        $factura = new Factura();
+        $factura->setEmpleado($empleado);
+        $factura->setFecha(date_create_from_format('d-m-Y',$datos["nacimiento"]));
+        $factura->setCliente($cliente);
+        $factura->setConcepto($datos["concepto"]);
+        $factura->setPrecioSinIva($datos["precio"]);
+
+
+        $this->getDoctrine()->getManager()->persist($factura);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($factura,200);
+
+        return $response;
+    }
+
+
 
     /**
      * @Route("/movil/login", name="inicio_session_movil", methods={"GET","POST"})
