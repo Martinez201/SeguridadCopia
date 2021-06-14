@@ -485,6 +485,33 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/alta/albaran", name="altas_albaranes_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActioAlbaran(Request $request, EmpleadoRepository  $empleadoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        /**  Delegacion delegacionNueva */
+
+      /*  $albaran = new Albaran();
+
+        $albaran->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+
+        $this->getDoctrine()->getManager()->persist($albaran);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();*/
+
+        $prueba = array();
+
+        $response = new JsonResponse($prueba,200);
+
+        return $response;
+    }
+
+
+    /**
      * @Route("/movil/alta/empleado", name="altas_empleado_movil", methods={"GET","POST"})
      */
 
