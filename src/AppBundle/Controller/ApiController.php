@@ -614,9 +614,9 @@ class ApiController extends Controller
         $producto= new Producto();
         $producto->setNombre($datos["nombre"]);
         $producto->setTipo($datos["tipo"]);
-        $producto->setCantidad($datos["stock"]);
+        $producto->setCantidad(intval($datos["stock"]));
         $producto->setImagen("");
-        $producto->setPrecio($datos["precio"]);
+        $producto->setPrecio(floatval($datos["precio"]));
 
 
         $this->getDoctrine()->getManager()->persist($producto);
