@@ -492,43 +492,34 @@ class ApiController extends Controller
         $datos = json_decode($request->getContent(),true);
 
         /**@var  Cliente $cliente */
-        //$cliente = $clienteRepository->obtenerClienteId(intval($datos["cliente"]));
+        $cliente = $clienteRepository->find(intval($datos["cliente"]));
 
 
         /** @var Empleado $empleado */
-        //$empleado = $empleadoRepository->obtenerEmpleadoId(intval($datos["empleado"]));
+        $empleado = $empleadoRepository->find(intval($datos["empleado"]));
+
+
 
         /**  Parte parte */
-        /* $parte = new Parte();
+        $parte = new Parte();
 
-          $parte->setCliente($cliente);
-          $parte->setObservaciones($datos["observaciones"]);
-          $parte->setDelegacion($empleado->getDelegacion());
-          $parte->setEstado($datos["estado"]);
-          $parte->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
-          $parte->setDetalle($datos["detalle"]);
-          $parte->setTipo($datos["tipo"]);
-          $parte->setEmpleado($empleado);*/
+        $parte->setCliente($cliente);
+        $parte->setObservaciones($datos["observaciones"]);
+        $parte->setDelegacion($empleado->getDelegacion());
+        $parte->setEstado($datos["estado"]);
+        $parte->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $parte->setDetalle($datos["detalle"]);
+        $parte->setTipo($datos["tipo"]);
+        $parte->setEmpleado($empleado);
 
 
 
-        /*  $this->getDoctrine()->getManager()->persist($parte);
+        $this->getDoctrine()->getManager()->persist($parte);
 
-           $em = $this->getDoctrine()->getManager();
-           $em->flush();*/
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
 
-        $prueba = array(
-            'A'=> $datos["cliente"],
-            'B'=> $datos["fecha"],
-            'C'=> $datos["detalle"],
-            'D'=> $datos["observaciones"],
-            'E'=> $datos["tipo"],
-            'F'=> $datos["estado"],
-            'G'=> $datos["delegacion"],
-            'H'=> $datos["empleado"],
-        );
-
-        $response = new JsonResponse($prueba,200);
+        $response = new JsonResponse($empleado->getDelegacion(),200);
 
         return $response;
     }
