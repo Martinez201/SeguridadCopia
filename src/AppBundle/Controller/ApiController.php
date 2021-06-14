@@ -35,6 +35,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
+use function Couchbase\passthruEncoder;
 
 
 class ApiController extends Controller
@@ -485,6 +486,44 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/alta/presupuesto", name="altas_presupuesto_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActioPresupuesto(Request $request, EmpleadoRepository  $empleadoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+
+        /** @var Empleado $empleado */
+        $empleado = $empleadoRepository->find(intval($datos["empleado"]));
+
+        $presupuesto = new Presupuesto();
+
+        $presupuesto->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $presupuesto->setEmpleado($empleado);
+        $presupuesto->setInstalacion($datos["instalacion"]);
+
+        if ($datos["estado"] == "FALSE"){
+
+            $presupuesto->setEstado(false);
+        }else{
+
+            $presupuesto->setEstado(true);
+        }
+
+
+        $this->getDoctrine()->getManager()->persist($presupuesto);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+
+        $response = new JsonResponse($presupuesto,200);
+
+        return $response;
+    }
+
+    /**
      * @Route("/movil/alta/albaran", name="altas_albaranes_movil", methods={"GET","POST"})
      */
 
@@ -590,10 +629,6 @@ class ApiController extends Controller
         return $response;
 
     }
-
-
-
-
 
     /**
      * @Route("/movil/alta/parte", name="altas_parte_movil", methods={"GET","POST"})
