@@ -30,4 +30,14 @@ class DelegacionRepository extends ServiceEntityRepository
             ->getResult();
 
     }
+
+    public function obtenerResultados2($palabra){
+
+
+        return $this->createQueryBuilder('del')
+            ->Where('del.nombre LIKE :texto')
+            ->setParameter('texto','%'.$palabra.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

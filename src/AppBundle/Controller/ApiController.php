@@ -734,6 +734,28 @@ class ApiController extends Controller
     }
 
 
+    /**
+     * @Route("/movil/delegaciones/buscar", name="buscar_delegacion_movil", methods={"GET","POST"})
+     */
 
+    public function buscarDelegacionMovil(Request $request, DelegacionRepository $delegacionRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        /**@var Cliente $respuesta*/
+        $delegaciones = $delegacionRepository->obtenerResultados2($datos["busqueda"]);
+
+        foreach ($delegaciones as $delegacion){
+
+            $data [$delegacion->getId()] = $this->serializeDelegacion($delegacion);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
 
 }
