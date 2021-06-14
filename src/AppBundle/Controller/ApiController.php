@@ -488,49 +488,81 @@ class ApiController extends Controller
      * @Route("/movil/alta/empleado", name="altas_empleado_movil", methods={"GET","POST"})
      */
 
-    public function nuevaActionEmpleado(Request $request, DelegacionRepository  $delegacionRepository){
+    public function nuevaActionEmpleado(Request $request, DelegacionRepository  $delegacionRepository /*, UserPasswordEncoderInterface $passwordEncoder */){
 
         $datos = json_decode($request->getContent(),true);
 
         /**@var  Delegacion $delegacion */
-       // $delegacion = $delegacionRepository->find(intval($datos["delegacion"]));
+        $delegacion = $delegacionRepository->find(intval($datos["delegacion"]));
+
+        $administrador = true;
+        $comercial = true;
+        $instalador = true;
+        $gestor = true;
+
+        if ($datos["admin"] == "FALSE"){
+
+            $administrador = false;
+
+        }
+
+        if ($datos["comercial"] == "FALSE"){
+
+            $comercial = false;
+
+        }
 
 
-       /* $empleado = new Empleado();
+        if ($datos["instalador"] == "FALSE"){
+
+            $instalador = false;
+
+        }
+
+
+        if ($datos["gestor"] == "FALSE"){
+
+            $gestor = false;
+
+        }
+
+
+        $empleado = new Empleado();
+        $empleado->setNombre($datos["nombre"]);
+        $empleado->setEdad(date_create_from_format('d-m-Y',$datos["nacimiento"]));
+        $empleado->setDelegacion($delegacion);
+        $empleado->setDni($datos["dni"]);
+        $empleado->setApellidos($datos["apellidos"]);
+        $empleado->setTelefono($datos["telefono"]);
+        $empleado->setEmail($datos["email"]);
+        $empleado->setCPostal($datos["cPostal"]);
+        $empleado->setCiudad($datos["ciudad"]);
+        $empleado->setProvincia($datos["provincia"]);
+        $empleado->setDireccion($datos["direccion"]);
+        $empleado->setAvatar("");
+        $empleado->setComercial($comercial);
+        $empleado->setGestor($gestor);
+        $empleado->setInstalador($instalador);
+        $empleado->setUsuario($datos["usuario"]);
+        $empleado->setAdministrador($administrador);
+        $empleado->setClave($datos["password"]);
+        //$clave = $passwordEncoder->encodePassword($empleado,$datos["password"]);
+        // $empleado->setClave($clave);
 
 
         $this->getDoctrine()->getManager()->persist($empleado);
 
         $em = $this->getDoctrine()->getManager();
-        $em->flush();*/
+        $em->flush();
 
 
-        $ejemplo = array(
-            'A' => $datos["usuario"],
-            'B' => $datos["password"],
-            'C' => $datos["nombre"],
-            'D' => $datos["apellidos"],
-            'E' => $datos["direccion"],
-            'F' => $datos["provincia"],
-            'G' => $datos["nacimiento"],
-            'H' => $datos["ciudad"],
-            'I' => $datos["cPostal"],
-            'J' => $datos["email"],
-            'K' => $datos["telefono"],
-            'L' => $datos["estado"],
-            'M' => $datos["dni"],
-            'N' => $datos["delegacion"],
-            'Ñ' => $datos["admin"],
-            'O' => $datos["instalador"],
-            'P' => $datos["gestor"],
-            'Q' => $datos["gestor"]
-        );
-
-        $response = new JsonResponse($ejemplo,200);
+        $response = new JsonResponse($empleado,200);
 
         return $response;
 
     }
+
+
 
 
 
