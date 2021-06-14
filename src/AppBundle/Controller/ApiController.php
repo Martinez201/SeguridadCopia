@@ -492,24 +492,26 @@ class ApiController extends Controller
 
         $datos = json_decode($request->getContent(),true);
 
-        /**  Delegacion delegacionNueva */
 
-      /*  $albaran = new Albaran();
+        /** @var Empleado $empleado */
+        $empleado = $empleadoRepository->find(intval($datos["empleado"]));
+
+        $albaran = new Albaran();
 
         $albaran->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $albaran->setEmpleado($empleado);
+        $albaran->setProveedor($datos["proveedor"]);
 
         $this->getDoctrine()->getManager()->persist($albaran);
 
         $em = $this->getDoctrine()->getManager();
-        $em->flush();*/
+        $em->flush();
 
-        $prueba = array();
 
-        $response = new JsonResponse($prueba,200);
+        $response = new JsonResponse($albaran,200);
 
         return $response;
     }
-
 
     /**
      * @Route("/movil/alta/empleado", name="altas_empleado_movil", methods={"GET","POST"})
