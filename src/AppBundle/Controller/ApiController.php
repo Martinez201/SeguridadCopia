@@ -601,6 +601,35 @@ class ApiController extends Controller
     }
 
 
+
+    /**
+     * @Route("/movil/alta/producto", name="altas_producto_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActionProducto(Request $request ){
+
+        $datos = json_decode($request->getContent(),true);
+
+
+        $producto= new Producto();
+        $producto->setNombre($datos["nombre"]);
+        $producto->setTipo($datos["tipo"]);
+        $producto->setCantidad($datos["stock"]);
+        $producto->setImagen("");
+        $producto->setPrecio($datos["precio"]);
+
+
+        $this->getDoctrine()->getManager()->persist($producto);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($producto,200);
+
+        return $response;
+    }
+
+
     /**
      * @Route("/movil/login", name="inicio_session_movil", methods={"GET","POST"})
      */
