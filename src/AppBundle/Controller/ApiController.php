@@ -26,6 +26,7 @@ use AppBundle\Repository\FacturaRepository;
 use AppBundle\Repository\ParteRepository;
 use AppBundle\Repository\PresupuestoRepository;
 use AppBundle\Repository\ProductoRepository;
+use ClassesWithParents\E;
 use DateTime;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -482,6 +483,56 @@ class ApiController extends Controller
 
         return $response;
     }
+
+    /**
+     * @Route("/movil/alta/empleado", name="altas_empleado_movil", methods={"GET","POST"})
+     */
+
+    public function nuevaActionEmpleado(Request $request, DelegacionRepository  $delegacionRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        /**@var  Delegacion $delegacion */
+       // $delegacion = $delegacionRepository->find(intval($datos["delegacion"]));
+
+
+       /* $empleado = new Empleado();
+
+
+        $this->getDoctrine()->getManager()->persist($empleado);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();*/
+
+
+        $ejemplo = array(
+            'A' => $datos["usuario"],
+            'B' => $datos["password"],
+            'C' => $datos["nombre"],
+            'D' => $datos["apellidos"],
+            'E' => $datos["direccion"],
+            'F' => $datos["provincia"],
+            'G' => $datos["nacimiento"],
+            'H' => $datos["ciudad"],
+            'I' => $datos["cPostal"],
+            'J' => $datos["email"],
+            'K' => $datos["telefono"],
+            'L' => $datos["estado"],
+            'M' => $datos["dni"],
+            'N' => $datos["delegacion"],
+            'Ñ' => $datos["admin"],
+            'O' => $datos["instalador"],
+            'P' => $datos["gestor"],
+            'Q' => $datos["gestor"]
+        );
+
+        $response = new JsonResponse($ejemplo,200);
+
+        return $response;
+
+    }
+
+
 
     /**
      * @Route("/movil/alta/parte", name="altas_parte_movil", methods={"GET","POST"})
