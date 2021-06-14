@@ -487,29 +487,35 @@ class ApiController extends Controller
      * @Route("/movil/alta/parte", name="altas_parte_movil", methods={"GET","POST"})
      */
 
-    public function nuevaActionParte(Request $request, ClienteRepository $clienteRepository){
+    public function nuevaActionParte(Request $request , ClienteRepository $clienteRepository, EmpleadoRepository  $empleadoRepository){
 
         $datos = json_decode($request->getContent(),true);
 
-        /**  Cliente cliente */
-        // $cliente = $clienteRepository->obtenerClienteId(intval($datos["cliente"]));
+        /**@var  Cliente $cliente */
+        //$cliente = $clienteRepository->obtenerClienteId(intval($datos["cliente"]));
+
+
+        /** @var Empleado $empleado */
+        //$empleado = $empleadoRepository->obtenerEmpleadoId(intval($datos["empleado"]));
 
         /**  Parte parte */
+        /* $parte = new Parte();
 
-        $parte = new Parte();
+          $parte->setCliente($cliente);
+          $parte->setObservaciones($datos["observaciones"]);
+          $parte->setDelegacion($empleado->getDelegacion());
+          $parte->setEstado($datos["estado"]);
+          $parte->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+          $parte->setDetalle($datos["detalle"]);
+          $parte->setTipo($datos["tipo"]);
+          $parte->setEmpleado($empleado);*/
 
-        /* $parte->setCliente($cliente);
-          $parte->set($datos["direccion"]);
-          $delegacionNueva->setProvincia($datos["provincia"]);
-          $delegacionNueva->setCPostal($datos["cPostal"]);
-          $delegacionNueva->setEmail($datos["email"]);
-          $delegacionNueva->setTelefono($datos["telefono"]);
-          $delegacionNueva->setNombre($datos["identificacion"]);
 
-          $this->getDoctrine()->getManager()->persist($delegacionNueva);
 
-          $em = $this->getDoctrine()->getManager();
-          $em->flush();*/
+        /*  $this->getDoctrine()->getManager()->persist($parte);
+
+           $em = $this->getDoctrine()->getManager();
+           $em->flush();*/
 
         $prueba = array(
             'A'=> $datos["cliente"],
@@ -526,6 +532,7 @@ class ApiController extends Controller
 
         return $response;
     }
+
 
 
     /**
