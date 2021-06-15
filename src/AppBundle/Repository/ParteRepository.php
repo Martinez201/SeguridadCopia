@@ -95,5 +95,12 @@ class ParteRepository extends ServiceEntityRepository
 
     }
 
+    public function obtenerParteId($id){
+        return $this->createQueryBuilder('cl')
+            ->where('cl.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
+    }
 
 }

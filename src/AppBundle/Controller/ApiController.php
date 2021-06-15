@@ -1043,6 +1043,28 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/parte/buscar/form", name="buscar_parte_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarParteFormMovil(Request $request, ParteRepository $parteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $partes= $parteRepository->obtenerParteId(intval($datos["busqueda"]));
+
+        foreach ($partes as $parte){
+
+            $data [$parte->getId()] = $this->serializeParte($parte);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
 
 
 }
