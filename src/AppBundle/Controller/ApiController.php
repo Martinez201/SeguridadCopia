@@ -951,4 +951,27 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/albaran/buscar/form", name="buscar_albaran_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarAlbaranFormMovil(Request $request, AlbaranRepository $albaranRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $albaranes = $albaranRepository->obtenerAlbaranId(intval($datos["busqueda"]));
+
+        foreach ($albaranes as $albaran){
+
+            $data [$albaran->getId()] = $this->serializeAlbaran($albaran);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
 }

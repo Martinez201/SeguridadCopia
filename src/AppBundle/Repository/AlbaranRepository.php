@@ -44,4 +44,12 @@ class AlbaranRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerAlbaranId($id){
+        return $this->createQueryBuilder('cl')
+            ->where('cl.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
