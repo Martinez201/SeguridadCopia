@@ -914,12 +914,34 @@ class ApiController extends Controller
         $datos = json_decode($request->getContent(),true);
         $data = array();
 
-        /**@var Cliente $respuesta*/
         $empleados = $empleadoRepository->obtenerEmpleadoId(intval($datos["busqueda"]));
 
         foreach ($empleados as $empleado){
 
             $data [$empleado->getId()] = $this->serializeEmpleado($empleado);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
+    /**
+     * @Route("/movil/cliente/buscar/form", name="buscar_cliente_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarClienteFormMovil(Request $request, ClienteRepository $clienteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $clientes = $clienteRepository->obtenerClienteId(intval($datos["busqueda"]));
+
+        foreach ($clientes as $cliente){
+
+            $data [$cliente->getId()] = $this->serializeCliente($cliente);
 
         }
 
