@@ -1103,6 +1103,26 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/factura/modificar", name="buscar_factura_movil_modificar", methods={"GET","POST"})
+     */
+
+    public function facturaModificarMovil(Request $request, FacturaRepository $facturaRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        /**@var Factura $factura */
+        $factura = $facturaRepository->obtenerFacturaId(intval($datos["busqueda"]));
+
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
+
 
 
 }
