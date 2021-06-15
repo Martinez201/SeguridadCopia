@@ -974,4 +974,27 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/albaran/buscar/form", name="buscar_albaran_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarFacturaFormMovil(Request $request, FacturaRepository $facturaRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $facturas = $facturaRepository->obtenerFacturaId(intval($datos["busqueda"]));
+
+        foreach ($facturas as $factura){
+
+            $data [$factura->getId()] = $this->serializeFactura($factura);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
 }
