@@ -1020,5 +1020,29 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/producto/buscar/form", name="buscar_producto_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarProductoFormMovil(Request $request, ProductoRepository $productoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $productos = $productoRepository->obtenerProductoId(intval($datos["busqueda"]));
+
+        foreach ($productos as $producto){
+
+            $data [$producto->getId()] = $this->serializeProducto($producto);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
+
 
 }
