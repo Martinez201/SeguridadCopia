@@ -84,5 +84,13 @@ class PresupuestoRepository extends ServiceEntityRepository
 
     }
 
+    public function obtenerPresupuestoId($id){
+        return $this->createQueryBuilder('cl')
+            ->where('cl.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 }

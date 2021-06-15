@@ -1065,6 +1065,29 @@ class ApiController extends Controller
         return $response;
 
     }
+    /**
+     * @Route("/movil/presupuesto/buscar/form", name="buscar_presupuesto_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarPresupuestoFormMovil(Request $request, PresupuestoRepository $presupuestoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $presupuestos = $presupuestoRepository->obtenerPresupuestoId(intval($datos["busqueda"]));
+
+        foreach ($presupuestos as $presupuesto){
+
+            $data [$presupuesto->getId()] = $this->serializePresupuesto($presupuesto);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
 
 
 }
