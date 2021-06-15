@@ -975,7 +975,7 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/albaran/buscar/form", name="buscar_albaran_movil_form", methods={"GET","POST"})
+     * @Route("/movil/factura/buscar/form", name="buscar_factura_movil_form", methods={"GET","POST"})
      */
 
     public function buscarFacturaFormMovil(Request $request, FacturaRepository $facturaRepository){
@@ -996,5 +996,29 @@ class ApiController extends Controller
         return $response;
 
     }
+
+    /**
+     * @Route("/movil/delegacion/buscar/form", name="buscar_delegacion_movil_form", methods={"GET","POST"})
+     */
+
+    public function buscarDelegacionFormMovil(Request $request, DelegacionRepository $delegacionRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        $delegaciones = $delegacionRepository->obtenerDelegacionId(intval($datos["busqueda"]));
+
+        foreach ($delegaciones as $delegacion){
+
+            $data [$delegacion->getId()] = $this->serializeDelegacion($delegacion);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
 
 }
