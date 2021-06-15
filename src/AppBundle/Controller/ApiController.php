@@ -90,6 +90,7 @@ class ApiController extends Controller
             'Postal'=> $delegacion->getCPostal(),
             'Telefono'=> $delegacion->getTelefono(),
             'Email'=> $delegacion->getEmail(),
+            'Ciudad'=> $delegacion->getCiudad()
         );
     }
 
@@ -655,7 +656,21 @@ class ApiController extends Controller
         $parte->setEstado($datos["estado"]);
         $parte->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
         $parte->setDetalle($datos["detalle"]);
-        $parte->setTipo($datos["tipo"]);
+
+        if ($datos["tipo"] == "AVERÍA"){
+
+            $parte->setTipo(3);
+
+        }else if($datos["tipo"] == "MANTENIMIENTO"){
+
+            $parte->setTipo(2);
+
+        }else{
+
+            $parte->setTipo(1);
+
+        }
+
         $parte->setEmpleado($empleado);
 
 
