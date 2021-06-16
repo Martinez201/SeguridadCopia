@@ -847,7 +847,7 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/empleados/buscar", name="buscar_delegacion_movil", methods={"GET","POST"})
+     * @Route("/movil/empleados/buscar", name="buscar_empleados_movil", methods={"GET","POST"})
      */
 
     public function buscarEmpleadosMovil(Request $request, EmpleadoRepository $empleadoRepository){
