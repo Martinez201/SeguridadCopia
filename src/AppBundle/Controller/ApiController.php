@@ -1515,5 +1515,28 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/factura/borrar", name="factura_movil_borrar", methods={"GET","POST"})
+     */
+
+    public  function borrarFacturas(Request $request ,FacturaRepository $facturaRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
+
+        /**@var Factura $factura */
+        $factura = $facturaRepository->find(intval($datos["id"]));
+
+
+        $cli = $this->getDoctrine()->getManager();
+        $cli->remove($factura);
+        $cli->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
 
 }
