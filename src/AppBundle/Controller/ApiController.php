@@ -1104,6 +1104,34 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/presupuesto/modificar", name="presupuesto_movil_modificar", methods={"GET","POST"})
+     */
+
+    public function presupuestoModificarMovil(Request $request, PresupuestoRepository $presupuestoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
+
+
+
+        /**@var Presupuesto $presupuesto */
+        $presupuesto = $presupuestoRepository->find($datos["id"]);
+
+        $presupuesto->setInstalacion($datos["direccion"]);
+        $presupuesto->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $presupuesto->setEstado($datos["estado"]);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+    /**
      * @Route("/movil/parte/modificar", name="parte_movil_modificar", methods={"GET","POST"})
      */
 
