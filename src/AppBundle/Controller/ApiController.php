@@ -1382,21 +1382,20 @@ class ApiController extends Controller
         $respuesta = array('Succes'=>200);
 
         /**@var Cliente $cliente */
-        $cliente= $clienteRepository->find(intval($datos["Id"]));
+        $cliente= $clienteRepository->find(intval($datos["id"]));
 
 
         $cliente->setNombre($datos["nombre"]);
-        $cliente->setNombre($datos["apellidos"]);
-        $cliente->setNombre($datos["direccion"]);
-        $cliente->setNombre($datos["ciudad"]);
-        $cliente->setNombre($datos["provincia"]);
-        $cliente->setNombre($datos["email"]);
-        $cliente->setNombre($datos["telefono"]);
-        $cliente->setNombre($datos["cPostal"]);
-        $cliente->setNombre($datos["dni"]);
-        $cliente->setNombre(date_create_from_format('d-m-Y',$datos["nacimiento"]));
-        $cliente->setNombre($datos["estado"]);
-
+        $cliente->setApellidos($datos["apellidos"]);
+        $cliente->setDireccion($datos["direccion"]);
+        $cliente->setCiudad($datos["ciudad"]);
+        $cliente->setProvincia($datos["provincia"]);
+        $cliente->setEmail(["email"]);
+        $cliente->setTelefono($datos["telefono"]);
+        $cliente->setCPostal($datos["cPostal"]);
+        $cliente->setDni($datos["dni"]);
+        $cliente->setFechaNacimiento(date_create_from_format('d-m-Y',$datos["nacimiento"]));
+        $cliente->setEstado($datos["estado"]);
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
