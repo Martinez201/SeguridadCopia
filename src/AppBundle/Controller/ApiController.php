@@ -1499,6 +1499,7 @@ class ApiController extends Controller
     public  function borrarAlbaranes(Request $request ,AlbaranRepository $albaranRepository){
 
         $datos = json_decode($request->getContent(),true);
+
         $respuesta = array('Succes'=>200);
 
         /**@var Albaran $albaran */
@@ -1522,6 +1523,7 @@ class ApiController extends Controller
     public  function borrarFacturas(Request $request ,FacturaRepository $facturaRepository){
 
         $datos = json_decode($request->getContent(),true);
+
         $respuesta = array('Succes'=>200);
 
         /**@var Factura $factura */
@@ -1530,6 +1532,30 @@ class ApiController extends Controller
 
         $cli = $this->getDoctrine()->getManager();
         $cli->remove($factura);
+        $cli->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+    /**
+     * @Route("/movil/producto/borrar", name="producto_movil_borrar", methods={"GET","POST"})
+     */
+
+    public  function borrarProducto(Request $request ,ProductoRepository $productoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        $respuesta = array('Succes'=>200);
+
+        /**@var Producto $producto */
+        $producto = $productoRepository->find(intval($datos["id"]));
+
+
+        $cli = $this->getDoctrine()->getManager();
+        $cli->remove($producto);
         $cli->flush();
 
         $response = new JsonResponse($respuesta,200);
