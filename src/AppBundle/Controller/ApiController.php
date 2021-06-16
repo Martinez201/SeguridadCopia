@@ -1223,7 +1223,7 @@ class ApiController extends Controller
      * @Route("/movil/empleado/modificar", name="empleado_movil_modificar", methods={"GET","POST"})
      */
 
-    public function empleadoModificarMovil(Request $request, EmpleadoRepository $empleadoRepository,UserPasswordEncoderInterface $passwordEncoder,DelegacionRepository  $delegacionRepository){
+    public function empleadoModificarMovil(Request $request, EmpleadoRepository $empleadoRepository ,DelegacionRepository  $delegacionRepository){
 
         $datos = json_decode($request->getContent(),true);
         $respuesta = array('Succes'=>200);
@@ -1236,7 +1236,6 @@ class ApiController extends Controller
 
 
         $empleado->setUsuario($datos["usuario"]);
-        $empleado->setClave($passwordEncoder->encodePassword($empleado,$datos["password"]));
         $empleado->setNombre($datos["nombre"]);
         $empleado->setApellidos($datos["apellidos"]);
         $empleado->setDireccion($datos["direccion"]);
