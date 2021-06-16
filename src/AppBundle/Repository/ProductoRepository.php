@@ -53,7 +53,7 @@ class ProductoRepository extends ServiceEntityRepository
     public function obtenerResultados2($palabra){
 
         return $this->createQueryBuilder('al')
-            ->Where('al.apellidos LIKE :texto')
+            ->Where('al.nombre LIKE :texto')
             ->setParameter('texto','%'.$palabra.'%')
             ->getQuery()
             ->getResult();
