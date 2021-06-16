@@ -1104,6 +1104,36 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/delegacion/modificar", name="delegacion_movil_modificar", methods={"GET","POST"})
+     */
+
+    public function delegacionModificarMovil(Request $request, DelegacionRepository $delegacionRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
+
+
+        /**@var Delegacion $delegacion */
+        $delegacion = $delegacionRepository->find(intval($datos["id"]));
+
+        $delegacion->setNombre($datos["identificacion"]);
+        $delegacion->setDireccion($datos["direccion"]);
+        $delegacion->setCiudad($datos["ciudad"]);
+        $delegacion->setProvincia($datos["provincia"]);
+        $delegacion->setEmail($datos["email"]);
+        $delegacion->setTelefono($datos["telefono"]);
+        $delegacion->setCPostal($datos["cPostal"]);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+    /**
      * @Route("/movil/factura/modificar", name="factura_movil_modificar", methods={"GET","POST"})
      */
 
