@@ -38,7 +38,7 @@ class AlbaranRepository extends ServiceEntityRepository
     public function obtenerResultados2($palabra){
 
         return $this->createQueryBuilder('al')
-            ->Where('al.proveedor LIKE :texto')
+            ->Where('al.fecha LIKE :texto')
             ->setParameter('texto','%'.$palabra.'%')
             ->getQuery()
             ->getResult();

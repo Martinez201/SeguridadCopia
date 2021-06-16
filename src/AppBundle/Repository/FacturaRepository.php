@@ -126,4 +126,13 @@ class FacturaRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerResultados2($palabra){
+
+        return $this->createQueryBuilder('al')
+            ->Where('al.fecha LIKE :texto')
+            ->setParameter('texto','%'.$palabra.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

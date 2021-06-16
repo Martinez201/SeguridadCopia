@@ -845,6 +845,31 @@ class ApiController extends Controller
         return $response;
 
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @Route("/movil/facturas/buscar", name="buscar_facturas_movil", methods={"GET","POST"})
+     */
+
+    public function buscarFacturasMovil(Request $request, FacturaRepository $facturaRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        /**@var Factura $respuesta*/
+        $facturas = $facturaRepository->obtenerResultados2($datos["busqueda"]);
+
+        foreach ($facturas as $factura){
+
+            $data [$factura->getId()] = $this->serializeFactura($factura);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
 
     /**
      * @Route("/movil/empleados/buscar", name="buscar_empleados_movil", methods={"GET","POST"})
@@ -856,11 +881,11 @@ class ApiController extends Controller
         $data = array();
 
         /**@var Empleado $respuesta*/
-        $delegaciones = $empleadoRepository->obtenerResultados2($datos["busqueda"]);
+        $empleados = $empleadoRepository->obtenerResultados2($datos["busqueda"]);
 
-        foreach ($delegaciones as $delegacion){
+        foreach ($empleados as $empleado){
 
-            $data [$delegacion->getId()] = $this->serializeDelegacion($delegacion);
+            $data [$empleado->getId()] = $this->serializeEmpleado($empleado);
 
         }
 
@@ -969,7 +994,7 @@ class ApiController extends Controller
 
     }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @Route("/movil/empleados/buscar/form", name="buscar_empleados_movil_form", methods={"GET","POST"})
      */
