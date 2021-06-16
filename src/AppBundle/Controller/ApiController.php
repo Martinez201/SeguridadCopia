@@ -930,12 +930,36 @@ class ApiController extends Controller
         $datos = json_decode($request->getContent(),true);
         $data = array();
 
-        /**@var Cliente $respuesta*/
+        /**@var Delegacion $respuesta*/
         $delegaciones = $delegacionRepository->obtenerResultados2($datos["busqueda"]);
 
         foreach ($delegaciones as $delegacion){
 
             $data [$delegacion->getId()] = $this->serializeDelegacion($delegacion);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
+    /**
+     * @Route("/movil/partes/buscar", name="buscar_partes_movil", methods={"GET","POST"})
+     */
+
+    public function buscarPartesMovil(Request $request, ParteRepository $parteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        /**@var Parte $respuesta */
+        $partes = $parteRepository->obtenerResultados2($datos["busqueda"]);
+
+        foreach ($partes as $parte){
+
+            $data [$parte->getId()] = $this->serializeParte($parte);
 
         }
 

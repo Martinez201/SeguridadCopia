@@ -103,4 +103,14 @@ class ParteRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerResultados2($palabra){
+
+
+        return $this->createQueryBuilder('del')
+            ->Where('del.fecha LIKE :texto')
+            ->setParameter('texto','%'.$palabra.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
