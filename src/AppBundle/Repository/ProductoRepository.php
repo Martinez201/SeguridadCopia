@@ -50,4 +50,13 @@ class ProductoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function obtenerResultados2($palabra){
+
+        return $this->createQueryBuilder('al')
+            ->Where('al.apellidos LIKE :texto')
+            ->setParameter('texto','%'.$palabra.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

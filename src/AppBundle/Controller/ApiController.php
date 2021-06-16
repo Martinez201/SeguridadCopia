@@ -847,6 +847,57 @@ class ApiController extends Controller
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    /**
+     * @Route("/movil/presupuestos/buscar", name="buscar_presupuestos_movil", methods={"GET","POST"})
+     */
+
+    public function buscarPresupuestosMovil(Request $request, PresupuestoRepository $presupuestoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        /**@var Presupuesto $respuesta*/
+        $presupuestos = $presupuestoRepository->obtenerResultados2($datos["busqueda"]);
+
+        foreach ($presupuestos as $presupuesto){
+
+            $data [$presupuesto->getId()] = $this->serializePresupuesto($presupuesto);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
+
+    /**
+     * @Route("/movil/productos/buscar", name="buscar_productos_movil", methods={"GET","POST"})
+     */
+
+    public function buscarProductosMovil(Request $request, ProductoRepository $productoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $data = array();
+
+        /**@var Producto $respuesta*/
+        $productos = $productoRepository->obtenerResultados2($datos["busqueda"]);
+
+        foreach ($productos as $producto){
+
+            $data [$producto->getId()] = $this->serializeProducto($producto);
+
+        }
+
+        $response = new JsonResponse($data,200);
+
+        return $response;
+
+    }
+
+
     /**
      * @Route("/movil/facturas/buscar", name="buscar_facturas_movil", methods={"GET","POST"})
      */
