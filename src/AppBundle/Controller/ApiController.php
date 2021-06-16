@@ -1113,7 +1113,6 @@ class ApiController extends Controller
         $respuesta = array('Succes'=>200);
 
 
-
         /**@var Presupuesto $presupuesto */
         $presupuesto = $presupuestoRepository->find($datos["id"]);
 
@@ -1313,7 +1312,7 @@ class ApiController extends Controller
      * @Route("/movil/empleado/modificar", name="empleado_movil_modificar", methods={"GET","POST"})
      */
 
-    public function empleadoModificarMovil(Request $request, EmpleadoRepository $empleadoRepository,UserPasswordEncoderInterface $passwordEncoder,DelegacionRepository  $delegacionRepository){
+    public function empleadoModificarMovil(Request $request, EmpleadoRepository $empleadoRepository,DelegacionRepository  $delegacionRepository){
 
         $datos = json_decode($request->getContent(),true);
         $respuesta = array('Succes'=>200);
@@ -1326,7 +1325,6 @@ class ApiController extends Controller
 
 
         $empleado->setUsuario($datos["usuario"]);
-        $empleado->setClave($passwordEncoder->encodePassword($empleado,$datos["password"]));
         $empleado->setNombre($datos["nombre"]);
         $empleado->setApellidos($datos["apellidos"]);
         $empleado->setDireccion($datos["direccion"]);
@@ -1339,22 +1337,22 @@ class ApiController extends Controller
         $empleado->setEdad(date_create_from_format('d-m-Y',$datos["nacimiento"]));
         $empleado->setDelegacion($delegacion);
 
-        if ($datos["comercial"] == "true"){
+        if ($datos["comercial"]){
 
             $empleado->setComercial(true);
         }
 
-        if ($datos["gestor"] == "true"){
+        if ($datos["gestor"]){
 
             $empleado->setGestor(true);
         }
 
-        if ($datos["instalador"] == "true"){
+        if ($datos["instalador"]){
 
             $empleado->setInstalador(true);
         }
 
-        if ($datos["admin"] == "true"){
+        if ($datos["admin"]){
 
             $empleado->setAdministrador(true);
         }
@@ -1367,7 +1365,6 @@ class ApiController extends Controller
         return $response;
 
     }
-
 
 
 }
