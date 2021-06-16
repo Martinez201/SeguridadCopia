@@ -1492,4 +1492,28 @@ class ApiController extends Controller
     }
 
 
+    /**
+     * @Route("/movil/albaran/borrar", name="albaran_movil_borrar", methods={"GET","POST"})
+     */
+
+    public  function borrarAlbaranes(Request $request ,AlbaranRepository $albaranRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
+
+        /**@var Albaran $albaran */
+        $albaran = $albaranRepository->find(intval($datos["id"]));
+
+
+        $cli = $this->getDoctrine()->getManager();
+        $cli->remove($albaran);
+        $cli->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+
 }
