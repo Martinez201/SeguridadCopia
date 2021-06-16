@@ -1113,10 +1113,11 @@ class ApiController extends Controller
         $respuesta = array('Succes'=>200);
 
 
-        /**@var Parte $parte */
-        $parte = $parteRepository->find(intval($datos["id"]));
 
-        $parte->setDetalle($datos["detalle"]);
+        /**@var Parte $parte */
+        $parte = $parteRepository->find($datos["id"]);
+
+        $parte->setDetalle($datos["detalles"]);
         $parte->setTipo($datos["tipo"]);
         $parte->setObservaciones($datos["observaciones"]);
         $parte->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
@@ -1125,6 +1126,7 @@ class ApiController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
+
         $response = new JsonResponse($respuesta,200);
 
         return $response;
