@@ -1198,7 +1198,7 @@ class ApiController extends Controller
      * @Route("/movil/albaran/modificar", name="albaran_movil_modificar", methods={"GET","POST"})
      */
 
-    public function albaranModificarMovil(Request $request, AlbaranRepository $albaranRepository){
+    public function albaranModificarMovil(Request $request,AlbaranRepository $albaranRepository){
 
         $datos = json_decode($request->getContent(),true);
         $respuesta = array('Succes'=>200);
@@ -1212,6 +1212,8 @@ class ApiController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
+
+
 
         $response = new JsonResponse($respuesta,200);
 
