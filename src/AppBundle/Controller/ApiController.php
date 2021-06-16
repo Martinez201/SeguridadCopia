@@ -1104,6 +1104,34 @@ class ApiController extends Controller
     }
 
     /**
+     * @Route("/movil/parte/modificar", name="parte_movil_modificar", methods={"GET","POST"})
+     */
+
+    public function parteModificarMovil(Request $request, ParteRepository $parteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
+
+
+        /**@var Parte $parte */
+        $parte = $parteRepository->find(intval($datos["id"]));
+
+        $parte->setDetalle($datos["detalle"]);
+        $parte->setTipo($datos["tipo"]);
+        $parte->setObservaciones($datos["observaciones"]);
+        $parte->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $parte->setEstado($datos["estado"]);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+    /**
      * @Route("/movil/delegacion/modificar", name="delegacion_movil_modificar", methods={"GET","POST"})
      */
 
