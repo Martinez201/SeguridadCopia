@@ -1129,6 +1129,36 @@ class ApiController extends Controller
         return $response;
 
     }
+
+    /**
+     * @Route("/movil/producto/modificar", name="producto_movil_modificar", methods={"GET","POST"})
+     */
+
+    public function productoModificarMovil(Request $request, ProductoRepository $productoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        $respuesta = array('Succes'=>200);
+
+        /**@var Producto $producto */
+        $producto= $productoRepository->find(intval($datos["productoId"]));
+
+
+        $producto->setNombre($datos["nombre"]);
+        $producto->setTipo($datos["tipo"]);
+        $producto->setCantidad(intval($datos["stock"]));
+        $producto->setPrecio(floatval($datos["precio"]));
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
     /**
      * @Route("/movil/albaran/modificar", name="albaran_movil_modificar", methods={"GET","POST"})
      */
