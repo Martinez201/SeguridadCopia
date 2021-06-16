@@ -1107,21 +1107,28 @@ class ApiController extends Controller
      * @Route("/movil/factura/modificar", name="buscar_factura_movil_modificar", methods={"GET","POST"})
      */
 
-    public function facturaModificarMovil(Request $request, FacturaRepository $facturaRepository){
+    public function facturaModificarMovil(Request $request, FacturaRepository  $facturaRepository){
 
         $datos = json_decode($request->getContent(),true);
-        $data = array();
 
         /**@var Factura $factura */
-        $factura = $facturaRepository->obtenerFacturaId(intval($datos["busqueda"]));
+        $factura = $facturaRepository->find(intval($datos["facturaId"]));
 
 
-        $response = new JsonResponse($data,200);
+
+        $factura->setPrecioSinIva(floatval($datos["precioC"]));
+        $factura->setPrecioConIva(floatval($datos["precio"]));
+        $factura->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $factura->setConcepto($datos["concepto"]);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $response = new JsonResponse($factura,200);
 
         return $response;
 
     }
-
     /**
      * @Route("/movil/albaran/modificar", name="albaran_movil_modificar", methods={"GET","POST"})
      */
