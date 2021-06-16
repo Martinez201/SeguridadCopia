@@ -1223,16 +1223,56 @@ class ApiController extends Controller
      * @Route("/movil/empleado/modificar", name="empleado_movil_modificar", methods={"GET","POST"})
      */
 
-    public function empleadoModificarMovil(Request $request, EmpleadoRepository $empleadoRepository){
+    public function empleadoModificarMovil(Request $request, EmpleadoRepository $empleadoRepository,UserPasswordEncoderInterface $passwordEncoder,DelegacionRepository  $delegacionRepository){
 
         $datos = json_decode($request->getContent(),true);
-        $data = array();
+        $respuesta = array('Succes'=>200);
 
         /**@var Empleado $empleado */
-        $empleado = $empleadoRepository->obtenerEmpleadoId(intval($datos["busqueda"]));
+        $empleado = $empleadoRepository->find(intval($datos["id"]));
+
+        /**@var Delegacion $delegacion */
+        $delegacion = $delegacionRepository->find(intval($datos["idDelegacion"]));
 
 
-        $response = new JsonResponse($data,200);
+        $empleado->setUsuario($datos["usuario"]);
+        $empleado->setClave($passwordEncoder->encodePassword($empleado,$datos["password"]));
+        $empleado->setNombre($datos["nombre"]);
+        $empleado->setApellidos($datos["apellidos"]);
+        $empleado->setDireccion($datos["direccion"]);
+        $empleado->setCiudad($datos["ciudad"]);
+        $empleado->setProvincia($datos["provincia"]);
+        $empleado->setEmail($datos["email"]);
+        $empleado->setTelefono($datos["telefono"]);
+        $empleado->setCPostal($datos["cPostal"]);
+        $empleado->setDni($datos["dni"]);
+        $empleado->setEdad(date_create_from_format('d-m-Y',$datos["nacimiento"]));
+        $empleado->setDelegacion($delegacion);
+
+        if ($datos["comercial"] == "true"){
+
+            $empleado->setComercial(true);
+        }
+
+        if ($datos["gestor"] == "true"){
+
+            $empleado->setGestor(true);
+        }
+
+        if ($datos["instalador"] == "true"){
+
+            $empleado->setInstalador(true);
+        }
+
+        if ($datos["administrador"] == "true"){
+
+            $empleado->setAdministrador(true);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
 
