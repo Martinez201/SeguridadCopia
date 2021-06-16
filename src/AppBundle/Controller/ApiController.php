@@ -1637,4 +1637,29 @@ class ApiController extends Controller
     }
 
 
+    /**
+     * @Route("/movil/empleado/borrar", name="empleado_movil_borrar", methods={"GET","POST"})
+     */
+
+    public  function borrarEmpleado(Request $request ,EmpleadoRepository $empleadoRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        $respuesta = array('Succes'=>200);
+
+        /**@var Empleado $empleado */
+        $empleado = $empleadoRepository->find(intval($datos["id"]));
+
+
+        $cli = $this->getDoctrine()->getManager();
+        $cli->remove($empleado);
+        $cli->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+
 }
