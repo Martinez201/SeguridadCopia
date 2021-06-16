@@ -1181,7 +1181,7 @@ class ApiController extends Controller
         $cliente->setNombre($datos["telefono"]);
         $cliente->setNombre($datos["cPostal"]);
         $cliente->setNombre($datos["dni"]);
-        $cliente->setNombre($datos["nacimiento"]);
+        $cliente->setNombre(date_create_from_format('d-m-Y',$datos["nacimiento"]));
         $cliente->setNombre($datos["estado"]);
 
 
@@ -1201,13 +1201,19 @@ class ApiController extends Controller
     public function albaranModificarMovil(Request $request, AlbaranRepository $albaranRepository){
 
         $datos = json_decode($request->getContent(),true);
-        $data = array();
+        $respuesta = array('Succes'=>200);
 
         /**@var Albaran $albaran */
-        $albaran = $albaranRepository->obtenerAlbaranId(intval($datos["busqueda"]));
+        $albaran = $albaranRepository->find(intval($datos["id"]));
+
+        $albaran->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
+        $albaran->setProveedor($datos["proveedor"]);
 
 
-        $response = new JsonResponse($data,200);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
 
