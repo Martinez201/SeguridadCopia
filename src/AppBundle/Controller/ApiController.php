@@ -1564,5 +1564,29 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/parte/borrar", name="parte_movil_borrar", methods={"GET","POST"})
+     */
+
+    public  function borrarParte(Request $request ,ParteRepository $parteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        $respuesta = array('Succes'=>200);
+
+        /**@var Parte $parte */
+        $parte = $parteRepository->find(intval($datos["id"]));
+
+
+        $cli = $this->getDoctrine()->getManager();
+        $cli->remove($parte);
+        $cli->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
 
 }
