@@ -1661,5 +1661,31 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * @Route("/movil/delegacion/borrar", name="delegacion_movil_borrar", methods={"GET","POST"})
+     */
+
+    public  function borrarDelegacion(Request $request ,DelegacionRepository $delegacionRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        $respuesta = array('Succes'=>200);
+
+        /**@var Delegacion $delegacion */
+        $delegacion = $delegacionRepository->find(intval($datos["id"]));
+
+
+        $cli = $this->getDoctrine()->getManager();
+        $cli->remove($delegacion);
+        $cli->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+
+
 
 }
