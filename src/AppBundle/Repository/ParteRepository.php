@@ -107,7 +107,7 @@ class ParteRepository extends ServiceEntityRepository
 
 
         return $this->createQueryBuilder('del')
-            ->Where('del.fecha LIKE :texto')
+            ->Where('del.observaciones LIKE :texto')
             ->setParameter('texto','%'.$palabra.'%')
             ->getQuery()
             ->getResult();
