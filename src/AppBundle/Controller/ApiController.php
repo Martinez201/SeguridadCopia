@@ -1104,7 +1104,7 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/movil/factura/modificar", name="buscar_factura_movil_modificar", methods={"GET","POST"})
+     * @Route("/movil/factura/modificar", name="factura_movil_modificar", methods={"GET","POST"})
      */
 
     public function facturaModificarMovil(Request $request, FacturaRepository  $facturaRepository){
@@ -1148,6 +1148,41 @@ class ApiController extends Controller
         $producto->setTipo($datos["tipo"]);
         $producto->setCantidad(intval($datos["stock"]));
         $producto->setPrecio(floatval($datos["precio"]));
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $response = new JsonResponse($respuesta,200);
+
+        return $response;
+
+    }
+
+    /**
+     * @Route("/movil/cliente/modificar", name="cliente_movil_modificar", methods={"GET","POST"})
+     */
+    public function clienteModificarMovil(Request $request, ClienteRepository $clienteRepository){
+
+        $datos = json_decode($request->getContent(),true);
+
+        $respuesta = array('Succes'=>200);
+
+        /**@var Cliente $cliente */
+        $cliente= $clienteRepository->find(intval($datos["Id"]));
+
+
+        $cliente->setNombre($datos["nombre"]);
+        $cliente->setNombre($datos["apellidos"]);
+        $cliente->setNombre($datos["direccion"]);
+        $cliente->setNombre($datos["ciudad"]);
+        $cliente->setNombre($datos["provincia"]);
+        $cliente->setNombre($datos["email"]);
+        $cliente->setNombre($datos["telefono"]);
+        $cliente->setNombre($datos["cPostal"]);
+        $cliente->setNombre($datos["dni"]);
+        $cliente->setNombre($datos["nacimiento"]);
+        $cliente->setNombre($datos["estado"]);
 
 
         $em = $this->getDoctrine()->getManager();
