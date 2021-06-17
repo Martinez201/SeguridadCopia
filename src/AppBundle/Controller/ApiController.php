@@ -503,14 +503,7 @@ class ApiController extends Controller
         $presupuesto->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
         $presupuesto->setEmpleado($empleado);
         $presupuesto->setInstalacion($datos["instalacion"]);
-
-        if ($datos["estado"]){
-
-            $presupuesto->setEstado(false);
-        }else{
-
-            $presupuesto->setEstado(true);
-        }
+        $presupuesto->setEstado((boolval($datos["estado"])));
 
 
         $this->getDoctrine()->getManager()->persist($presupuesto);
