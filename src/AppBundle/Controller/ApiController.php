@@ -493,7 +493,7 @@ class ApiController extends Controller
     public function nuevaActioPresupuesto(Request $request, EmpleadoRepository  $empleadoRepository){
 
         $datos = json_decode($request->getContent(),true);
-
+        $respuesta = array('Succes'=>200);
 
         /** @var Empleado $empleado */
         $empleado = $empleadoRepository->find(intval($datos["empleado"]));
@@ -518,7 +518,7 @@ class ApiController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $response = new JsonResponse($presupuesto,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -530,7 +530,7 @@ class ApiController extends Controller
     public function nuevaActioAlbaran(Request $request, EmpleadoRepository  $empleadoRepository){
 
         $datos = json_decode($request->getContent(),true);
-
+        $respuesta = array('Succes'=>200);
 
         /** @var Empleado $empleado */
         $empleado = $empleadoRepository->find(intval($datos["empleado"]));
@@ -547,7 +547,7 @@ class ApiController extends Controller
         $em->flush();
 
 
-        $response = new JsonResponse($albaran,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -559,6 +559,7 @@ class ApiController extends Controller
     public function nuevaActionEmpleado(Request $request, DelegacionRepository  $delegacionRepository /*, UserPasswordEncoderInterface $passwordEncoder */){
 
         $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
 
         /**@var  Delegacion $delegacion */
         $delegacion = $delegacionRepository->find(intval($datos["delegacion"]));
@@ -624,7 +625,7 @@ class ApiController extends Controller
         $em->flush();
 
 
-        $response = new JsonResponse($empleado,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
 
@@ -645,7 +646,7 @@ class ApiController extends Controller
         /** @var Empleado $empleado */
         $empleado = $empleadoRepository->find(intval($datos["empleado"]));
 
-
+        $respuesta = array('Succes'=>200);
 
         /**  Parte parte */
         $parte = new Parte();
@@ -680,7 +681,7 @@ class ApiController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $response = new JsonResponse($empleado->getDelegacion(),200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -694,7 +695,7 @@ class ApiController extends Controller
     public function nuevaActionCliente(Request $request){
 
         $datos = json_decode($request->getContent(),true);
-
+        $respuesta = array('Succes'=>200);
         /** Cliente clienteNuevo */
 
         $clienteNuevo = new Cliente();
@@ -724,7 +725,7 @@ class ApiController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $response = new JsonResponse($clienteNuevo,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -738,6 +739,7 @@ class ApiController extends Controller
     public function nuevaActionDelegacion(Request $request, DelegacionRepository $delegacionRepository){
 
         $datos = json_decode($request->getContent(),true);
+        $respuesta = array('Succes'=>200);
 
         /**  Delegacion delegacionNueva */
 
@@ -756,7 +758,7 @@ class ApiController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $response = new JsonResponse($delegacionNueva,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -770,7 +772,7 @@ class ApiController extends Controller
     public function nuevaActionProducto(Request $request ){
 
         $datos = json_decode($request->getContent(),true);
-
+        $respuesta = array('Succes'=>200);
 
         $producto= new Producto();
         $producto->setNombre($datos["nombre"]);
@@ -785,7 +787,7 @@ class ApiController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $response = new JsonResponse($producto,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -797,7 +799,7 @@ class ApiController extends Controller
     public function nuevaActionFactura(Request $request  , ClienteRepository $clienteRepository, EmpleadoRepository  $empleadoRepository){
 
         $datos = json_decode($request->getContent(),true);
-
+        $respuesta = array('Succes'=>200);
 
         /**@var  Cliente $cliente */
         $cliente = $clienteRepository->find(intval($datos["cliente"]));
@@ -821,7 +823,7 @@ class ApiController extends Controller
         $em->flush();
 
 
-        $response = new JsonResponse($factura,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
     }
@@ -1244,7 +1246,7 @@ class ApiController extends Controller
 
         $presupuesto->setInstalacion($datos["direccion"]);
         $presupuesto->setFecha(date_create_from_format('d-m-Y',$datos["fecha"]));
-        $presupuesto->setEstado($datos["estado"]);
+        $presupuesto->setEstado(boolval($datos["estado"]));
 
 
         $em = $this->getDoctrine()->getManager();
@@ -1327,7 +1329,7 @@ class ApiController extends Controller
         /**@var Factura $factura */
         $factura = $facturaRepository->find(intval($datos["facturaId"]));
 
-
+        $respuesta = array('Succes'=>200);
 
         $factura->setPrecioSinIva(floatval($datos["precioC"]));
         $factura->setPrecioConIva(floatval($datos["precio"]));
@@ -1337,7 +1339,7 @@ class ApiController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
-        $response = new JsonResponse($factura,200);
+        $response = new JsonResponse($respuesta,200);
 
         return $response;
 
