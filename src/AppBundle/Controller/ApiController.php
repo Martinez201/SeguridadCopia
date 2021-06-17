@@ -504,7 +504,7 @@ class ApiController extends Controller
         $presupuesto->setEmpleado($empleado);
         $presupuesto->setInstalacion($datos["instalacion"]);
 
-        if ($datos["estado"] == "FALSE"){
+        if ($datos["estado"]){
 
             $presupuesto->setEstado(false);
         }else{
